@@ -1,0 +1,111 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'nav' => '트렌드',
+    'title' => '트렌드',
+    'edit_setup' => '설정 수정',
+    'analyze_now' => '지금 분석',
+    'last_analyzed' => ':time 업데이트',
+    'never_analyzed' => '아직 분석하지 않았어요',
+    'formats' => [
+        'text' => '텍스트',
+        'image' => '이미지',
+        'carousel' => '캐러셀',
+        'video' => '동영상',
+    ],
+    'goals' => [
+        'grow' => ['label' => '팔로워 늘리기', 'description' => '공유되고 팔로우로 이어지는 게시물.'],
+        'traffic' => ['label' => '내 사이트로 방문자 보내기', 'description' => '클릭하고 싶어지는 게시물.'],
+        'sell' => ['label' => '무언가 판매하기', 'description' => '문제와 해결책을 보여 주는 게시물.'],
+        'authority' => ['label' => '전문가로 인정받기', 'description' => '알려 주고 입장을 밝히는 게시물.'],
+    ],
+    'niches' => [
+        'marketing' => '마케팅',
+        'technology' => '기술',
+        'business' => '비즈니스',
+        'news' => '뉴스',
+        'creative' => '크리에이티브',
+        'entertainment' => '엔터테인먼트',
+        'science' => '과학',
+    ],
+    'topic' => [
+        'covered_by' => '{1} 출처 :count곳에서 다룸|[0,*] 출처 :count곳에서 다룸',
+        'make_post' => '게시물 만들기',
+        'dismiss' => '숨기기',
+        'used' => '아이디어에 추가됨',
+        'show_sources' => '왜 뜨고 있나요',
+        'hide_sources' => '출처 숨기기',
+        'make_failed' => '아이디어를 만들지 못했어요. 다시 시도해 주세요.',
+    ],
+    'empty' => [
+        'analyzing' => [
+            'title' => '출처를 읽는 중',
+            'body' => '첫 주제가 곧 여기에 표시돼요.',
+        ],
+        'none' => [
+            'title' => '아직 주제가 없어요',
+            'body' => '출처에서 다루는 내용 중 아직 내 분야와 맞는 것이 없어요. 피드가 업데이트된 뒤 다시 확인하거나 출처를 더 추가하세요.',
+        ],
+        'no_feeds' => [
+            'title' => '아직 출처를 고르지 않았어요',
+            'body' => '주제를 찾으려면 트렌드가 읽을 피드가 필요해요. 내 분야에 맞는 피드를 골라 보세요.',
+            'member' => '주제를 찾으려면 워크스페이스 관리자가 트렌드가 읽을 피드를 골라야 해요.',
+            'action' => '출처 고르기',
+        ],
+    ],
+    'setup' => [
+        'title' => '트렌드 설정',
+        'step' => ':total단계 중 :current단계',
+        'steps' => [
+            'niche' => '내 분야',
+            'goal' => '내 목표',
+            'formats' => '게시 방식',
+            'sources' => '출처',
+        ],
+        'back' => '이전',
+        'next' => '다음',
+        'finish' => '트렌드 찾기',
+        'save' => '저장',
+        'save_failed' => '설정을 저장하지 못했어요. 입력란을 확인하고 다시 시도해 주세요.',
+        'niche' => [
+            'heading' => '무엇에 대해 게시하나요?',
+            'description' => '가장 가까운 주제를 고르거나 직접 입력하세요. 이를 바탕으로 나와 관련된 내용을 판단해요.',
+            'label' => '내 분야',
+            'placeholder' => '바쁜 부모를 위한 홈트레이닝',
+            'keywords_label' => '지켜볼 단어',
+            'keywords_placeholder' => '단어를 입력하고 Enter를 누르세요',
+            'keywords_description' => '이 단어들을 헤드라인에서 찾아요. 내 분야에서 쓰는 단어를 추가하세요.',
+            'excluded_label' => '제외할 단어',
+            'excluded_description' => '이 단어가 들어간 헤드라인은 제외돼요.',
+        ],
+        'goal' => [
+            'heading' => '게시물로 무엇을 이루고 싶나요?',
+            'description' => '어떤 형식을 먼저 제안할지 정해요.',
+            'audience_label' => '누구를 위한 게시물인가요?',
+            'audience_placeholder' => '집에서 빠르게 운동하고 싶은 부모',
+        ],
+        'formats' => [
+            'heading' => '실제로 어떤 게시물을 만드나요?',
+            'description' => '직접 만들 수 있는 형식만 제안해요.',
+            'cadence_label' => '주당 게시물 수',
+        ],
+        'sources' => [
+            'heading' => '어디에서 찾을까요?',
+            'description' => '이 피드들을 읽고 내 분야에서 어떤 이야기가 나오는지 확인해요.',
+            'yours' => '내 피드',
+            'none' => '아직 피드가 없어요. 아래에서 추가하세요.',
+            'limit' => '피드는 최대 :count개까지 고를 수 있어요.',
+            'suggested' => ':niche 추천',
+            'add' => '추가',
+            'add_failed' => '피드를 추가하지 못했어요. 다시 시도해 주세요.',
+            'more' => '피드 더 찾기',
+        ],
+    ],
+    'idea' => [
+        'summary' => '{1} 트렌드: 출처 :count곳에서 다루고 있어요.|[0,*] 트렌드: 출처 :count곳에서 다루고 있어요.',
+        'formats' => '시도해 볼 형식: :formats.',
+        'sources' => '왜 뜨고 있나요:',
+    ],
+];

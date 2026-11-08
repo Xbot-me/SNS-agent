@@ -1,0 +1,111 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'nav' => 'Trends',
+    'title' => 'Trends',
+    'edit_setup' => 'Einrichtung ändern',
+    'analyze_now' => 'Jetzt analysieren',
+    'last_analyzed' => 'Aktualisiert :time',
+    'never_analyzed' => 'Noch nicht analysiert',
+    'formats' => [
+        'text' => 'Text',
+        'image' => 'Bild',
+        'carousel' => 'Karussell',
+        'video' => 'Video',
+    ],
+    'goals' => [
+        'grow' => ['label' => 'Reichweite aufbauen', 'description' => 'Beiträge, die geteilt werden und Follower bringen.'],
+        'traffic' => ['label' => 'Besucher auf meine Seite holen', 'description' => 'Beiträge, die zum Klicken anregen.'],
+        'sell' => ['label' => 'Etwas verkaufen', 'description' => 'Beiträge, die ein Problem und deine Lösung zeigen.'],
+        'authority' => ['label' => 'Als Expertin oder Experte gelten', 'description' => 'Beiträge, die erklären und Haltung zeigen.'],
+    ],
+    'niches' => [
+        'marketing' => 'Marketing',
+        'technology' => 'Technik',
+        'business' => 'Wirtschaft',
+        'news' => 'Nachrichten',
+        'creative' => 'Kreatives',
+        'entertainment' => 'Unterhaltung',
+        'science' => 'Wissenschaft',
+    ],
+    'topic' => [
+        'covered_by' => '{1} Von :count Quelle behandelt|[0,*] Von :count Quellen behandelt',
+        'make_post' => 'Beitrag erstellen',
+        'dismiss' => 'Ausblenden',
+        'used' => 'In deinen Ideen',
+        'show_sources' => 'Warum es im Trend ist',
+        'hide_sources' => 'Quellen ausblenden',
+        'make_failed' => 'Die Idee konnte nicht erstellt werden. Versuche es erneut.',
+    ],
+    'empty' => [
+        'analyzing' => [
+            'title' => 'Deine Quellen werden gelesen',
+            'body' => 'Die ersten Themen erscheinen gleich hier.',
+        ],
+        'none' => [
+            'title' => 'Noch keine Themen',
+            'body' => 'Deine Quellen behandeln noch nichts, das zu deiner Nische passt. Schau nach dem nächsten Feed-Update wieder vorbei oder füge Quellen hinzu.',
+        ],
+        'no_feeds' => [
+            'title' => 'Du hast noch keine Quellen gewählt',
+            'body' => 'Um Themen zu finden, braucht Trends Feeds zum Lesen. Wähle passende für deine Nische.',
+            'member' => 'Um Themen zu finden, muss ein Workspace-Admin die Feeds wählen, die Trends liest.',
+            'action' => 'Quellen wählen',
+        ],
+    ],
+    'setup' => [
+        'title' => 'Trends einrichten',
+        'step' => 'Schritt :current von :total',
+        'steps' => [
+            'niche' => 'Deine Nische',
+            'goal' => 'Dein Ziel',
+            'formats' => 'Wie du postest',
+            'sources' => 'Quellen',
+        ],
+        'back' => 'Zurück',
+        'next' => 'Weiter',
+        'finish' => 'Trends finden',
+        'save' => 'Speichern',
+        'save_failed' => 'Die Einrichtung konnte nicht gespeichert werden. Prüfe die Felder und versuche es erneut.',
+        'niche' => [
+            'heading' => 'Worüber postest du?',
+            'description' => 'Wähle das nächstliegende Thema oder gib dein eigenes ein. So entscheiden wir, was für dich relevant ist.',
+            'label' => 'Deine Nische',
+            'placeholder' => 'Home-Fitness für vielbeschäftigte Eltern',
+            'keywords_label' => 'Beobachtete Wörter',
+            'keywords_placeholder' => 'Wort eingeben und Enter drücken',
+            'keywords_description' => 'Wir suchen diese Wörter in Schlagzeilen. Füge Wörter hinzu, die in deiner Nische üblich sind.',
+            'excluded_label' => 'Wörter überspringen',
+            'excluded_description' => 'Schlagzeilen mit diesen Wörtern werden ausgelassen.',
+        ],
+        'goal' => [
+            'heading' => 'Was sollen deine Beiträge bewirken?',
+            'description' => 'Danach richtet sich, welche Formate wir zuerst vorschlagen.',
+            'audience_label' => 'Für wen sind sie?',
+            'audience_placeholder' => 'Eltern, die schnelle Workouts für zu Hause suchen',
+        ],
+        'formats' => [
+            'heading' => 'Was postest du wirklich?',
+            'description' => 'Wir schlagen nur Formate vor, die du auch erstellst.',
+            'cadence_label' => 'Beiträge pro Woche',
+        ],
+        'sources' => [
+            'heading' => 'Wo sollen wir suchen?',
+            'description' => 'Wir lesen diese Feeds, um zu sehen, worüber deine Nische berichtet.',
+            'yours' => 'Deine Feeds',
+            'none' => 'Du hast noch keine Feeds. Füge unten welche hinzu.',
+            'limit' => 'Wähle bis zu :count Feeds.',
+            'suggested' => 'Vorschläge für :niche',
+            'add' => 'Hinzufügen',
+            'add_failed' => 'Der Feed konnte nicht hinzugefügt werden. Versuche es erneut.',
+            'more' => 'Weitere Feeds finden',
+        ],
+    ],
+    'idea' => [
+        'summary' => '{1} Im Trend: :count Quelle berichtet darüber.|[0,*] Im Trend: :count Quellen berichten darüber.',
+        'formats' => 'Formate zum Ausprobieren: :formats.',
+        'sources' => 'Warum es im Trend ist:',
+    ],
+];

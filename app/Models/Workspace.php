@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\Workspace\Module;
 use App\Models\Traits\HasMedia;
 use App\Observers\WorkspaceObserver;
 use Database\Factories\WorkspaceFactory;
@@ -15,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[ObservedBy([WorkspaceObserver::class])]
 class Workspace extends Model
@@ -26,9 +28,48 @@ class Workspace extends Model
         'account_id',
         'user_id',
         'name',
+        'modules',
     ];
 
     protected $appends = ['has_logo', 'logo_url'];
+
+    protected function casts(): array
+    {
+        return [
+            'modules' => 'array',
+        ];
+    }
+
+    /**
+     * A module is on when the app offers it and this workspace has not switched it off.
+     */
+    public function hasModule(Module $module): bool
+    {
+        return $module->isAvailable() && data_get($this->modules, $module->value) !== false;
+    }
+
+    /**
+     * What the workspace chose for each module the app offers, for the settings switches.
+     *
+     * @return array<string, bool>
+     */
+    public function moduleSettings(): array
+    {
+        return collect(Module::cases())
+            ->filter(fn (Module $module): bool => $module->isAvailable())
+            ->mapWithKeys(fn (Module $module): array => [$module->value => data_get($this->modules, $module->value) !== false])
+            ->all();
+    }
+
+    /**
+     * @return array<string, bool>
+     */
+    public function moduleStates(): array
+    {
+        return collect(Module::cases())
+            ->mapWithKeys(fn (Module $module): array => [$module->value => $this->hasModule($module)])
+            ->all();
+    }
 
     public function getHasLogoAttribute(): bool
     {
@@ -130,6 +171,16 @@ class Workspace extends Model
     public function repurposes(): HasMany
     {
         return $this->hasMany(Repurpose::class);
+    }
+
+    public function trendProfile(): HasOne
+    {
+        return $this->hasOne(TrendProfile::class);
+    }
+
+    public function trendTopics(): HasMany
+    {
+        return $this->hasMany(TrendTopic::class);
     }
 
     /**

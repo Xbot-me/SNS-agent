@@ -7,6 +7,7 @@ use App\Console\Commands\Analytics\DispatchPublicationDiscovery;
 use App\Console\Commands\Analytics\DispatchPublicationMetrics;
 use App\Console\Commands\CheckSocialConnections;
 use App\Console\Commands\CheckUpcomingPostConnections;
+use App\Console\Commands\Inbox\DispatchInboxSync;
 use App\Console\Commands\ProcessScheduledPosts;
 use App\Console\Commands\PruneExpiredPostHistoryCommand;
 use App\Console\Commands\PruneTemporaryUploadsCommand;
@@ -18,6 +19,7 @@ use App\Console\Commands\Repurpose\PollRepurposes;
 use App\Console\Commands\ResolveTikTokVideoIds;
 use App\Console\Commands\RssFeed\PollRssFeeds;
 use App\Console\Commands\SyncPostHogLifecycleStages;
+use App\Console\Commands\Trend\DispatchTrendAnalysis;
 use App\Enums\SocialAccount\Platform;
 use App\Jobs\Analytics\FinalizeAccountDailySnapshots;
 use App\Services\PostHogService;
@@ -36,6 +38,8 @@ Schedule::command(PruneExpiredPostHistoryCommand::class)->daily()->withoutOverla
 Schedule::command(PruneTemporaryUploadsCommand::class)->hourly()->withoutOverlapping()->onOneServer();
 Schedule::command(PollRepurposes::class)->everyFiveMinutes()->withoutOverlapping()->onOneServer();
 Schedule::command(PollRssFeeds::class)->everyFiveMinutes()->withoutOverlapping()->onOneServer();
+Schedule::command(DispatchInboxSync::class)->everyMinute()->withoutOverlapping()->onOneServer();
+Schedule::command(DispatchTrendAnalysis::class)->hourly()->when(fn (): bool => (bool) config('trypost.trends.enabled'))->withoutOverlapping()->onOneServer();
 Schedule::command(SyncPostHogLifecycleStages::class)->hourly()->when(PostHogService::isEnabled(...))->withoutOverlapping()->onOneServer();
 Schedule::command(DispatchAccountDailyAnalytics::class)
     ->dailyAt('02:00')

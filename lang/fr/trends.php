@@ -1,0 +1,111 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'nav' => 'Tendances',
+    'title' => 'Tendances',
+    'edit_setup' => 'Modifier la configuration',
+    'analyze_now' => 'Analyser',
+    'last_analyzed' => 'Mis à jour :time',
+    'never_analyzed' => 'Pas encore analysé',
+    'formats' => [
+        'text' => 'Texte',
+        'image' => 'Image',
+        'carousel' => 'Carrousel',
+        'video' => 'Vidéo',
+    ],
+    'goals' => [
+        'grow' => ['label' => 'Développer mon audience', 'description' => 'Des posts que l’on partage et pour lesquels on vous suit.'],
+        'traffic' => ['label' => 'Amener des visiteurs sur mon site', 'description' => 'Des posts qui donnent envie de cliquer.'],
+        'sell' => ['label' => 'Vendre quelque chose', 'description' => 'Des posts qui montrent un problème et votre solution.'],
+        'authority' => ['label' => 'Être reconnu comme expert', 'description' => 'Des posts qui enseignent et prennent position.'],
+    ],
+    'niches' => [
+        'marketing' => 'Marketing',
+        'technology' => 'Technologie',
+        'business' => 'Affaires',
+        'news' => 'Actualités',
+        'creative' => 'Création',
+        'entertainment' => 'Divertissement',
+        'science' => 'Science',
+    ],
+    'topic' => [
+        'covered_by' => '{1} Traité par :count source|[0,*] Traité par :count sources',
+        'make_post' => 'Créer un post',
+        'dismiss' => 'Ignorer',
+        'used' => 'Dans vos idées',
+        'show_sources' => 'Pourquoi c’est une tendance',
+        'hide_sources' => 'Masquer les sources',
+        'make_failed' => 'Impossible de créer l’idée. Réessayez.',
+    ],
+    'empty' => [
+        'analyzing' => [
+            'title' => 'Lecture de vos sources',
+            'body' => 'Vos premiers sujets s’afficheront ici dans un instant.',
+        ],
+        'none' => [
+            'title' => 'Aucun sujet pour l’instant',
+            'body' => 'Rien de ce que couvrent vos sources ne correspond encore à votre niche. Revenez après la mise à jour de vos flux ou ajoutez des sources.',
+        ],
+        'no_feeds' => [
+            'title' => 'Vous n’avez pas encore choisi de sources',
+            'body' => 'Pour trouver des sujets, Tendances a besoin de flux à lire. Choisissez-en pour votre niche.',
+            'member' => 'Pour trouver des sujets, un admin de l’espace de travail doit choisir les flux que lit Tendances.',
+            'action' => 'Choisir des sources',
+        ],
+    ],
+    'setup' => [
+        'title' => 'Configurer Tendances',
+        'step' => 'Étape :current sur :total',
+        'steps' => [
+            'niche' => 'Votre niche',
+            'goal' => 'Votre objectif',
+            'formats' => 'Votre façon de publier',
+            'sources' => 'Sources',
+        ],
+        'back' => 'Retour',
+        'next' => 'Suivant',
+        'finish' => 'Trouver mes tendances',
+        'save' => 'Enregistrer',
+        'save_failed' => 'Impossible d’enregistrer la configuration. Vérifiez les champs et réessayez.',
+        'niche' => [
+            'heading' => 'De quoi parlez-vous ?',
+            'description' => 'Choisissez le sujet le plus proche ou saisissez le vôtre. C’est ainsi que nous jugeons ce qui vous concerne.',
+            'label' => 'Votre niche',
+            'placeholder' => 'Fitness à la maison pour parents pressés',
+            'keywords_label' => 'Mots à surveiller',
+            'keywords_placeholder' => 'Saisissez un mot et appuyez sur Entrée',
+            'keywords_description' => 'Nous cherchons ces mots dans les titres. Ajoutez ceux qu’emploient les gens de votre niche.',
+            'excluded_label' => 'Mots à ignorer',
+            'excluded_description' => 'Les titres contenant ces mots sont écartés.',
+        ],
+        'goal' => [
+            'heading' => 'Que doivent faire vos posts ?',
+            'description' => 'Cela décide des formats que nous suggérons en premier.',
+            'audience_label' => 'Pour qui sont-ils ?',
+            'audience_placeholder' => 'Des parents qui veulent des séances rapides à la maison',
+        ],
+        'formats' => [
+            'heading' => 'Que publierez-vous vraiment ?',
+            'description' => 'Nous ne suggérons que les formats que vous ferez.',
+            'cadence_label' => 'Posts par semaine',
+        ],
+        'sources' => [
+            'heading' => 'Où devons-nous chercher ?',
+            'description' => 'Nous lisons ces flux pour voir ce dont parle votre niche.',
+            'yours' => 'Vos flux',
+            'none' => 'Vous n’avez pas encore de flux. Ajoutez-en ci-dessous.',
+            'limit' => 'Choisissez jusqu’à :count flux.',
+            'suggested' => 'Suggestions pour :niche',
+            'add' => 'Ajouter',
+            'add_failed' => 'Impossible d’ajouter ce flux. Réessayez.',
+            'more' => 'Trouver d’autres flux',
+        ],
+    ],
+    'idea' => [
+        'summary' => '{1} Tendance : :count source en parle.|[0,*] Tendance : :count sources en parlent.',
+        'formats' => 'Formats à essayer : :formats.',
+        'sources' => 'Pourquoi c’est une tendance :',
+    ],
+];

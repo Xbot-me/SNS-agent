@@ -564,6 +564,24 @@ class Post extends Model
     }
 
     /**
+     * An assisted channel's post is due: it waits in review, without a remote
+     * id, until the user publishes it in the assisted posting window. The
+     * review clock starts now, on every attempt.
+     */
+    public function markPublicationAwaitingAssist(): void
+    {
+        $this->writePublication([
+            'publish_status' => PublishStatus::PendingReview,
+            'platform_post_id' => null,
+            'platform_url' => null,
+            'submitted_at' => now(),
+            'retry_at' => null,
+            'error_message' => null,
+            'error_context' => null,
+        ]);
+    }
+
+    /**
      * The provider accepted the post and then refused it in review. Unlike a
      * failure, the remote row exists, so its id and URL are kept for support.
      *

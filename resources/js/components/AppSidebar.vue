@@ -3,11 +3,13 @@ import { Link, router, usePage } from '@inertiajs/vue3';
 import {
     IconBulb,
     IconCalendarEvent,
-    IconTrendingUp,
     IconFileText,
+    IconFlame,
+    IconInbox,
     IconLayoutGrid,
     IconPlus,
     IconRepeat,
+    IconTrendingUp,
     IconUsers,
 } from '@tabler/icons-vue';
 import { trans } from 'laravel-vue-i18n';
@@ -39,22 +41,21 @@ import { useConnectChannelDialog } from '@/composables/useConnectChannelDialog';
 import { openPostComposer } from '@/composables/useGlobalPostComposer';
 import { useWorkspaceAbilities } from '@/composables/useWorkspaceAbilities';
 import { insights } from '@/routes/app';
-import { index as ideasIndex, create as createIdea } from '@/routes/app/create/ideas';
+import {
+    create as createIdea,
+    index as ideasIndex,
+} from '@/routes/app/create/ideas';
+import { index as inboxIndex } from '@/routes/app/inbox';
 import { index as repurposes } from '@/routes/app/repurposes';
+import { index as trendsIndex } from '@/routes/app/trends';
 import type { NavItem } from '@/types';
 import type { SidebarChannel } from '@/types/channel';
 
 const page = usePage();
-const currentWorkspace = computed(
-    () => page.props.auth.currentWorkspace,
-);
+const currentWorkspace = computed(() => page.props.auth.currentWorkspace);
 
-const {
-    canCreatePost,
-    canManageRepurposes,
-    canManageAccounts,
-    canManageTeam,
-} = useWorkspaceAbilities();
+const { canCreatePost, canManageRepurposes, canManageAccounts, canManageTeam } =
+    useWorkspaceAbilities();
 const { open: openConnectDialog } = useConnectChannelDialog();
 
 const inviteMemberDialogOpen = ref(false);
@@ -71,6 +72,10 @@ const scheduledPostsCount = computed(() =>
         0,
     ),
 );
+
+// A module that is off for the workspace has no entry in the menu.
+const isModuleOn = (module: string): boolean =>
+    currentWorkspace.value?.modules?.[module] === true;
 
 const mainNavItems = computed<NavItem[]>(() => [
     ...(canCreatePost.value
@@ -90,6 +95,26 @@ const mainNavItems = computed<NavItem[]>(() => [
         count: scheduledPostsCount.value,
         countTestId: 'sidebar-publish-count',
     },
+    ...(isModuleOn('inbox')
+        ? [
+              {
+                  title: trans('sidebar.inbox'),
+                  href: inboxIndex.url(),
+                  icon: IconInbox,
+                  activePattern: '/inbox',
+              },
+          ]
+        : []),
+    ...(isModuleOn('trends') && canCreatePost.value
+        ? [
+              {
+                  title: trans('trends.nav'),
+                  href: trendsIndex.url(),
+                  icon: IconFlame,
+                  activePattern: '/trends',
+              },
+          ]
+        : []),
     {
         title: trans('channels.insights'),
         href: insights.url(),
@@ -114,7 +139,7 @@ const mainNavItems = computed<NavItem[]>(() => [
         >
             <Link
                 :href="postsIndex.url()"
-                class="flex h-8 items-center rounded-md px-2 outline-hidden focus-visible:ring-2 focus-visible:ring-sidebar-ring group-data-[collapsible=icon]:px-1"
+                class="flex h-8 items-center rounded-md px-2 outline-hidden group-data-[collapsible=icon]:px-1 focus-visible:ring-2 focus-visible:ring-sidebar-ring"
                 data-testid="sidebar-logo"
             >
                 <span class="inline-flex group-data-[collapsible=icon]:hidden">
@@ -134,16 +159,17 @@ const mainNavItems = computed<NavItem[]>(() => [
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                         <Button
-                            class="h-9 w-full justify-center gap-1.5 rounded-lg bg-primary-strong font-medium text-primary-strong-foreground hover:bg-primary-text-hover data-[state=open]:bg-primary-text-hover dark:hover:bg-primary dark:data-[state=open]:bg-primary group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:px-0"
+                            class="h-9 w-full justify-center gap-1.5 rounded-lg bg-primary-strong font-medium text-primary-strong-foreground group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:px-0 hover:bg-primary-text-hover data-[state=open]:bg-primary-text-hover dark:hover:bg-primary dark:data-[state=open]:bg-primary"
                             :aria-label="$t('sidebar.new')"
                             data-testid="sidebar-new"
                         >
                             <IconPlus
                                 class="hidden size-4 group-data-[collapsible=icon]:block"
                             />
-                            <span class="group-data-[collapsible=icon]:hidden">{{
-                                $t('sidebar.new')
-                            }}</span>
+                            <span
+                                class="group-data-[collapsible=icon]:hidden"
+                                >{{ $t('sidebar.new') }}</span
+                            >
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
@@ -224,7 +250,9 @@ const mainNavItems = computed<NavItem[]>(() => [
                                 data-testid="sidebar-new-member"
                                 @select="openInviteMemberDialog"
                             >
-                                <IconUsers class="size-4 text-muted-foreground" />
+                                <IconUsers
+                                    class="size-4 text-muted-foreground"
+                                />
                                 {{ $t('sidebar.new_menu.member') }}
                             </DropdownMenuItem>
                         </template>

@@ -22,6 +22,7 @@ class DispatchAccountDailyAnalytics extends Command
 
         SocialAccount::query()
             ->connected()
+            ->apiBacked()
             ->with('workspace.account.subscriptions')
             ->lazyById(200)
             ->each(function (SocialAccount $channel) use ($collectors, $date): void {

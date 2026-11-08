@@ -60,7 +60,7 @@ class InstagramFacebookController extends MetaController
 
         $driver = Socialite::driver($this->driver)
             ->usingGraphVersion($this->graphVersion())
-            ->setScopes($this->scopes)
+            ->setScopes($this->withInboxScopes($this->scopes))
             ->redirectUrl(route('app.social.instagram-facebook.callback'));
 
         $driver = $this->switchingAccount($request)

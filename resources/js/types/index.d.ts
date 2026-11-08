@@ -9,10 +9,18 @@ import type {
     TimeFormat,
     WeekStart,
 } from '@/preferences';
-import type { ScrollChangelogEntries, SharedChangelog } from '@/types/changelog';
+import type {
+    ScrollChangelogEntries,
+    SharedChangelog,
+} from '@/types/changelog';
 import type { AuthPlan, Features, PlanOption } from '@/types/plan';
 
-export type { AuthPlan, BillingInterval, Features, PlanOption } from '@/types/plan';
+export type {
+    AuthPlan,
+    BillingInterval,
+    Features,
+    PlanOption,
+} from '@/types/plan';
 export type { WelcomeStep } from '@/types/welcome';
 
 export interface Workspace {
@@ -22,6 +30,7 @@ export interface Workspace {
     is_owner?: boolean;
     is_admin?: boolean;
     requires_approval?: boolean;
+    modules?: Record<string, boolean>;
     [key: string]: unknown;
 }
 

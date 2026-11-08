@@ -1,0 +1,111 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'nav' => '趋势',
+    'title' => '趋势',
+    'edit_setup' => '编辑设置',
+    'analyze_now' => '立即分析',
+    'last_analyzed' => ':time更新',
+    'never_analyzed' => '尚未分析',
+    'formats' => [
+        'text' => '文字',
+        'image' => '图片',
+        'carousel' => '轮播图',
+        'video' => '视频',
+    ],
+    'goals' => [
+        'grow' => ['label' => '扩大受众', 'description' => '值得分享、让人愿意关注的帖子。'],
+        'traffic' => ['label' => '为网站引流', 'description' => '让人想点击的帖子。'],
+        'sell' => ['label' => '销售产品或服务', 'description' => '展示问题与你的解决方案的帖子。'],
+        'authority' => ['label' => '树立专家形象', 'description' => '有教学价值、有明确观点的帖子。'],
+    ],
+    'niches' => [
+        'marketing' => '营销',
+        'technology' => '科技',
+        'business' => '商业',
+        'news' => '新闻',
+        'creative' => '创意',
+        'entertainment' => '娱乐',
+        'science' => '科学',
+    ],
+    'topic' => [
+        'covered_by' => '{1} :count 个来源在报道|[0,*] :count 个来源在报道',
+        'make_post' => '创建帖子',
+        'dismiss' => '忽略',
+        'used' => '已在创意中',
+        'show_sources' => '为什么热门',
+        'hide_sources' => '隐藏来源',
+        'make_failed' => '无法创建创意。请重试。',
+    ],
+    'empty' => [
+        'analyzing' => [
+            'title' => '正在读取你的来源',
+            'body' => '第一批话题稍后会显示在这里。',
+        ],
+        'none' => [
+            'title' => '暂无话题',
+            'body' => '你的来源报道的内容暂时与你的领域不匹配。订阅源更新后再来看看，或添加更多来源。',
+        ],
+        'no_feeds' => [
+            'title' => '你还没有选择来源',
+            'body' => '要找到话题，趋势需要订阅源来读取。请为你的领域选几个。',
+            'member' => '要找到话题，需要工作区管理员选择趋势读取的订阅源。',
+            'action' => '选择来源',
+        ],
+    ],
+    'setup' => [
+        'title' => '设置趋势',
+        'step' => '第 :current 步，共 :total 步',
+        'steps' => [
+            'niche' => '你的领域',
+            'goal' => '你的目标',
+            'formats' => '发布方式',
+            'sources' => '来源',
+        ],
+        'back' => '返回',
+        'next' => '下一步',
+        'finish' => '查找趋势',
+        'save' => '保存',
+        'save_failed' => '无法保存设置。请检查各项内容后重试。',
+        'niche' => [
+            'heading' => '你发布什么内容？',
+            'description' => '选择最接近的主题，或输入你自己的。我们据此判断哪些内容与你相关。',
+            'label' => '你的领域',
+            'placeholder' => '面向忙碌父母的居家健身',
+            'keywords_label' => '关注的词',
+            'keywords_placeholder' => '输入词语后按 Enter',
+            'keywords_description' => '我们会在标题中查找这些词。添加你所在领域常用的词。',
+            'excluded_label' => '排除的词',
+            'excluded_description' => '包含这些词的标题会被忽略。',
+        ],
+        'goal' => [
+            'heading' => '你希望帖子达成什么？',
+            'description' => '这决定我们优先推荐哪些形式。',
+            'audience_label' => '帖子面向谁？',
+            'audience_placeholder' => '想在家快速锻炼的父母',
+        ],
+        'formats' => [
+            'heading' => '你实际会发布什么？',
+            'description' => '我们只推荐你会制作的形式。',
+            'cadence_label' => '每周发帖数',
+        ],
+        'sources' => [
+            'heading' => '去哪里查找？',
+            'description' => '我们读取这些订阅源，了解你的领域正在报道什么。',
+            'yours' => '你的订阅源',
+            'none' => '你还没有订阅源。请在下方添加。',
+            'limit' => '最多选择 :count 个订阅源。',
+            'suggested' => '适合“:niche”的推荐',
+            'add' => '添加',
+            'add_failed' => '无法添加该订阅源。请重试。',
+            'more' => '查找更多订阅源',
+        ],
+    ],
+    'idea' => [
+        'summary' => '{1} 热门：有 :count 个来源在报道这个话题。|[0,*] 热门：有 :count 个来源在报道这个话题。',
+        'formats' => '可以尝试的形式：:formats。',
+        'sources' => '为什么热门：',
+    ],
+];

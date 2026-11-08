@@ -48,7 +48,7 @@ test('user can initiate mastodon oauth flow', function () {
     expect(session('mastodon_instance'))->toBe('https://mastodon.social');
     expect(session('mastodon_client_id'))->toBe('test-client-id');
     expect(session('mastodon_client_secret'))->toBe('test-client-secret');
-    Http::assertSent(fn (ClientRequest $request): bool => $request['scopes'] === 'read:accounts read:statuses write:statuses write:media');
+    Http::assertSent(fn (ClientRequest $request): bool => $request['scopes'] === 'read:accounts read:statuses write:statuses write:media read:notifications');
 });
 
 test('user cannot connect to invalid mastodon instance', function () {
@@ -360,4 +360,15 @@ test('mastodon connect errors are shown in the user language', function () {
     $this->actingAs($this->user)
         ->post(route('app.social.mastodon.authorize'), ['instance' => 'https://mastodon.example'])
         ->assertSessionHasErrors(['instance' => 'Erro ao conectar à instância do Mastodon.']);
+});
+
+test('the mastodon login leaves the inbox scope out when the inbox is off', function () {
+    config()->set('trypost.inbox.enabled', false);
+    Http::fake([
+        'https://mastodon.social/api/v1/apps' => Http::response(['client_id' => 'test-client-id', 'client_secret' => 'test-client-secret']),
+    ]);
+
+    $this->actingAs($this->user)->post(route('app.social.mastodon.authorize'), ['instance' => 'https://mastodon.social']);
+
+    Http::assertSent(fn (ClientRequest $request): bool => $request['scopes'] === 'read:accounts read:statuses write:statuses write:media');
 });

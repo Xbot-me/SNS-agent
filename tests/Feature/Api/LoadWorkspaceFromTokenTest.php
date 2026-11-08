@@ -175,6 +175,50 @@ test('rejects personal access tokens on the mcp endpoint', function () {
         ->assertJson(['message' => 'MCP OAuth authorization required.']);
 });
 
+test('accepts personal access tokens on the mcp endpoint when api keys are allowed there', function () {
+    subscribeAccount($this->user->account);
+    config(['trypost.mcp_accept_api_keys' => true]);
+
+    $this->withHeaders([
+        'Authorization' => "Bearer {$this->plainToken}",
+        'Accept' => 'application/json, text/event-stream',
+    ])->postJson(route('mcp.trypost'), [
+        'jsonrpc' => '2.0',
+        'id' => 1,
+        'method' => 'initialize',
+        'params' => [
+            'protocolVersion' => '2025-03-26',
+            'capabilities' => (object) [],
+            'clientInfo' => ['name' => 'Pest', 'version' => '1.0'],
+        ],
+    ])->assertSuccessful();
+});
+
+test('still rejects an oauth grant without the mcp scope when api keys are allowed on the mcp endpoint', function () {
+    subscribeAccount($this->user->account);
+    config(['trypost.mcp_accept_api_keys' => true]);
+    $member = User::factory()->create(['account_id' => $this->user->account_id]);
+    $this->workspace->members()->attach($member->id, membershipPivot('member'));
+    $member->update(['current_workspace_id' => $this->workspace->id]);
+    $issued = mcpBearerToken($member, $this->workspace, scopes: []);
+
+    $this->withHeaders([
+        'Authorization' => "Bearer {$issued['plain_token']}",
+        'Accept' => 'application/json, text/event-stream',
+    ])->postJson(route('mcp.trypost'), [
+        'jsonrpc' => '2.0',
+        'id' => 1,
+        'method' => 'initialize',
+        'params' => [
+            'protocolVersion' => '2025-03-26',
+            'capabilities' => (object) [],
+            'clientInfo' => ['name' => 'Pest', 'version' => '1.0'],
+        ],
+    ])
+        ->assertForbidden()
+        ->assertJson(['message' => 'MCP OAuth authorization required.']);
+});
+
 test('rejects oauth grants without the mcp scope on the mcp endpoint', function () {
     subscribeAccount($this->user->account);
 

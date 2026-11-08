@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Enums\Post\CreatedVia;
+use App\Enums\Post\PublishStatus;
 use App\Enums\Post\ScheduleMode;
 use App\Enums\Post\Status as PostStatus;
 use App\Enums\PostPlatform\ContentType;
@@ -1012,6 +1013,23 @@ test('destroy keeps a post that already went out or failed', function (PostStatu
     'published' => [PostStatus::Published],
     'failed' => [PostStatus::Failed],
 ]);
+
+test('destroy deletes a post stuck waiting on an assisted channel', function () {
+    $account = SocialAccount::factory()->assisted()->create(['workspace_id' => $this->workspace->id]);
+    $post = Post::factory()->forAccount($account)->create([
+        'workspace_id' => $this->workspace->id,
+        'user_id' => $this->user->id,
+        'status' => PostStatus::Publishing,
+        'publish_status' => PublishStatus::PendingReview,
+    ]);
+
+    $this->actingAs($this->user)
+        ->from(route('app.posts.index'))
+        ->delete(route('app.posts.destroy', $post))
+        ->assertRedirect(route('app.posts.index'));
+
+    expect(Post::find($post->id))->toBeNull();
+});
 
 test('destroy post deletes the post and redirects to posts index', function () {
     $post = Post::factory()->create([

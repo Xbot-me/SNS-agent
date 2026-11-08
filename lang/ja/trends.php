@@ -1,0 +1,111 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'nav' => 'トレンド',
+    'title' => 'トレンド',
+    'edit_setup' => '設定を編集',
+    'analyze_now' => '今すぐ分析',
+    'last_analyzed' => ':time に更新',
+    'never_analyzed' => 'まだ分析していません',
+    'formats' => [
+        'text' => 'テキスト',
+        'image' => '画像',
+        'carousel' => 'カルーセル',
+        'video' => '動画',
+    ],
+    'goals' => [
+        'grow' => ['label' => 'フォロワーを増やす', 'description' => 'シェアされ、フォローのきっかけになる投稿。'],
+        'traffic' => ['label' => 'サイトへの訪問を増やす', 'description' => 'クリックしたくなる投稿。'],
+        'sell' => ['label' => '商品やサービスを売る', 'description' => '課題と解決策を見せる投稿。'],
+        'authority' => ['label' => '専門家として認知される', 'description' => '教え、立場を示す投稿。'],
+    ],
+    'niches' => [
+        'marketing' => 'マーケティング',
+        'technology' => 'テクノロジー',
+        'business' => 'ビジネス',
+        'news' => 'ニュース',
+        'creative' => 'クリエイティブ',
+        'entertainment' => 'エンタメ',
+        'science' => 'サイエンス',
+    ],
+    'topic' => [
+        'covered_by' => '{1} :count 件のソースが取り上げ中|[0,*] :count 件のソースが取り上げ中',
+        'make_post' => '投稿を作成',
+        'dismiss' => '非表示',
+        'used' => 'アイデアに追加済み',
+        'show_sources' => '話題の理由',
+        'hide_sources' => 'ソースを隠す',
+        'make_failed' => 'アイデアを作成できませんでした。もう一度お試しください。',
+    ],
+    'empty' => [
+        'analyzing' => [
+            'title' => 'ソースを読み込み中',
+            'body' => '最初のトピックはまもなくここに表示されます。',
+        ],
+        'none' => [
+            'title' => 'トピックはまだありません',
+            'body' => 'ソースが取り上げている内容に、ニッチに合うものがまだありません。フィードの更新後にもう一度確認するか、ソースを追加してください。',
+        ],
+        'no_feeds' => [
+            'title' => 'ソースがまだ選ばれていません',
+            'body' => 'トピックを見つけるには、トレンドが読むフィードが必要です。ニッチに合うものを選んでください。',
+            'member' => 'トピックを見つけるには、ワークスペースの管理者がトレンドの読むフィードを選ぶ必要があります。',
+            'action' => 'ソースを選ぶ',
+        ],
+    ],
+    'setup' => [
+        'title' => 'トレンドの設定',
+        'step' => 'ステップ :current / :total',
+        'steps' => [
+            'niche' => 'ニッチ',
+            'goal' => '目標',
+            'formats' => '投稿スタイル',
+            'sources' => 'ソース',
+        ],
+        'back' => '戻る',
+        'next' => '次へ',
+        'finish' => 'トレンドを探す',
+        'save' => '保存',
+        'save_failed' => '設定を保存できませんでした。入力内容を確認して、もう一度お試しください。',
+        'niche' => [
+            'heading' => '何について投稿しますか？',
+            'description' => '近いテーマを選ぶか、自分で入力してください。これをもとに、あなたに関係のある内容を判断します。',
+            'label' => 'ニッチ',
+            'placeholder' => '忙しい親のための自宅フィットネス',
+            'keywords_label' => '追跡するキーワード',
+            'keywords_placeholder' => '単語を入力して Enter',
+            'keywords_description' => 'これらの単語を見出しから探します。ニッチでよく使われる言葉を追加してください。',
+            'excluded_label' => '除外するキーワード',
+            'excluded_description' => 'これらの単語を含む見出しは対象外になります。',
+        ],
+        'goal' => [
+            'heading' => '投稿で何を実現したいですか？',
+            'description' => '最初に提案するフォーマットが変わります。',
+            'audience_label' => '誰に向けた投稿ですか？',
+            'audience_placeholder' => '自宅で手早く運動したい親',
+        ],
+        'formats' => [
+            'heading' => '実際に作る投稿は？',
+            'description' => '作れるフォーマットだけを提案します。',
+            'cadence_label' => '週あたりの投稿数',
+        ],
+        'sources' => [
+            'heading' => 'どこから探しますか？',
+            'description' => 'これらのフィードを読んで、ニッチで話題になっていることを調べます。',
+            'yours' => 'あなたのフィード',
+            'none' => 'フィードはまだありません。下から追加してください。',
+            'limit' => '最大 :count 件のフィードを選べます。',
+            'suggested' => ':niche のおすすめ',
+            'add' => '追加',
+            'add_failed' => 'フィードを追加できませんでした。もう一度お試しください。',
+            'more' => 'フィードをもっと探す',
+        ],
+    ],
+    'idea' => [
+        'summary' => '{1} トレンド: :count 件のソースが取り上げています。|[0,*] トレンド: :count 件のソースが取り上げています。',
+        'formats' => '試したいフォーマット: :formats。',
+        'sources' => '話題の理由:',
+    ],
+];

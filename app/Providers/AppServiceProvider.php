@@ -15,6 +15,8 @@ use App\Models\ChangelogEntry;
 use App\Models\ChangelogEntryView;
 use App\Models\Idea;
 use App\Models\IdeaStage;
+use App\Models\InboxConversation;
+use App\Models\InboxMessage;
 use App\Models\Invite;
 use App\Models\Media;
 use App\Models\MediaSourceConnection;
@@ -32,6 +34,8 @@ use App\Models\RssFeedItem;
 use App\Models\SocialAccount;
 use App\Models\Subscription;
 use App\Models\SubscriptionItem;
+use App\Models\TrendProfile;
+use App\Models\TrendTopic;
 use App\Models\User;
 use App\Models\Webhook;
 use App\Models\WebhookLog;
@@ -114,6 +118,8 @@ class AppServiceProvider extends ServiceProvider
             'changelogEntryView' => ChangelogEntryView::class,
             'idea' => Idea::class,
             'ideaStage' => IdeaStage::class,
+            'inboxConversation' => InboxConversation::class,
+            'inboxMessage' => InboxMessage::class,
             'invite' => Invite::class,
             'media' => Media::class,
             'mediaSourceConnection' => MediaSourceConnection::class,
@@ -131,6 +137,8 @@ class AppServiceProvider extends ServiceProvider
             'socialAccount' => SocialAccount::class,
             'subscription' => Subscription::class,
             'subscriptionItem' => SubscriptionItem::class,
+            'trendProfile' => TrendProfile::class,
+            'trendTopic' => TrendTopic::class,
             'user' => User::class,
             'webhook' => Webhook::class,
             'webhookLog' => WebhookLog::class,

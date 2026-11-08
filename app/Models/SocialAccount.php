@@ -66,6 +66,7 @@ class SocialAccount extends Model
         'scopes',
         'meta',
         'status',
+        'is_assisted',
         'error_message',
         'disconnected_at',
         'last_used_at',
@@ -100,6 +101,7 @@ class SocialAccount extends Model
             'last_verified_at' => 'datetime',
             'scopes' => 'array',
             'meta' => 'array',
+            'is_assisted' => 'boolean',
             'position' => 'integer',
             'posting_goal' => 'integer',
             'posting_schedule' => PostingScheduleCast::class,
@@ -109,6 +111,16 @@ class SocialAccount extends Model
     public function workspace(): BelongsTo
     {
         return $this->belongsTo(Workspace::class);
+    }
+
+    /**
+     * An assisted channel has no API token. Its posts wait for the user to
+     * publish them in the browser window the assisted posting helper fills in,
+     * and nothing calls the network's API for it (verify, refresh, analytics).
+     */
+    public function isAssisted(): bool
+    {
+        return (bool) $this->is_assisted;
     }
 
     /**
@@ -596,6 +608,17 @@ class SocialAccount extends Model
 
     public function scopeIncludedInAnalytics(Builder $query): Builder
     {
-        return $query->whereIn('platform', SocialPlatform::analyticsValues());
+        return $query->whereIn('platform', SocialPlatform::analyticsValues())->apiBacked();
+    }
+
+    public function scopeAssisted(Builder $query): Builder
+    {
+        return $query->where('is_assisted', true);
+    }
+
+    /** Channels TryPost reaches through the network's API: every one but an assisted channel. */
+    public function scopeApiBacked(Builder $query): Builder
+    {
+        return $query->where('is_assisted', false);
     }
 }

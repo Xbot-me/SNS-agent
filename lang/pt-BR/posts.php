@@ -57,8 +57,8 @@ return [
             'edit_in_canva' => 'Editar :name no Canva',
             'errors' => [
                 'import_failed' => 'Não foi possível importar o arquivo. Tente novamente.',
-                'popup_blocked' => 'Seu navegador bloqueou a janela. Permita pop-ups para o TryPost e tente novamente.',
-                'scope_not_granted' => 'O TryPost precisa de acesso ao arquivo que você escolher. Tente novamente e permita o acesso.',
+                'popup_blocked' => 'Seu navegador bloqueou a janela. Permita pop-ups para o X-board e tente novamente.',
+                'scope_not_granted' => 'O X-board precisa de acesso ao arquivo que você escolher. Tente novamente e permita o acesso.',
                 'session_expired' => 'Sua sessão expirou. Abra a fonte novamente.',
                 'video_not_ready' => 'O Google Photos ainda está processando este vídeo. Tente novamente em alguns minutos.',
                 'google_connect_failed' => 'Não foi possível conectar ao Google. Tente novamente.',
@@ -361,7 +361,7 @@ return [
                 'play' => 'Ouvir prévia',
                 'pause' => 'Pausar prévia',
                 'remove' => 'Remover música',
-                'part_hint' => 'O Instagram não deixa o TryPost escolher qual trecho da música toca.',
+                'part_hint' => 'O Instagram não deixa o X-board escolher qual trecho da música toca.',
                 'volume' => 'Volume',
                 'video_volume' => 'Vídeo',
                 'audio_volume' => 'Música',
@@ -911,6 +911,9 @@ return [
         'publishing_timed_out' => 'A publicação excedeu o tempo limite. Tente novamente.',
         'rejected_in_review' => 'O Google recusou este post na revisão. Edite o conteúdo ou a imagem e tente novamente.',
         'review_unconfirmed' => 'O Google nunca confirmou este post. Confira seu Perfil da Empresa e tente novamente.',
+        'assisted_single_post_only' => 'Esta conta do X publica pela janela de publicação, um post por vez. Remova a enquete ou as respostas da thread para agendar.',
+        'assisted_not_posted' => 'Este post não foi publicado no X em 24 horas. Tente de novo para abrir a janela de publicação.',
+        'assisted_window_closed' => 'A janela de publicação do X foi fechada antes de você clicar em Postar. Tente de novo para abri-la.',
         'instagram' => [
             'processing_failed' => 'O Instagram não conseguiu processar esta mídia. Tente outro arquivo.',
         ],
@@ -1069,7 +1072,7 @@ return [
         ],
         'created_by' => 'Criado por :name :when',
         'welcome' => [
-            'title' => 'Boas-vindas ao TryPost 👋',
+            'title' => 'Boas-vindas ao X-board 👋',
             'description' => 'Conecte um canal para começar a planejar e publicar seus posts.',
             'invite' => 'Convidar sua equipe',
             'connect_more' => 'Conectar mais canais',

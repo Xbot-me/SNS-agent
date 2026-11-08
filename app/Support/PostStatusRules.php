@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support;
 
+use App\Enums\Post\PublishStatus;
 use App\Enums\Post\QueuePosition;
 use App\Enums\Post\Status as PostStatus;
 use App\Models\Post;
@@ -50,9 +51,41 @@ class PostStatusRules
         return in_array($post->status, self::EDIT_BLOCKED_STATUSES, true);
     }
 
+    /**
+     * Minutes a publish attempt may go without writing before the user can
+     * delete the post themselves (RecoverStuckPosts fails it after an hour).
+     */
+    private const STUCK_PUBLISHING_MINUTES = 15;
+
     public static function blocksDeletion(Post $post): bool
     {
+        if (self::isStuckPublishing($post)) {
+            return false;
+        }
+
         return in_array($post->status, self::DELETE_BLOCKED_STATUSES, true);
+    }
+
+    /**
+     * A post that sits in Publishing with nothing working on it: one waiting
+     * for the user on an assisted channel (X without an API), or an attempt
+     * that stopped writing. It can be deleted so it never blocks the queue.
+     */
+    public static function isStuckPublishing(Post $post): bool
+    {
+        if ($post->status !== PostStatus::Publishing) {
+            return false;
+        }
+
+        if ($post->publish_status === PublishStatus::PendingReview) {
+            return $post->socialAccount?->isAssisted() === true;
+        }
+
+        $lastWrite = $post->publication_updated_at ?? $post->updated_at;
+
+        return $post->publish_status?->isInFlight() === true
+            && blank($post->retry_at)
+            && $lastWrite?->lessThanOrEqualTo(now()->subMinutes(self::STUCK_PUBLISHING_MINUTES)) === true;
     }
 
     public static function editBlockedMessage(): string

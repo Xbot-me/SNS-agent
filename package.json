@@ -8,7 +8,8 @@
         "dev": "vite",
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
-        "lint": "eslint . --fix"
+        "lint": "eslint . --fix",
+        "x:assist": "node resources/scripts/x-assist.ts"
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",

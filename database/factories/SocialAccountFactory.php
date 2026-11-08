@@ -63,6 +63,19 @@ class SocialAccountFactory extends Factory
         ]);
     }
 
+    /** An X account added by handle for assisted posting: no token, no API. */
+    public function assisted(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'platform' => Platform::X,
+            'is_assisted' => true,
+            'access_token' => '',
+            'refresh_token' => null,
+            'token_expires_at' => null,
+            'scopes' => [],
+        ]);
+    }
+
     public function tiktok(): static
     {
         return $this->state(fn (array $attributes) => [

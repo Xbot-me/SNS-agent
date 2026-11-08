@@ -69,6 +69,12 @@ class ConnectionVerifier
      */
     public function verify(SocialAccount $account): bool
     {
+        // An assisted channel has no token and is never reached through the API:
+        // the user signs in to the network in the assisted posting window.
+        if ($account->isAssisted()) {
+            return true;
+        }
+
         $this->assertConnectionConfigured($account);
 
         // Hard-expired tokens cannot make API calls — refresh is mandatory.

@@ -65,7 +65,7 @@ class PostObserver
         rescue(function () use ($post): void {
             $account = $post->loadMissing('socialAccount')->socialAccount;
 
-            if (blank($account) || ! app(FollowerCollectorFactory::class)->supports($post->platform)) {
+            if (blank($account) || $account->isAssisted() || ! app(FollowerCollectorFactory::class)->supports($post->platform)) {
                 return;
             }
 

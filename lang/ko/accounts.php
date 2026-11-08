@@ -3,6 +3,16 @@
 declare(strict_types=1);
 
 return [
+    'x_assisted' => [
+        'title' => 'X 계정 추가',
+        'description' => 'X 게시물이 바로 올릴 수 있는 상태로 브라우저 창에 열립니다. 게시하기는 직접 누르므로 X API가 필요 없습니다.',
+        'handle' => 'X 사용자 이름',
+        'handle_placeholder' => '@yourhandle',
+        'hint' => '게시 창에서 로그인할 계정을 사용하세요.',
+        'submit' => 'X 계정 추가',
+        'handle_invalid' => 'X 사용자 이름을 입력하세요. 영문, 숫자, 밑줄로 15자 이내입니다.',
+    ],
+
     'bluesky' => [
         'title' => 'Bluesky 연결',
         'description' => '연결하려면 인증 정보를 입력하세요',
@@ -99,7 +109,7 @@ return [
             ],
             'permissions' => [
                 'lead' => '모든 페이지와 Instagram 계정에 대해 모든 권한 선택',
-                'rest' => '(연결 시, TryPost에 연결하지 않을 계정 포함).',
+                'rest' => '(연결 시, X-board에 연결하지 않을 계정 포함).',
             ],
         ],
         'learn_how' => '방법 알아보기.',
@@ -121,8 +131,8 @@ return [
         'close' => '닫기',
         'title_single' => '계정 연결',
         'title_select' => '계정 선택',
-        'subtitle_single' => 'TryPost가 :network에 게시할 계정을 선택하세요.',
-        'subtitle_select' => 'TryPost가 :network에 게시할 계정들을 선택하세요.',
+        'subtitle_single' => 'X-board가 :network에 게시할 계정을 선택하세요.',
+        'subtitle_select' => 'X-board가 :network에 게시할 계정들을 선택하세요.',
         'selected' => ':count개 선택됨',
         'select_all' => '모두 선택',
         'connected' => '연결됨',
@@ -153,7 +163,7 @@ return [
             ],
             'missing_permission' => [
                 'title' => '권한이 필요합니다',
-                'description' => 'TryPost가 게시물을 게시하려면 권한이 필요합니다. 다시 연결하고 해당 권한을 선택한 상태로 두세요.',
+                'description' => 'X-board가 게시물을 게시하려면 권한이 필요합니다. 다시 연결하고 해당 권한을 선택한 상태로 두세요.',
             ],
             'expired' => [
                 'title' => '연결이 만료되었습니다',
@@ -170,7 +180,7 @@ return [
             'start_again' => '처음부터',
         ],
         'errors' => [
-            'bluesky_email_unconfirmed' => 'Bluesky 설정에서 이메일을 인증한 후 계정을 다시 연결하세요. TryPost에서 동영상을 게시하려면 이메일 인증이 필요합니다.',
+            'bluesky_email_unconfirmed' => 'Bluesky 설정에서 이메일을 인증한 후 계정을 다시 연결하세요. X-board에서 동영상을 게시하려면 이메일 인증이 필요합니다.',
             'error_connecting' => '계정 연결 중 오류가 발생했습니다. 다시 시도해 주세요.',
             'network_taken' => '이 워크스페이스에는 이미 이 네트워크의 계정이 있습니다. 먼저 연결을 해제하세요.',
             'wrong_account' => '다른 계정입니다. 다시 연결하려는 계정을 인증하세요.',
@@ -185,7 +195,7 @@ return [
             'page_not_found' => '페이지를 찾을 수 없습니다.',
             'channel_not_found' => '채널을 찾을 수 없습니다.',
             'pages_read_incomplete' => '페이지를 모두 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.',
-            'publish_permission_missing' => 'TryPost가 게시물을 게시하려면 권한이 필요합니다. 다시 연결하고 해당 권한을 선택된 상태로 두세요.',
+            'publish_permission_missing' => 'X-board가 게시물을 게시하려면 권한이 필요합니다. 다시 연결하고 해당 권한을 선택된 상태로 두세요.',
             'cancelled' => '연결이 취소되었습니다.',
             'pages_missing_permission' => '페이지는 찾았지만 게시할 수 있는 곳이 없습니다. 페이지 자체의 역할과 모든 권한이 필요합니다.',
             'no_facebook_pages' => 'Facebook 페이지를 찾을 수 없습니다. 최소 한 개 페이지의 관리자여야 합니다.',

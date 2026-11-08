@@ -57,8 +57,8 @@ return [
             'edit_in_canva' => 'Edit :name in Canva',
             'errors' => [
                 'import_failed' => 'The file could not be imported. Please try again.',
-                'popup_blocked' => 'Your browser blocked the window. Allow pop-ups for TryPost and try again.',
-                'scope_not_granted' => 'TryPost needs access to the file you pick. Try again and allow it.',
+                'popup_blocked' => 'Your browser blocked the window. Allow pop-ups for X-board and try again.',
+                'scope_not_granted' => 'X-board needs access to the file you pick. Try again and allow it.',
                 'session_expired' => 'Your session expired. Open the source again.',
                 'video_not_ready' => 'Google Photos is still processing this video. Try again in a few minutes.',
                 'google_connect_failed' => 'Could not connect to Google. Please try again.',
@@ -361,7 +361,7 @@ return [
                 'play' => 'Play preview',
                 'pause' => 'Pause preview',
                 'remove' => 'Remove music',
-                'part_hint' => 'Instagram doesn\'t let TryPost choose which part of a track plays.',
+                'part_hint' => 'Instagram doesn\'t let X-board choose which part of a track plays.',
                 'volume' => 'Volume',
                 'video_volume' => 'Video',
                 'audio_volume' => 'Music',
@@ -911,6 +911,9 @@ return [
         'publishing_timed_out' => 'Publishing timed out. Please try again.',
         'rejected_in_review' => 'Google rejected this post in review. Edit the content or image and try again.',
         'review_unconfirmed' => 'Google never confirmed this post. Check your Business Profile and try again.',
+        'assisted_single_post_only' => 'This X account posts through the posting window, one post at a time. Remove the poll or thread replies to schedule it.',
+        'assisted_not_posted' => 'This post wasn\'t published on X within 24 hours. Retry it to open the posting window again.',
+        'assisted_window_closed' => 'The X posting window was closed before you pressed Post. Retry it to open the window again.',
         'instagram' => [
             'processing_failed' => 'Instagram could not process this media. Try another file.',
         ],
@@ -1069,7 +1072,7 @@ return [
         ],
         'created_by' => 'Created by :name :when',
         'welcome' => [
-            'title' => 'Welcome to TryPost 👋',
+            'title' => 'Welcome to X-board 👋',
             'description' => 'Connect a channel to start planning and publishing your posts.',
             'invite' => 'Invite your team',
             'connect_more' => 'Connect more channels',

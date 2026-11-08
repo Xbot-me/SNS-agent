@@ -57,8 +57,8 @@ return [
             'edit_in_canva' => ':name dosyasını Canva\'da düzenle',
             'errors' => [
                 'import_failed' => 'Dosya içe aktarılamadı. Lütfen tekrar deneyin.',
-                'popup_blocked' => 'Tarayıcınız pencereyi engelledi. TryPost için açılır pencerelere izin verip tekrar deneyin.',
-                'scope_not_granted' => 'TryPost\'un seçtiğiniz dosyaya erişmesi gerekiyor. Tekrar deneyin ve erişime izin verin.',
+                'popup_blocked' => 'Tarayıcınız pencereyi engelledi. X-board için açılır pencerelere izin verip tekrar deneyin.',
+                'scope_not_granted' => 'X-board\'un seçtiğiniz dosyaya erişmesi gerekiyor. Tekrar deneyin ve erişime izin verin.',
                 'session_expired' => 'Oturumunuzun süresi doldu. Kaynağı yeniden açın.',
                 'video_not_ready' => 'Google Photos bu videoyu hâlâ işliyor. Birkaç dakika sonra tekrar deneyin.',
                 'google_connect_failed' => 'Google\'a bağlanılamadı. Lütfen tekrar deneyin.',
@@ -361,7 +361,7 @@ return [
                 'play' => 'Önizlemeyi çal',
                 'pause' => 'Önizlemeyi duraklat',
                 'remove' => 'Müziği kaldır',
-                'part_hint' => 'Instagram, parçanın hangi kısmının çalacağını TryPost\'un seçmesine izin vermiyor.',
+                'part_hint' => 'Instagram, parçanın hangi kısmının çalacağını X-board\'un seçmesine izin vermiyor.',
                 'volume' => 'Ses',
                 'video_volume' => 'Video',
                 'audio_volume' => 'Müzik',
@@ -911,6 +911,9 @@ return [
         'publishing_timed_out' => 'Yayınlama zaman aşımına uğradı. Lütfen tekrar deneyin.',
         'rejected_in_review' => 'Google bu gönderiyi incelemede reddetti. İçeriği veya görseli düzenleyip tekrar deneyin.',
         'review_unconfirmed' => 'Google bu gönderiyi hiç onaylamadı. İşletme Profili\'ni kontrol edip tekrar deneyin.',
+        'assisted_single_post_only' => 'Bu X hesabı gönderi penceresinden, tek seferde bir gönderi paylaşır. Planlamak için anketi veya flood yanıtlarını kaldır.',
+        'assisted_not_posted' => 'Bu gönderi 24 saat içinde X\'te paylaşılmadı. Gönderi penceresini yeniden açmak için tekrar dene.',
+        'assisted_window_closed' => 'X gönderi penceresi Gönder\'e basmadan kapatıldı. Yeniden açmak için tekrar dene.',
         'instagram' => [
             'processing_failed' => 'Instagram bu medyayı işleyemedi. Başka bir dosya deneyin.',
         ],
@@ -1069,7 +1072,7 @@ return [
         ],
         'created_by' => 'Oluşturan: :name :when',
         'welcome' => [
-            'title' => 'TryPost\'a hoş geldin 👋',
+            'title' => 'X-board\'a hoş geldin 👋',
             'description' => 'Gönderilerinizi planlamaya ve yayınlamaya başlamak için bir kanal bağlayın.',
             'invite' => 'Ekibini davet et',
             'connect_more' => 'Daha fazla kanal bağla',

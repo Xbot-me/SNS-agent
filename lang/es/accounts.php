@@ -3,6 +3,16 @@
 declare(strict_types=1);
 
 return [
+    'x_assisted' => [
+        'title' => 'Añade tu cuenta de X',
+        'description' => 'Tus posts de X se abren en una ventana del navegador, listos para publicar. Tú pulsas Postear, así que no hace falta la API de X.',
+        'handle' => 'Usuario de X',
+        'handle_placeholder' => '@tuusuario',
+        'hint' => 'Usa la cuenta con la que iniciarás sesión en la ventana de publicación.',
+        'submit' => 'Añadir cuenta de X',
+        'handle_invalid' => 'Escribe tu usuario de X: hasta 15 letras, números o guiones bajos.',
+    ],
+
     'bluesky' => [
         'title' => 'Conectar Bluesky',
         'description' => 'Introduce tus credenciales para conectar',
@@ -99,7 +109,7 @@ return [
             ],
             'permissions' => [
                 'lead' => 'Todos los permisos seleccionados para todas las páginas y cuentas de Instagram',
-                'rest' => 'al conectar, incluso las que no conectarás a TryPost.',
+                'rest' => 'al conectar, incluso las que no conectarás a X-board.',
             ],
         ],
         'learn_how' => 'Descubre cómo.',
@@ -121,8 +131,8 @@ return [
         'close' => 'Cerrar',
         'title_single' => 'Conecta tu cuenta',
         'title_select' => 'Selecciona cuentas',
-        'subtitle_single' => 'Elige la cuenta en la que TryPost publicará en :network.',
-        'subtitle_select' => 'Elige las cuentas en las que TryPost publicará en :network.',
+        'subtitle_single' => 'Elige la cuenta en la que X-board publicará en :network.',
+        'subtitle_select' => 'Elige las cuentas en las que X-board publicará en :network.',
         'selected' => ':count seleccionadas',
         'select_all' => 'Seleccionar todas',
         'connected' => 'Conectada',
@@ -153,7 +163,7 @@ return [
             ],
             'missing_permission' => [
                 'title' => 'Permiso necesario',
-                'description' => 'TryPost necesita permiso para publicar tus publicaciones. Vuelve a conectar y mantén ese permiso marcado.',
+                'description' => 'X-board necesita permiso para publicar tus publicaciones. Vuelve a conectar y mantén ese permiso marcado.',
             ],
             'expired' => [
                 'title' => 'Esta conexión ha caducado',
@@ -170,7 +180,7 @@ return [
             'start_again' => 'Empezar de nuevo',
         ],
         'errors' => [
-            'bluesky_email_unconfirmed' => 'Confirma tu correo en los ajustes de Bluesky y vuelve a conectar tu cuenta. TryPost requiere un correo confirmado para publicar vídeos.',
+            'bluesky_email_unconfirmed' => 'Confirma tu correo en los ajustes de Bluesky y vuelve a conectar tu cuenta. X-board requiere un correo confirmado para publicar vídeos.',
             'error_connecting' => 'Error al conectar la cuenta. Inténtalo de nuevo.',
             'network_taken' => 'Este workspace ya tiene una cuenta para esta red. Desconéctala primero.',
             'wrong_account' => 'Esa es una cuenta diferente. Autoriza la que estás reconectando.',
@@ -185,7 +195,7 @@ return [
             'page_not_found' => 'Página no encontrada.',
             'channel_not_found' => 'Canal no encontrado.',
             'pages_read_incomplete' => 'No pudimos terminar de leer tus páginas. Inténtalo de nuevo en un momento.',
-            'publish_permission_missing' => 'TryPost necesita permiso para publicar tus publicaciones. Vuelve a conectar y mantén ese permiso marcado.',
+            'publish_permission_missing' => 'X-board necesita permiso para publicar tus publicaciones. Vuelve a conectar y mantén ese permiso marcado.',
             'cancelled' => 'Conexión cancelada.',
             'pages_missing_permission' => 'Encontramos páginas, pero ninguna en la que puedas publicar. Necesitas un rol en la página y aceptar todos los permisos.',
             'no_facebook_pages' => 'No se encontraron páginas de Facebook. Debes ser administrador de al menos una página.',

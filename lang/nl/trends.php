@@ -1,0 +1,111 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'nav' => 'Trends',
+    'title' => 'Trends',
+    'edit_setup' => 'Instelling wijzigen',
+    'analyze_now' => 'Nu analyseren',
+    'last_analyzed' => 'Bijgewerkt :time',
+    'never_analyzed' => 'Nog niet geanalyseerd',
+    'formats' => [
+        'text' => 'Tekst',
+        'image' => 'Afbeelding',
+        'carousel' => 'Carrousel',
+        'video' => 'Video',
+    ],
+    'goals' => [
+        'grow' => ['label' => 'Mijn publiek laten groeien', 'description' => 'Berichten die mensen delen en waarvoor ze je volgen.'],
+        'traffic' => ['label' => 'Bezoekers naar mijn site halen', 'description' => 'Berichten die uitnodigen om door te klikken.'],
+        'sell' => ['label' => 'Iets verkopen', 'description' => 'Berichten die een probleem en jouw oplossing laten zien.'],
+        'authority' => ['label' => 'Gezien worden als expert', 'description' => 'Berichten die uitleggen en stelling nemen.'],
+    ],
+    'niches' => [
+        'marketing' => 'Marketing',
+        'technology' => 'Technologie',
+        'business' => 'Zakelijk',
+        'news' => 'Nieuws',
+        'creative' => 'Creatief',
+        'entertainment' => 'Entertainment',
+        'science' => 'Wetenschap',
+    ],
+    'topic' => [
+        'covered_by' => '{1} Behandeld door :count bron|[0,*] Behandeld door :count bronnen',
+        'make_post' => 'Bericht maken',
+        'dismiss' => 'Negeren',
+        'used' => 'Op je ideeënbord',
+        'show_sources' => 'Waarom het trendt',
+        'hide_sources' => 'Bronnen verbergen',
+        'make_failed' => 'Het idee kon niet worden gemaakt. Probeer het opnieuw.',
+    ],
+    'empty' => [
+        'analyzing' => [
+            'title' => 'Je bronnen worden gelezen',
+            'body' => 'Je eerste onderwerpen verschijnen zo hier.',
+        ],
+        'none' => [
+            'title' => 'Nog geen onderwerpen',
+            'body' => 'Niets van wat je bronnen behandelen past al bij je niche. Kom terug na de volgende update van je feeds of voeg bronnen toe.',
+        ],
+        'no_feeds' => [
+            'title' => 'Je hebt nog geen bronnen gekozen',
+            'body' => 'Om onderwerpen te vinden heeft Trends feeds nodig om te lezen. Kies er een paar voor je niche.',
+            'member' => 'Om onderwerpen te vinden moet een workspace-beheerder de feeds kiezen die Trends leest.',
+            'action' => 'Bronnen kiezen',
+        ],
+    ],
+    'setup' => [
+        'title' => 'Trends instellen',
+        'step' => 'Stap :current van :total',
+        'steps' => [
+            'niche' => 'Je niche',
+            'goal' => 'Je doel',
+            'formats' => 'Hoe je post',
+            'sources' => 'Bronnen',
+        ],
+        'back' => 'Terug',
+        'next' => 'Volgende',
+        'finish' => 'Mijn trends vinden',
+        'save' => 'Opslaan',
+        'save_failed' => 'De instelling kon niet worden opgeslagen. Controleer de velden en probeer het opnieuw.',
+        'niche' => [
+            'heading' => 'Waarover post je?',
+            'description' => 'Kies het dichtstbijzijnde onderwerp of typ je eigen. Zo bepalen we wat voor jou relevant is.',
+            'label' => 'Je niche',
+            'placeholder' => 'Thuis fitnessen voor drukke ouders',
+            'keywords_label' => 'Woorden om te volgen',
+            'keywords_placeholder' => 'Typ een woord en druk op Enter',
+            'keywords_description' => 'We zoeken deze woorden in koppen. Voeg woorden toe die in je niche gebruikt worden.',
+            'excluded_label' => 'Woorden om over te slaan',
+            'excluded_description' => 'Koppen met deze woorden laten we weg.',
+        ],
+        'goal' => [
+            'heading' => 'Wat moeten je berichten doen?',
+            'description' => 'Dit bepaalt welke formaten we eerst voorstellen.',
+            'audience_label' => 'Voor wie zijn ze?',
+            'audience_placeholder' => 'Ouders die snel thuis willen trainen',
+        ],
+        'formats' => [
+            'heading' => 'Wat ga je echt posten?',
+            'description' => 'We stellen alleen formaten voor die je ook maakt.',
+            'cadence_label' => 'Berichten per week',
+        ],
+        'sources' => [
+            'heading' => 'Waar zoeken we?',
+            'description' => 'We lezen deze feeds om te zien waar je niche over schrijft.',
+            'yours' => 'Je feeds',
+            'none' => 'Je hebt nog geen feeds. Voeg er hieronder een paar toe.',
+            'limit' => 'Kies maximaal :count feeds.',
+            'suggested' => 'Suggesties voor :niche',
+            'add' => 'Toevoegen',
+            'add_failed' => 'Die feed kon niet worden toegevoegd. Probeer het opnieuw.',
+            'more' => 'Meer feeds zoeken',
+        ],
+    ],
+    'idea' => [
+        'summary' => '{1} Trending: :count bron schrijft hierover.|[0,*] Trending: :count bronnen schrijven hierover.',
+        'formats' => 'Formaten om te proberen: :formats.',
+        'sources' => 'Waarom het trendt:',
+    ],
+];

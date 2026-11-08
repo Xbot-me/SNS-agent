@@ -57,8 +57,8 @@ return [
             'edit_in_canva' => 'Canva에서 :name 편집',
             'errors' => [
                 'import_failed' => '파일을 가져올 수 없습니다. 다시 시도해 주세요.',
-                'popup_blocked' => '브라우저가 창을 차단했습니다. TryPost의 팝업을 허용하고 다시 시도해 주세요.',
-                'scope_not_granted' => 'TryPost가 선택한 파일에 접근할 수 있어야 합니다. 다시 시도하고 접근을 허용해 주세요.',
+                'popup_blocked' => '브라우저가 창을 차단했습니다. X-board의 팝업을 허용하고 다시 시도해 주세요.',
+                'scope_not_granted' => 'X-board가 선택한 파일에 접근할 수 있어야 합니다. 다시 시도하고 접근을 허용해 주세요.',
                 'session_expired' => '세션이 만료되었습니다. 소스를 다시 열어 주세요.',
                 'video_not_ready' => 'Google Photos에서 아직 이 동영상을 처리하고 있습니다. 몇 분 후에 다시 시도해 주세요.',
                 'google_connect_failed' => 'Google에 연결할 수 없습니다. 다시 시도해 주세요.',
@@ -361,7 +361,7 @@ return [
                 'play' => '미리듣기',
                 'pause' => '일시정지',
                 'remove' => '음악 삭제',
-                'part_hint' => 'Instagram은 TryPost가 트랙의 어느 부분을 재생할지 선택하도록 허용하지 않습니다.',
+                'part_hint' => 'Instagram은 X-board가 트랙의 어느 부분을 재생할지 선택하도록 허용하지 않습니다.',
                 'volume' => '볼륨',
                 'video_volume' => '동영상',
                 'audio_volume' => '음악',
@@ -911,6 +911,9 @@ return [
         'publishing_timed_out' => '게시에 시간이 초과되었습니다. 다시 시도하세요.',
         'rejected_in_review' => 'Google 검토에서 이 게시물이 거부되었습니다. 내용이나 이미지를 수정한 후 다시 시도하세요.',
         'review_unconfirmed' => 'Google가 이 게시물을 확인해 주지 않았습니다. 비즈니스 프로필을 확인한 후 다시 시도하세요.',
+        'assisted_single_post_only' => '이 X 계정은 게시 창에서 한 번에 하나씩 게시합니다. 예약하려면 투표나 스레드 답글을 삭제하세요.',
+        'assisted_not_posted' => '이 게시물은 24시간 안에 X에 게시되지 않았습니다. 다시 시도하면 게시 창이 다시 열립니다.',
+        'assisted_window_closed' => '게시하기를 누르기 전에 X 게시 창이 닫혔습니다. 다시 시도하면 창이 다시 열립니다.',
         'instagram' => [
             'processing_failed' => 'Instagram에서 이 미디어를 처리하지 못했습니다. 다른 파일을 사용해 보세요.',
         ],
@@ -1069,7 +1072,7 @@ return [
         ],
         'created_by' => '작성자: :name :when',
         'welcome' => [
-            'title' => 'TryPost에 오신 것을 환영합니다 👋',
+            'title' => 'X-board에 오신 것을 환영합니다 👋',
             'description' => '채널을 연결하고 게시물 계획과 게시를 시작하세요.',
             'invite' => '팀 초대',
             'connect_more' => '채널 더 연결',

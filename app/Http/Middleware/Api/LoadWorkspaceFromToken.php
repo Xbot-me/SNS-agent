@@ -49,7 +49,9 @@ class LoadWorkspaceFromToken
         }
 
         if ($context === 'mcp') {
-            if (! $token->isActiveMcpGrant() || ! $authenticatedToken->can('mcp:use')) {
+            $acceptsApiKey = config('trypost.mcp_accept_api_keys') && $token->isPersonalAccessToken();
+
+            if (! $acceptsApiKey && (! $token->isActiveMcpGrant() || ! $authenticatedToken->can('mcp:use'))) {
                 return response()->json(['message' => 'MCP OAuth authorization required.'], Response::HTTP_FORBIDDEN);
             }
         } else {

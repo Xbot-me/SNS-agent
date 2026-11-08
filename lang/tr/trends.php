@@ -1,0 +1,111 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'nav' => 'Trendler',
+    'title' => 'Trendler',
+    'edit_setup' => 'Kurulumu düzenle',
+    'analyze_now' => 'Şimdi analiz et',
+    'last_analyzed' => 'Güncellendi :time',
+    'never_analyzed' => 'Henüz analiz edilmedi',
+    'formats' => [
+        'text' => 'Metin',
+        'image' => 'Görsel',
+        'carousel' => 'Karusel',
+        'video' => 'Video',
+    ],
+    'goals' => [
+        'grow' => ['label' => 'Kitlemi büyütmek', 'description' => 'İnsanların paylaştığı ve seni takip etme sebebi olan gönderiler.'],
+        'traffic' => ['label' => 'Sitemde ziyaretçi toplamak', 'description' => 'Tıklama isteği uyandıran gönderiler.'],
+        'sell' => ['label' => 'Bir şey satmak', 'description' => 'Bir sorunu ve senin çözümünü gösteren gönderiler.'],
+        'authority' => ['label' => 'Uzman olarak görülmek', 'description' => 'Öğreten ve görüş bildiren gönderiler.'],
+    ],
+    'niches' => [
+        'marketing' => 'Pazarlama',
+        'technology' => 'Teknoloji',
+        'business' => 'İş dünyası',
+        'news' => 'Haberler',
+        'creative' => 'Yaratıcılık',
+        'entertainment' => 'Eğlence',
+        'science' => 'Bilim',
+    ],
+    'topic' => [
+        'covered_by' => '{1} :count kaynak işliyor|[0,*] :count kaynak işliyor',
+        'make_post' => 'Gönderi oluştur',
+        'dismiss' => 'Gizle',
+        'used' => 'Fikirlerinde',
+        'show_sources' => 'Neden trend',
+        'hide_sources' => 'Kaynakları gizle',
+        'make_failed' => 'Fikir oluşturulamadı. Tekrar dene.',
+    ],
+    'empty' => [
+        'analyzing' => [
+            'title' => 'Kaynakların okunuyor',
+            'body' => 'İlk konular birazdan burada görünecek.',
+        ],
+        'none' => [
+            'title' => 'Henüz konu yok',
+            'body' => 'Kaynaklarının işlediği hiçbir şey henüz nişinle eşleşmiyor. Akışların güncellendikten sonra tekrar bak ya da kaynak ekle.',
+        ],
+        'no_feeds' => [
+            'title' => 'Henüz kaynak seçmedin',
+            'body' => 'Konu bulmak için Trendler’in okuyacağı akışlara ihtiyacı var. Nişin için birkaç tane seç.',
+            'member' => 'Konu bulmak için bir çalışma alanı yöneticisinin Trendler’in okuyacağı akışları seçmesi gerekiyor.',
+            'action' => 'Kaynak seç',
+        ],
+    ],
+    'setup' => [
+        'title' => 'Trendler’i kur',
+        'step' => 'Adım :current / :total',
+        'steps' => [
+            'niche' => 'Nişin',
+            'goal' => 'Hedefin',
+            'formats' => 'Nasıl paylaşıyorsun',
+            'sources' => 'Kaynaklar',
+        ],
+        'back' => 'Geri',
+        'next' => 'İleri',
+        'finish' => 'Trendleri bul',
+        'save' => 'Kaydet',
+        'save_failed' => 'Kurulum kaydedilemedi. Alanları kontrol edip tekrar dene.',
+        'niche' => [
+            'heading' => 'Ne hakkında paylaşım yapıyorsun?',
+            'description' => 'En yakın konuyu seç ya da kendi konunu yaz. Senin için neyin alakalı olduğuna böyle karar veriyoruz.',
+            'label' => 'Nişin',
+            'placeholder' => 'Yoğun ebeveynler için evde fitness',
+            'keywords_label' => 'İzlenecek kelimeler',
+            'keywords_placeholder' => 'Bir kelime yaz ve Enter’a bas',
+            'keywords_description' => 'Bu kelimeleri başlıklarda arıyoruz. Nişindeki insanların kullandığı kelimeleri ekle.',
+            'excluded_label' => 'Atlanacak kelimeler',
+            'excluded_description' => 'Bu kelimeleri içeren başlıklar dışarıda bırakılır.',
+        ],
+        'goal' => [
+            'heading' => 'Gönderilerin ne işe yaramalı?',
+            'description' => 'Hangi formatları önce önereceğimize bu karar verir.',
+            'audience_label' => 'Kimler için?',
+            'audience_placeholder' => 'Evde hızlı antrenman isteyen ebeveynler',
+        ],
+        'formats' => [
+            'heading' => 'Gerçekte ne paylaşacaksın?',
+            'description' => 'Yalnızca hazırlayacağın formatları öneririz.',
+            'cadence_label' => 'Haftalık gönderi',
+        ],
+        'sources' => [
+            'heading' => 'Nerede arayalım?',
+            'description' => 'Nişinde nelerin işlendiğini görmek için bu akışları okuyoruz.',
+            'yours' => 'Akışların',
+            'none' => 'Henüz akışın yok. Aşağıdan ekle.',
+            'limit' => 'En fazla :count akış seç.',
+            'suggested' => ':niche için öneriler',
+            'add' => 'Ekle',
+            'add_failed' => 'Bu akış eklenemedi. Tekrar dene.',
+            'more' => 'Daha fazla akış bul',
+        ],
+    ],
+    'idea' => [
+        'summary' => '{1} Trend: :count kaynak bunu işliyor.|[0,*] Trend: :count kaynak bunu işliyor.',
+        'formats' => 'Denenecek formatlar: :formats.',
+        'sources' => 'Neden trend:',
+    ],
+];

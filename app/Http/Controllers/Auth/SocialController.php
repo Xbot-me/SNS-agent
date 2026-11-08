@@ -20,6 +20,7 @@ use App\Models\Repurpose;
 use App\Models\SocialAccount;
 use App\Models\Workspace;
 use App\Services\PostHogService;
+use App\Support\Inbox\InboxScopes;
 use App\Support\Social\PendingConnection;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -231,6 +232,19 @@ class SocialController extends Controller
         )));
 
         return $scopes === [] ? array_values($requested) : $scopes;
+    }
+
+    /**
+     * The publish scopes plus the ones the unified inbox reads with, so one
+     * consent covers both. The inbox scopes are never required: a login that
+     * refuses them still connects, and the inbox asks for a reconnect.
+     *
+     * @param  array<int, string>  $scopes
+     * @return array<int, string>
+     */
+    protected function withInboxScopes(array $scopes): array
+    {
+        return array_values(array_unique([...$scopes, ...InboxScopes::for($this->platform)]));
     }
 
     /**

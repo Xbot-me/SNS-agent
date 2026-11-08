@@ -84,13 +84,15 @@ class RecoverStuckPosts extends Command
             return;
         }
 
+        $assisted = $post->socialAccount?->isAssisted() === true;
+
         $post->markPublicationRejected(
             (string) $post->platform_post_id,
             $post->platform_url,
-            __('posts.errors.review_unconfirmed'),
+            $assisted ? __('posts.errors.assisted_not_posted') : __('posts.errors.review_unconfirmed'),
             [
                 ...($post->error_context ?? []),
-                'category' => 'review_unconfirmed',
+                'category' => $assisted ? 'assisted_not_posted' : 'review_unconfirmed',
                 'failed_at' => now()->toIso8601String(),
             ],
         );

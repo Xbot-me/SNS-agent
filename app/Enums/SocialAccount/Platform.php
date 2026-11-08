@@ -102,6 +102,23 @@ enum Platform: string
         };
     }
 
+    /**
+     * The network's own name, for copy that sends the user there ("Open on
+     * YouTube", "Reply from the Facebook app"), where label() names the kind
+     * of channel ("YouTube Shorts", "Facebook Page").
+     */
+    public function networkName(): string
+    {
+        return match ($this) {
+            self::LinkedIn, self::LinkedInPage => 'LinkedIn',
+            self::Facebook => 'Facebook',
+            self::Instagram, self::InstagramFacebook => 'Instagram',
+            self::YouTube => 'YouTube',
+            self::GoogleBusiness => 'Google',
+            default => $this->label(),
+        };
+    }
+
     /** What one connected identity of this platform is, as the connect confirmation page names it. */
     public function identityType(): IdentityType
     {

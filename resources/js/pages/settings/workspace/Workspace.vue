@@ -13,6 +13,7 @@ interface Workspace {
 
 defineProps<{
     workspace: Workspace;
+    modules: Record<string, boolean>;
     isOnlyWorkspace: boolean;
     otherMemberCount: number;
 }>();
@@ -24,6 +25,7 @@ defineProps<{
     <SettingsLayout :title="$t('settings.workspace.title')">
         <WorkspaceTab
             :workspace="workspace"
+            :modules="modules"
             :is-only-workspace="isOnlyWorkspace"
             :other-member-count="otherMemberCount"
         />

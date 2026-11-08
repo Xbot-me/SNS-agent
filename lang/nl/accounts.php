@@ -3,6 +3,16 @@
 declare(strict_types=1);
 
 return [
+    'x_assisted' => [
+        'title' => 'Voeg je X-account toe',
+        'description' => 'Je X-posts openen klaar in een browservenster. Je klikt zelf op Posten, dus de X-API is niet nodig.',
+        'handle' => 'X-gebruikersnaam',
+        'handle_placeholder' => '@jouwnaam',
+        'hint' => 'Gebruik het account waarmee je inlogt in het postvenster.',
+        'submit' => 'X-account toevoegen',
+        'handle_invalid' => 'Vul je X-gebruikersnaam in: maximaal 15 letters, cijfers of underscores.',
+    ],
+
     'bluesky' => [
         'title' => 'Bluesky koppelen',
         'description' => 'Voer je inloggegevens in om te koppelen',
@@ -99,7 +109,7 @@ return [
             ],
             'permissions' => [
                 'lead' => 'Alle machtigingen geselecteerd voor alle pagina’s en Instagram-accounts',
-                'rest' => 'tijdens het koppelen, ook voor de accounts die je niet aan TryPost koppelt.',
+                'rest' => 'tijdens het koppelen, ook voor de accounts die je niet aan X-board koppelt.',
             ],
         ],
         'learn_how' => 'Zo werkt het.',
@@ -121,8 +131,8 @@ return [
         'close' => 'Sluiten',
         'title_single' => 'Koppel je account',
         'title_select' => 'Kies accounts',
-        'subtitle_single' => 'Kies het account waarop TryPost op :network publiceert.',
-        'subtitle_select' => 'Kies de accounts waarop TryPost op :network publiceert.',
+        'subtitle_single' => 'Kies het account waarop X-board op :network publiceert.',
+        'subtitle_select' => 'Kies de accounts waarop X-board op :network publiceert.',
         'selected' => ':count geselecteerd',
         'select_all' => 'Alles kiezen',
         'connected' => 'Gekoppeld',
@@ -153,7 +163,7 @@ return [
             ],
             'missing_permission' => [
                 'title' => 'Toestemming nodig',
-                'description' => 'TryPost heeft toestemming nodig om je berichten te publiceren. Koppel opnieuw en laat die toestemming aangevinkt.',
+                'description' => 'X-board heeft toestemming nodig om je berichten te publiceren. Koppel opnieuw en laat die toestemming aangevinkt.',
             ],
             'expired' => [
                 'title' => 'Deze koppeling is verlopen',
@@ -170,7 +180,7 @@ return [
             'start_again' => 'Opnieuw beginnen',
         ],
         'errors' => [
-            'bluesky_email_unconfirmed' => 'Bevestig je e-mailadres in de instellingen van Bluesky en verbind je account opnieuw. TryPost vereist een bevestigd e-mailadres om video’s te publiceren.',
+            'bluesky_email_unconfirmed' => 'Bevestig je e-mailadres in de instellingen van Bluesky en verbind je account opnieuw. X-board vereist een bevestigd e-mailadres om video’s te publiceren.',
             'error_connecting' => 'Fout bij het koppelen van het account. Probeer het opnieuw.',
             'network_taken' => 'Deze workspace heeft al een account voor dit netwerk. Koppel dat eerst los.',
             'wrong_account' => 'Dat is een ander account. Autoriseer het account dat je opnieuw koppelt.',
@@ -185,7 +195,7 @@ return [
             'page_not_found' => 'Pagina niet gevonden.',
             'channel_not_found' => 'Kanaal niet gevonden.',
             'pages_read_incomplete' => 'We konden je pagina’s niet volledig uitlezen. Probeer het zo meteen opnieuw.',
-            'publish_permission_missing' => 'TryPost heeft toestemming nodig om je berichten te publiceren. Koppel opnieuw en laat die toestemming aangevinkt.',
+            'publish_permission_missing' => 'X-board heeft toestemming nodig om je berichten te publiceren. Koppel opnieuw en laat die toestemming aangevinkt.',
             'cancelled' => 'Koppeling geannuleerd.',
             'pages_missing_permission' => 'We vonden pagina\'s, maar geen waar je op kunt posten. Je hebt een rol op de pagina zelf nodig en alle rechten.',
             'no_facebook_pages' => 'Geen Facebook-pagina\'s gevonden. Je moet beheerder zijn van ten minste één pagina.',

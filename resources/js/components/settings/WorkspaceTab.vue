@@ -4,13 +4,15 @@ import { Form } from '@inertiajs/vue3';
 import WorkspaceController from '@/actions/App/Http/Controllers/App/WorkspaceController';
 import PhotoUpload from '@/components/PhotoUpload.vue';
 import DeleteWorkspace from '@/components/settings/DeleteWorkspace.vue';
+import ModulesSection from '@/components/settings/ModulesSection.vue';
 import SettingsField from '@/components/settings/SettingsField.vue';
 import SettingsSection from '@/components/settings/SettingsSection.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { useWorkspaceAbilities } from '@/composables/useWorkspaceAbilities';
-import { uploadLogo, deleteLogo } from '@/routes/app/workspace';
+import { filled } from '@/lib/helpers';
+import { deleteLogo, uploadLogo } from '@/routes/app/workspace';
 
 interface Workspace {
     id: string;
@@ -21,6 +23,7 @@ interface Workspace {
 
 defineProps<{
     workspace: Workspace;
+    modules: Record<string, boolean>;
     isOnlyWorkspace: boolean;
     otherMemberCount: number;
 }>();
@@ -73,6 +76,12 @@ const { canManageBilling } = useWorkspaceAbilities();
                 </Button>
             </Form>
         </SettingsSection>
+
+        <template v-if="filled(modules)">
+            <Separator />
+
+            <ModulesSection :modules="modules" />
+        </template>
 
         <template v-if="canManageBilling">
             <Separator />

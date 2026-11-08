@@ -12,13 +12,21 @@ import {
     SHARE_CARD_SIZE,
     type ShareTint,
 } from '@/lib/shareCard/theme';
-import type { Box, Point, ShareCardOptions, SharePoint } from '@/lib/shareCard/types';
+import type {
+    Box,
+    Point,
+    ShareCardOptions,
+    SharePoint,
+} from '@/lib/shareCard/types';
 
 /** The home hero's dot grid in the ground's corners, fading toward the middle. */
 const DOTS = { gap: 24, radius: 1.4, opacity: 0.22, reach: 0.38 };
 
 /** The covers' background: the flat tint with the dot grid in the top-right and bottom-left corners. */
-const drawGround = (context: CanvasRenderingContext2D, tint: ShareTint): void => {
+const drawGround = (
+    context: CanvasRenderingContext2D,
+    tint: ShareTint,
+): void => {
     const { width, height } = SHARE_CARD_SIZE;
     const reach = Math.hypot(width, height) * DOTS.reach;
 
@@ -27,7 +35,10 @@ const drawGround = (context: CanvasRenderingContext2D, tint: ShareTint): void =>
 
     for (let y = DOTS.gap / 2; y < height; y += DOTS.gap) {
         for (let x = DOTS.gap / 2; x < width; x += DOTS.gap) {
-            const corner = Math.min(Math.hypot(width - x, y), Math.hypot(x, height - y));
+            const corner = Math.min(
+                Math.hypot(width - x, y),
+                Math.hypot(x, height - y),
+            );
             const strength = 1 - corner / reach;
 
             if (strength <= 0) {
@@ -43,10 +54,16 @@ const drawGround = (context: CanvasRenderingContext2D, tint: ShareTint): void =>
 };
 
 /** Each tint's ground, drawn once and kept until a canvas of another pixel density asks for it. */
-const grounds = new Map<string, { pixels: number; canvas: HTMLCanvasElement }>();
+const grounds = new Map<
+    string,
+    { pixels: number; canvas: HTMLCanvasElement }
+>();
 
 /** The ground for `tint` at the canvas' pixel density, drawn the first time it is asked for at that density. */
-const groundFor = (tint: ShareTint, pixels: number): HTMLCanvasElement | null => {
+const groundFor = (
+    tint: ShareTint,
+    pixels: number,
+): HTMLCanvasElement | null => {
     const known = grounds.get(tint.key);
 
     if (known && known.pixels === pixels) {
@@ -70,7 +87,10 @@ const groundFor = (tint: ShareTint, pixels: number): HTMLCanvasElement | null =>
 };
 
 /** Paints the tint and its dots under the panel, from the drawn ground when the browser can keep one. */
-export const paintGround = (context: CanvasRenderingContext2D, tint: ShareTint): void => {
+export const paintGround = (
+    context: CanvasRenderingContext2D,
+    tint: ShareTint,
+): void => {
     const ground = groundFor(tint, context.getTransform().a);
 
     if (!ground) {
@@ -79,7 +99,13 @@ export const paintGround = (context: CanvasRenderingContext2D, tint: ShareTint):
         return;
     }
 
-    context.drawImage(ground, 0, 0, SHARE_CARD_SIZE.width, SHARE_CARD_SIZE.height);
+    context.drawImage(
+        ground,
+        0,
+        0,
+        SHARE_CARD_SIZE.width,
+        SHARE_CARD_SIZE.height,
+    );
 };
 
 /** A white surface with the ink border and no shadow. */
@@ -93,7 +119,13 @@ export const paintPanel = (context: CanvasRenderingContext2D): Box => {
     };
 
     context.beginPath();
-    context.roundRect(panel.x, panel.y, panel.width, panel.height, PANEL.radius);
+    context.roundRect(
+        panel.x,
+        panel.y,
+        panel.width,
+        panel.height,
+        PANEL.radius,
+    );
     context.fillStyle = surface();
     context.fill();
     context.strokeStyle = ink();
@@ -106,29 +138,22 @@ export const paintPanel = (context: CanvasRenderingContext2D): Box => {
 /** The grid the logo's paths are drawn on. */
 const LOGO_GRID = 410;
 
-/** The TryPost mark, the four quarters of `AppLogo.vue`. */
-const paintLogo = (context: CanvasRenderingContext2D, at: Point, size: number): void => {
-    const quarters: [string, string][] = [
-        ['M410 109.736V410H128.863L410 109.736Z', '#3660E0'],
-        ['M410 0H281.138L205 81.3178L410 300.264V0Z', '#855ED4'],
-        ['M0 0V300.264L205 81.3178L281.138 0H0Z', '#FFCC33'],
-        ['M0 109.736V410H128.862L205 328.682L0 109.736Z', '#F39200'],
-    ];
-
+/** The app mark: the violet disc and white "F" of `AppLogo.vue`. */
+const paintLogo = (
+    context: CanvasRenderingContext2D,
+    at: Point,
+    size: number,
+): void => {
     context.save();
     context.beginPath();
     context.arc(at.x + size / 2, at.y + size / 2, size / 2, 0, Math.PI * 2);
     context.clip();
-    context.fillStyle = surface();
+    context.fillStyle = '#6D28D9';
     context.fillRect(at.x, at.y, size, size);
     context.translate(at.x, at.y);
     context.scale(size / LOGO_GRID, size / LOGO_GRID);
-
-    for (const [path, color] of quarters) {
-        context.fillStyle = color;
-        context.fill(new Path2D(path));
-    }
-
+    context.fillStyle = '#FFFFFF';
+    context.fill(new Path2D('M110 100H175L205 160L235 100H300L240 205L300 310H235L205 250L175 310H110L170 205Z'));
     context.restore();
 };
 
@@ -136,16 +161,27 @@ const paintLogo = (context: CanvasRenderingContext2D, at: Point, size: number): 
 const MARK = { logo: 32, gap: 12, size: 24 };
 
 /** The signature, centred in the band under the panel: whoever sees the post sees where it came from. */
-export const paintMark = (context: CanvasRenderingContext2D, mark: string): void => {
+export const paintMark = (
+    context: CanvasRenderingContext2D,
+    mark: string,
+): void => {
     const font = sans(600, MARK.size);
     const centre = SHARE_CARD_SIZE.height - PANEL.band / 2;
 
     context.font = font;
 
-    const start = (SHARE_CARD_SIZE.width - (MARK.logo + MARK.gap + context.measureText(mark).width)) / 2;
+    const start =
+        (SHARE_CARD_SIZE.width -
+            (MARK.logo + MARK.gap + context.measureText(mark).width)) /
+        2;
 
     paintLogo(context, { x: start, y: centre - MARK.logo / 2 }, MARK.logo);
-    writeText(context, mark, { x: start + MARK.logo + MARK.gap, y: centre + 1 }, { font, color: ink(), baseline: 'middle' });
+    writeText(
+        context,
+        mark,
+        { x: start + MARK.logo + MARK.gap, y: centre + 1 },
+        { font, color: ink(), baseline: 'middle' },
+    );
 };
 
 /** The workspace or channel name, with what and when under it. */
@@ -159,21 +195,56 @@ export const paintIdentity = (
     const nameFont = heading(600, IDENTITY.nameSize);
     const detailFont = sans(500, IDENTITY.detailSize);
 
-    writeText(context, ellipsise(context, subject, nameFont, limit), { x: at.x, y: at.y + IDENTITY.name }, { font: nameFont, color: ink() });
-    writeText(context, ellipsise(context, detail, detailFont, limit), { x: at.x, y: at.y + IDENTITY.detail }, { font: detailFont, color: muted() });
+    writeText(
+        context,
+        ellipsise(context, subject, nameFont, limit),
+        { x: at.x, y: at.y + IDENTITY.name },
+        { font: nameFont, color: ink() },
+    );
+    writeText(
+        context,
+        ellipsise(context, detail, detailFont, limit),
+        { x: at.x, y: at.y + IDENTITY.detail },
+        { font: detailFont, color: muted() },
+    );
 };
 
 /** The subject and what and when on the left, the figure with its change on the right. */
-export const paintHeadline = (context: CanvasRenderingContext2D, options: ShareCardOptions, panel: Box): void => {
+export const paintHeadline = (
+    context: CanvasRenderingContext2D,
+    options: ShareCardOptions,
+    panel: Box,
+): void => {
     const left = panel.x + PANEL.padding;
     const right = panel.x + panel.width - PANEL.padding;
     const limit = panel.width - PANEL.padding * 2 - HEADLINE.reserve;
 
-    paintIdentity(context, options.subject, `${options.label} · ${options.range}`, { x: left, y: panel.y + IDENTITY.top }, limit);
-    writeText(context, options.figure, { x: right, y: panel.y + HEADLINE.figure }, { font: heading(500, HEADLINE.figureSize), color: ink(), align: 'right' });
+    paintIdentity(
+        context,
+        options.subject,
+        `${options.label} · ${options.range}`,
+        { x: left, y: panel.y + IDENTITY.top },
+        limit,
+    );
+    writeText(
+        context,
+        options.figure,
+        { x: right, y: panel.y + HEADLINE.figure },
+        {
+            font: heading(500, HEADLINE.figureSize),
+            color: ink(),
+            align: 'right',
+        },
+    );
 
     if (options.change) {
-        paintChange(context, options.change, { x: right, y: panel.y + HEADLINE.change }, HEADLINE.changeSize, 'right');
+        paintChange(
+            context,
+            options.change,
+            { x: right, y: panel.y + HEADLINE.change },
+            HEADLINE.changeSize,
+            'right',
+        );
     }
 };
 
@@ -186,4 +257,5 @@ export const headlinePlot = (panel: Box): Box => ({
 });
 
 /** The values of the points that have one. */
-export const pointValues = (points: SharePoint[]): number[] => points.flatMap((point) => (point.value === null ? [] : [point.value]));
+export const pointValues = (points: SharePoint[]): number[] =>
+    points.flatMap((point) => (point.value === null ? [] : [point.value]));

@@ -57,8 +57,8 @@ return [
             'edit_in_canva' => 'Modifier :name dans Canva',
             'errors' => [
                 'import_failed' => 'Impossible d\'importer le fichier. Veuillez réessayer.',
-                'popup_blocked' => 'Votre navigateur a bloqué la fenêtre. Autorisez les pop-ups pour TryPost et réessayez.',
-                'scope_not_granted' => 'TryPost a besoin d\'accéder au fichier que vous choisissez. Réessayez et autorisez l\'accès.',
+                'popup_blocked' => 'Votre navigateur a bloqué la fenêtre. Autorisez les pop-ups pour X-board et réessayez.',
+                'scope_not_granted' => 'X-board a besoin d\'accéder au fichier que vous choisissez. Réessayez et autorisez l\'accès.',
                 'session_expired' => 'Votre session a expiré. Rouvrez la source.',
                 'video_not_ready' => 'Google Photos traite encore cette vidéo. Réessayez dans quelques minutes.',
                 'google_connect_failed' => 'Impossible de se connecter à Google. Veuillez réessayer.',
@@ -361,7 +361,7 @@ return [
                 'play' => 'Écouter',
                 'pause' => 'Pause',
                 'remove' => 'Retirer la musique',
-                'part_hint' => 'Instagram ne permet pas à TryPost de choisir quel passage du morceau est joué.',
+                'part_hint' => 'Instagram ne permet pas à X-board de choisir quel passage du morceau est joué.',
                 'volume' => 'Volume',
                 'video_volume' => 'Vidéo',
                 'audio_volume' => 'Musique',
@@ -911,6 +911,9 @@ return [
         'publishing_timed_out' => 'La publication a expiré. Veuillez réessayer.',
         'rejected_in_review' => 'Google a refusé ce post lors de l\'examen. Modifie le contenu ou l\'image et réessaie.',
         'review_unconfirmed' => 'Google n\'a jamais confirmé ce post. Vérifie ta fiche d\'établissement et réessaie.',
+        'assisted_single_post_only' => 'Ce compte X publie depuis la fenêtre de publication, un post à la fois. Retirez le sondage ou les réponses du fil pour le programmer.',
+        'assisted_not_posted' => 'Ce post n\'a pas été publié sur X en 24 heures. Relancez-le pour rouvrir la fenêtre de publication.',
+        'assisted_window_closed' => 'La fenêtre de publication X a été fermée avant que vous cliquiez sur Poster. Relancez-le pour la rouvrir.',
         'instagram' => [
             'processing_failed' => 'Instagram n\'a pas pu traiter ce média. Essaie un autre fichier.',
         ],
@@ -1069,7 +1072,7 @@ return [
         ],
         'created_by' => 'Créé par :name :when',
         'welcome' => [
-            'title' => 'Bienvenue sur TryPost 👋',
+            'title' => 'Bienvenue sur X-board 👋',
             'description' => 'Connectez un canal pour commencer à planifier et publier vos posts.',
             'invite' => 'Inviter votre équipe',
             'connect_more' => 'Connecter d\'autres canaux',

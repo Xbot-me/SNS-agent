@@ -8,6 +8,7 @@ import {
 } from '@tabler/icons-vue';
 import { computed } from 'vue';
 
+import AppLogo from '@/components/AppLogo.vue';
 import PlatformLogo from '@/components/PlatformLogo.vue';
 import { Button } from '@/components/ui/button';
 import { DialogDescription, DialogTitle } from '@/components/ui/dialog';
@@ -40,17 +41,33 @@ const emit = defineEmits<{
 const WORKS_WELL_WITH: Record<string, PlatformValue[]> = {
     [Platform.Bluesky]: [Platform.X, Platform.Threads, Platform.Mastodon],
     [Platform.Discord]: [Platform.Telegram, Platform.X],
-    [Platform.Facebook]: [Platform.Instagram, Platform.LinkedIn, Platform.YouTube],
+    [Platform.Facebook]: [
+        Platform.Instagram,
+        Platform.LinkedIn,
+        Platform.YouTube,
+    ],
     [Platform.GoogleBusiness]: [Platform.Facebook, Platform.Instagram],
-    [Platform.Instagram]: [Platform.Pinterest, Platform.TikTok, Platform.YouTube],
+    [Platform.Instagram]: [
+        Platform.Pinterest,
+        Platform.TikTok,
+        Platform.YouTube,
+    ],
     [Platform.LinkedIn]: [Platform.X, Platform.Facebook],
     [Platform.Mastodon]: [Platform.Bluesky, Platform.X, Platform.LinkedIn],
     [Platform.Pinterest]: [Platform.Instagram, Platform.TikTok],
     [Platform.Telegram]: [Platform.Discord, Platform.X],
-    [Platform.Threads]: [Platform.Instagram, Platform.Mastodon, Platform.Bluesky],
+    [Platform.Threads]: [
+        Platform.Instagram,
+        Platform.Mastodon,
+        Platform.Bluesky,
+    ],
     [Platform.TikTok]: [Platform.YouTube, Platform.Instagram],
     [Platform.X]: [Platform.Threads, Platform.Bluesky, Platform.LinkedIn],
-    [Platform.YouTube]: [Platform.TikTok, Platform.Instagram, Platform.Facebook],
+    [Platform.YouTube]: [
+        Platform.TikTok,
+        Platform.Instagram,
+        Platform.Facebook,
+    ],
 };
 
 const MEDIA_FEATURE_KEYS: Record<MediaType, string> = {
@@ -65,11 +82,15 @@ const copyKey = computed(() => `channels.details.networks.${value.value}`);
 
 const featureKeys = computed<string[]>(() => [
     ...(props.platform.text_only ? ['channels.details.features.text'] : []),
-    ...(props.platform.media_types ?? []).map((type) => MEDIA_FEATURE_KEYS[type]),
+    ...(props.platform.media_types ?? []).map(
+        (type) => MEDIA_FEATURE_KEYS[type],
+    ),
     ...(hasMultipleContentTypes(value.value)
         ? getContentTypeOptions(value.value).map((option) => option.labelKey)
         : []),
-    ...(props.platform.analytics ? ['channels.details.features.analytics'] : []),
+    ...(props.platform.analytics
+        ? ['channels.details.features.analytics']
+        : []),
 ]);
 
 const siblings = computed(() =>
@@ -83,10 +104,7 @@ const mediaUrl = computed(() => mediaLimitsDocsUrl(value.value));
 </script>
 
 <template>
-    <div
-        class="flex min-h-0 flex-1 flex-col"
-        data-testid="connect-details"
-    >
+    <div class="flex min-h-0 flex-1 flex-col" data-testid="connect-details">
         <Button
             variant="ghost"
             size="icon"
@@ -121,8 +139,12 @@ const mediaUrl = computed(() => mediaLimitsDocsUrl(value.value));
                 </header>
 
                 <section class="flex flex-col gap-3">
-                    <h3 class="text-sm leading-[21px] font-medium text-foreground">
-                        {{ $t('channels.details.why', { network: networkName }) }}
+                    <h3
+                        class="text-sm leading-[21px] font-medium text-foreground"
+                    >
+                        {{
+                            $t('channels.details.why', { network: networkName })
+                        }}
                     </h3>
                     <ul class="flex flex-col gap-3">
                         <li
@@ -146,12 +168,7 @@ const mediaUrl = computed(() => mediaLimitsDocsUrl(value.value));
                         {{ $t(`${copyKey}.tip`) }}
                     </blockquote>
                     <figcaption class="flex items-center gap-2">
-                        <img
-                            src="/images/reviews/paulo-castellano.jpg"
-                            alt=""
-                            class="size-8 rounded-lg object-cover"
-                            loading="lazy"
-                        />
+                        <AppLogo variant="mark" class="text-[28px]" />
                         <span
                             class="text-sm leading-[21px] font-medium text-foreground"
                             >{{ $t('channels.details.signature') }}</span

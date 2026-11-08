@@ -1,0 +1,111 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'nav' => 'Trends',
+    'title' => 'Trends',
+    'edit_setup' => 'Edit setup',
+    'analyze_now' => 'Analyze now',
+    'last_analyzed' => 'Updated :time',
+    'never_analyzed' => 'Not analyzed yet',
+    'formats' => [
+        'text' => 'Text',
+        'image' => 'Image',
+        'carousel' => 'Carousel',
+        'video' => 'Video',
+    ],
+    'goals' => [
+        'grow' => ['label' => 'Grow my audience', 'description' => 'Posts people share and follow you for.'],
+        'traffic' => ['label' => 'Send visitors to my site', 'description' => 'Posts that make people click through.'],
+        'sell' => ['label' => 'Sell something', 'description' => 'Posts that show a problem and your answer.'],
+        'authority' => ['label' => 'Be seen as an expert', 'description' => 'Posts that teach and take a stand.'],
+    ],
+    'niches' => [
+        'marketing' => 'Marketing',
+        'technology' => 'Technology',
+        'business' => 'Business',
+        'news' => 'News',
+        'creative' => 'Creative',
+        'entertainment' => 'Entertainment',
+        'science' => 'Science',
+    ],
+    'topic' => [
+        'covered_by' => '{1} Covered by :count source|[0,*] Covered by :count sources',
+        'make_post' => 'Make a post',
+        'dismiss' => 'Dismiss',
+        'used' => 'On your ideas board',
+        'show_sources' => 'Why it is trending',
+        'hide_sources' => 'Hide sources',
+        'make_failed' => "Couldn't create the idea. Try again.",
+    ],
+    'empty' => [
+        'analyzing' => [
+            'title' => 'Reading your sources',
+            'body' => 'Your first topics show up here in a moment.',
+        ],
+        'none' => [
+            'title' => 'No topics yet',
+            'body' => 'Nothing your sources cover matches your niche yet. Check back after your feeds update, or add more sources.',
+        ],
+        'no_feeds' => [
+            'title' => "You haven't picked any sources yet",
+            'body' => 'To find topics, Trends needs feeds to read. Choose some for your niche.',
+            'member' => 'To find topics, a workspace admin needs to choose the feeds Trends reads.',
+            'action' => 'Choose sources',
+        ],
+    ],
+    'setup' => [
+        'title' => 'Set up Trends',
+        'step' => 'Step :current of :total',
+        'steps' => [
+            'niche' => 'Your niche',
+            'goal' => 'Your goal',
+            'formats' => 'How you post',
+            'sources' => 'Sources',
+        ],
+        'back' => 'Back',
+        'next' => 'Next',
+        'finish' => 'Find my trends',
+        'save' => 'Save and update',
+        'save_failed' => "Couldn't save your setup. Check the fields and try again.",
+        'niche' => [
+            'heading' => 'What do you post about?',
+            'description' => 'Pick the closest topic or type your own. This is how we decide what is relevant to you.',
+            'label' => 'Your niche',
+            'placeholder' => 'Home fitness for busy parents',
+            'keywords_label' => 'Words to watch',
+            'keywords_placeholder' => 'Type a word and press Enter',
+            'keywords_description' => 'We look for these words in headlines. Add the words people in your niche use.',
+            'excluded_label' => 'Words to skip',
+            'excluded_description' => 'Headlines with these words are left out.',
+        ],
+        'goal' => [
+            'heading' => 'What should your posts do?',
+            'description' => 'This decides which formats we suggest first.',
+            'audience_label' => 'Who are they for?',
+            'audience_placeholder' => 'Parents who want quick workouts at home',
+        ],
+        'formats' => [
+            'heading' => 'What will you actually post?',
+            'description' => 'We only suggest formats you will make.',
+            'cadence_label' => 'Posts per week',
+        ],
+        'sources' => [
+            'heading' => 'Where should we look?',
+            'description' => 'We read these feeds to see what your niche is covering.',
+            'yours' => 'Your feeds',
+            'none' => 'You have no feeds yet. Add some below.',
+            'limit' => 'Pick up to :count feeds.',
+            'suggested' => 'Suggested for :niche',
+            'add' => 'Add',
+            'add_failed' => "Couldn't add that feed. Try again.",
+            'more' => 'Find more feeds',
+        ],
+    ],
+    'idea' => [
+        'summary' => '{1} Trending: :count source is covering this.|[0,*] Trending: :count sources are covering this.',
+        'formats' => 'Formats to try: :formats.',
+        'sources' => 'Why it is trending:',
+    ],
+];

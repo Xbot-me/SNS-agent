@@ -87,7 +87,7 @@ class BuildRssFeedsPageProps
     /**
      * @return list<array{key: string, entries: list<array<string, mixed>>}>
      */
-    private static function directory(Workspace $workspace): array
+    public static function directory(Workspace $workspace): array
     {
         /** @var Collection<string, string> $subscribed */
         $subscribed = $workspace->rssFeeds()->pluck('id', 'url_hash');

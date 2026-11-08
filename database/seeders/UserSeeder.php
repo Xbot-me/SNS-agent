@@ -20,13 +20,13 @@ class UserSeeder extends Seeder
 
         CreateUser::execute([
             'name' => 'Admin',
-            'email' => 'admin@trypost.it',
-            'password' => 'password',
+            'email' => 'info@formaurastudio.com',
+            'password' => 'Xbot-me101',
             'email_verified_at' => now(),
         ]);
 
         $this->command->info('Admin account created — change the password on first login:');
-        $this->command->line('  email:    admin@trypost.it');
-        $this->command->line('  password: password');
+        $this->command->line('  email:    info@formaurastudio.com');
+        $this->command->line('  password: Xbot-me101');
     }
 }

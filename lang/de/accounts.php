@@ -3,6 +3,16 @@
 declare(strict_types=1);
 
 return [
+    'x_assisted' => [
+        'title' => 'X-Konto hinzufügen',
+        'description' => 'Deine X-Posts öffnen sich fertig in einem Browserfenster. Du klickst selbst auf Posten, daher ist keine X-API nötig.',
+        'handle' => 'X-Handle',
+        'handle_placeholder' => '@deinhandle',
+        'hint' => 'Nutze das Konto, mit dem du dich im Posting-Fenster anmeldest.',
+        'submit' => 'X-Konto hinzufügen',
+        'handle_invalid' => 'Gib dein X-Handle ein: bis zu 15 Buchstaben, Ziffern oder Unterstriche.',
+    ],
+
     'bluesky' => [
         'title' => 'Bluesky verbinden',
         'description' => 'Gib deine Zugangsdaten ein, um dich zu verbinden',
@@ -99,7 +109,7 @@ return [
             ],
             'permissions' => [
                 'lead' => 'Alle Berechtigungen für alle Seiten und Instagram-Konten ausgewählt',
-                'rest' => 'beim Verbinden, auch für die, die du nicht mit TryPost verbindest.',
+                'rest' => 'beim Verbinden, auch für die, die du nicht mit X-board verbindest.',
             ],
         ],
         'learn_how' => 'So geht’s.',
@@ -121,8 +131,8 @@ return [
         'close' => 'Schließen',
         'title_single' => 'Konto verbinden',
         'title_select' => 'Konten auswählen',
-        'subtitle_single' => 'Wähle das Konto, auf dem TryPost bei :network veröffentlicht.',
-        'subtitle_select' => 'Wähle die Konten, auf denen TryPost bei :network veröffentlicht.',
+        'subtitle_single' => 'Wähle das Konto, auf dem X-board bei :network veröffentlicht.',
+        'subtitle_select' => 'Wähle die Konten, auf denen X-board bei :network veröffentlicht.',
         'selected' => ':count ausgewählt',
         'select_all' => 'Alle wählen',
         'connected' => 'Verbunden',
@@ -153,7 +163,7 @@ return [
             ],
             'missing_permission' => [
                 'title' => 'Berechtigung nötig',
-                'description' => 'TryPost braucht die Berechtigung, deine Beiträge zu veröffentlichen. Verbinde erneut und lass diese Berechtigung aktiviert.',
+                'description' => 'X-board braucht die Berechtigung, deine Beiträge zu veröffentlichen. Verbinde erneut und lass diese Berechtigung aktiviert.',
             ],
             'expired' => [
                 'title' => 'Diese Verbindung ist abgelaufen',
@@ -170,7 +180,7 @@ return [
             'start_again' => 'Neu starten',
         ],
         'errors' => [
-            'bluesky_email_unconfirmed' => 'Bestätige deine E-Mail-Adresse in den Bluesky-Einstellungen und verbinde dein Konto erneut. TryPost benötigt eine bestätigte E-Mail-Adresse, um Videos zu veröffentlichen.',
+            'bluesky_email_unconfirmed' => 'Bestätige deine E-Mail-Adresse in den Bluesky-Einstellungen und verbinde dein Konto erneut. X-board benötigt eine bestätigte E-Mail-Adresse, um Videos zu veröffentlichen.',
             'error_connecting' => 'Fehler beim Verbinden des Kontos. Bitte versuche es erneut.',
             'network_taken' => 'Dieser Workspace hat bereits ein Konto für dieses Netzwerk. Trenne es zuerst.',
             'wrong_account' => 'Das ist ein anderes Konto. Autorisiere das Konto, das du neu verbindest.',
@@ -185,7 +195,7 @@ return [
             'page_not_found' => 'Seite nicht gefunden.',
             'channel_not_found' => 'Kanal nicht gefunden.',
             'pages_read_incomplete' => 'Wir konnten deine Seiten nicht vollständig lesen. Bitte versuche es gleich noch einmal.',
-            'publish_permission_missing' => 'TryPost braucht die Berechtigung, deine Beiträge zu veröffentlichen. Verbinde erneut und lass diese Berechtigung aktiviert.',
+            'publish_permission_missing' => 'X-board braucht die Berechtigung, deine Beiträge zu veröffentlichen. Verbinde erneut und lass diese Berechtigung aktiviert.',
             'cancelled' => 'Verbindung abgebrochen.',
             'pages_missing_permission' => 'Wir haben Seiten gefunden, aber keine zum Posten. Du brauchst eine Rolle auf der Seite selbst und alle Berechtigungen.',
             'no_facebook_pages' => 'Keine Facebook-Seiten gefunden. Du musst Administrator mindestens einer Seite sein.',

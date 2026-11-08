@@ -1,0 +1,111 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'nav' => 'Trendy',
+    'title' => 'Trendy',
+    'edit_setup' => 'Zmień ustawienia',
+    'analyze_now' => 'Analizuj teraz',
+    'last_analyzed' => 'Zaktualizowano :time',
+    'never_analyzed' => 'Jeszcze nie analizowano',
+    'formats' => [
+        'text' => 'Tekst',
+        'image' => 'Obraz',
+        'carousel' => 'Karuzela',
+        'video' => 'Wideo',
+    ],
+    'goals' => [
+        'grow' => ['label' => 'Zwiększyć zasięg', 'description' => 'Posty, które ludzie udostępniają i dla których obserwują.'],
+        'traffic' => ['label' => 'Kierować ruch na stronę', 'description' => 'Posty, które zachęcają do kliknięcia.'],
+        'sell' => ['label' => 'Sprzedawać', 'description' => 'Posty pokazujące problem i rozwiązanie.'],
+        'authority' => ['label' => 'Budować pozycję eksperta', 'description' => 'Posty, które uczą i zajmują stanowisko.'],
+    ],
+    'niches' => [
+        'marketing' => 'Marketing',
+        'technology' => 'Technologia',
+        'business' => 'Biznes',
+        'news' => 'Wiadomości',
+        'creative' => 'Kreatywność',
+        'entertainment' => 'Rozrywka',
+        'science' => 'Nauka',
+    ],
+    'topic' => [
+        'covered_by' => 'Omawia :count źródło|Omawiają :count źródła|Omawia :count źródeł',
+        'make_post' => 'Utwórz post',
+        'dismiss' => 'Odrzuć',
+        'used' => 'W Twoich pomysłach',
+        'show_sources' => 'Dlaczego to trend',
+        'hide_sources' => 'Ukryj źródła',
+        'make_failed' => 'Nie udało się utworzyć pomysłu. Spróbuj ponownie.',
+    ],
+    'empty' => [
+        'analyzing' => [
+            'title' => 'Czytamy Twoje źródła',
+            'body' => 'Pierwsze tematy pojawią się tu za chwilę.',
+        ],
+        'none' => [
+            'title' => 'Brak tematów',
+            'body' => 'Nic, o czym piszą Twoje źródła, nie pasuje jeszcze do Twojej niszy. Wróć po aktualizacji kanałów lub dodaj więcej źródeł.',
+        ],
+        'no_feeds' => [
+            'title' => 'Nie wybrano jeszcze źródeł',
+            'body' => 'Aby znaleźć tematy, Trendy potrzebują kanałów do czytania. Wybierz kilka dla swojej niszy.',
+            'member' => 'Aby znaleźć tematy, administrator przestrzeni roboczej musi wybrać kanały, które czytają Trendy.',
+            'action' => 'Wybierz źródła',
+        ],
+    ],
+    'setup' => [
+        'title' => 'Skonfiguruj Trendy',
+        'step' => 'Krok :current z :total',
+        'steps' => [
+            'niche' => 'Twoja nisza',
+            'goal' => 'Twój cel',
+            'formats' => 'Jak publikujesz',
+            'sources' => 'Źródła',
+        ],
+        'back' => 'Wstecz',
+        'next' => 'Dalej',
+        'finish' => 'Znajdź trendy',
+        'save' => 'Zapisz',
+        'save_failed' => 'Nie udało się zapisać ustawień. Sprawdź pola i spróbuj ponownie.',
+        'niche' => [
+            'heading' => 'O czym publikujesz?',
+            'description' => 'Wybierz najbliższy temat albo wpisz własny. Na tej podstawie ustalamy, co jest dla Ciebie istotne.',
+            'label' => 'Twoja nisza',
+            'placeholder' => 'Ćwiczenia w domu dla zapracowanych rodziców',
+            'keywords_label' => 'Słowa do śledzenia',
+            'keywords_placeholder' => 'Wpisz słowo i naciśnij Enter',
+            'keywords_description' => 'Szukamy tych słów w nagłówkach. Dodaj słowa używane w Twojej niszy.',
+            'excluded_label' => 'Słowa do pominięcia',
+            'excluded_description' => 'Nagłówki z tymi słowami są pomijane.',
+        ],
+        'goal' => [
+            'heading' => 'Do czego mają służyć Twoje posty?',
+            'description' => 'Od tego zależy, które formaty zaproponujemy najpierw.',
+            'audience_label' => 'Dla kogo są?',
+            'audience_placeholder' => 'Rodzice, którzy chcą szybko ćwiczyć w domu',
+        ],
+        'formats' => [
+            'heading' => 'Co naprawdę będziesz publikować?',
+            'description' => 'Proponujemy tylko formaty, które przygotowujesz.',
+            'cadence_label' => 'Postów tygodniowo',
+        ],
+        'sources' => [
+            'heading' => 'Gdzie mamy szukać?',
+            'description' => 'Czytamy te kanały, żeby zobaczyć, o czym piszą w Twojej niszy.',
+            'yours' => 'Twoje kanały',
+            'none' => 'Nie masz jeszcze kanałów. Dodaj je poniżej.',
+            'limit' => 'Wybierz do :count kanałów.',
+            'suggested' => 'Propozycje dla: :niche',
+            'add' => 'Dodaj',
+            'add_failed' => 'Nie udało się dodać tego kanału. Spróbuj ponownie.',
+            'more' => 'Znajdź więcej kanałów',
+        ],
+    ],
+    'idea' => [
+        'summary' => 'Trend: pisze o tym :count źródło.|Trend: piszą o tym :count źródła.|Trend: pisze o tym :count źródeł.',
+        'formats' => 'Formaty do wypróbowania: :formats.',
+        'sources' => 'Dlaczego to trend:',
+    ],
+];

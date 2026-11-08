@@ -34,22 +34,22 @@ $accountDeleteInvitedMemberMarkers = [
  * @var array<string, string>
  */
 $workspaceDeleteConditionalMemberMarkers = [
-    'en' => 'without another TryPost workspace',
-    'uk' => 'без іншого workspace у TryPost',
-    'pt-BR' => 'sem outro workspace no TryPost',
-    'es' => 'sin otro workspace en TryPost',
-    'fr' => 'sans autre workspace TryPost',
-    'de' => 'ohne anderen TryPost-Workspace',
-    'it' => 'senza un altro workspace TryPost',
-    'nl' => 'zonder andere TryPost-workspace',
-    'pl' => 'bez innego workspace w TryPost',
-    'el' => 'χωρίς άλλο workspace στο TryPost',
-    'ja' => '別のTryPostワークスペースがない',
-    'ko' => '다른 TryPost 워크스페이스가 없는',
-    'zh' => '没有其他 TryPost 工作区',
-    'ru' => 'без другого workspace в TryPost',
-    'tr' => 'Başka bir TryPost workspace',
-    'ar' => 'مساحة عمل أخرى في TryPost',
+    'en' => 'without another X-board workspace',
+    'uk' => 'без іншого workspace у X-board',
+    'pt-BR' => 'sem outro workspace no X-board',
+    'es' => 'sin otro workspace en X-board',
+    'fr' => 'sans autre workspace X-board',
+    'de' => 'ohne anderen X-board-Workspace',
+    'it' => 'senza un altro workspace X-board',
+    'nl' => 'zonder andere X-board-workspace',
+    'pl' => 'bez innego workspace w X-board',
+    'el' => 'χωρίς άλλο workspace στο X-board',
+    'ja' => '別のX-boardワークスペースがない',
+    'ko' => '다른 X-board 워크스페이스가 없는',
+    'zh' => '没有其他 X-board 工作区',
+    'ru' => 'без другого workspace в X-board',
+    'tr' => 'Başka bir X-board workspace',
+    'ar' => 'مساحة عمل أخرى في X-board',
 ];
 
 test('workspace delete members warning describes conditional permanent deletion', function () {
@@ -57,7 +57,7 @@ test('workspace delete members warning describes conditional permanent deletion'
 
     expect($warning)
         ->toContain('lose access')
-        ->toContain('without another TryPost workspace')
+        ->toContain('without another X-board workspace')
         ->toContain('permanently deleted')
         ->not->toContain('personal account');
 });

@@ -57,8 +57,8 @@ return [
             'edit_in_canva' => '在 Canva 中编辑 :name',
             'errors' => [
                 'import_failed' => '无法导入文件。请重试。',
-                'popup_blocked' => '浏览器拦截了窗口。请允许 TryPost 的弹出窗口后重试。',
-                'scope_not_granted' => 'TryPost 需要访问你选择的文件。请重试并允许访问。',
+                'popup_blocked' => '浏览器拦截了窗口。请允许 X-board 的弹出窗口后重试。',
+                'scope_not_granted' => 'X-board 需要访问你选择的文件。请重试并允许访问。',
                 'session_expired' => '会话已过期。请重新打开来源。',
                 'video_not_ready' => 'Google Photos 仍在处理此视频。请几分钟后再试。',
                 'google_connect_failed' => '无法连接到 Google，请重试。',
@@ -361,7 +361,7 @@ return [
                 'play' => '试听',
                 'pause' => '暂停',
                 'remove' => '移除音乐',
-                'part_hint' => 'Instagram 不允许 TryPost 选择播放曲目的哪一段。',
+                'part_hint' => 'Instagram 不允许 X-board 选择播放曲目的哪一段。',
                 'volume' => '音量',
                 'video_volume' => '视频',
                 'audio_volume' => '音乐',
@@ -911,6 +911,9 @@ return [
         'publishing_timed_out' => '发布超时。请重试。',
         'rejected_in_review' => 'Google 在审核中拒绝了这篇帖子。请修改内容或图片后重试。',
         'review_unconfirmed' => 'Google 始终未确认这篇帖子。请检查你的商家资料后重试。',
+        'assisted_single_post_only' => '此 X 账号通过发帖窗口一次发布一条帖子。如需排期，请删除投票或串推回复。',
+        'assisted_not_posted' => '此帖子在 24 小时内未发布到 X。重试即可再次打开发帖窗口。',
+        'assisted_window_closed' => '你在点击“发帖”前关闭了 X 发帖窗口。重试即可再次打开。',
         'instagram' => [
             'processing_failed' => 'Instagram 无法处理此媒体，请换一个文件。',
         ],
@@ -1069,7 +1072,7 @@ return [
         ],
         'created_by' => '创建者：:name :when',
         'welcome' => [
-            'title' => '欢迎使用 TryPost 👋',
+            'title' => '欢迎使用 X-board 👋',
             'description' => '连接一个频道，开始规划和发布你的帖子。',
             'invite' => '邀请你的团队',
             'connect_more' => '连接更多频道',

@@ -18,7 +18,6 @@ import { videoFrameUrl } from '@/lib/videoFrame';
 import type { TopPost, WorkspaceAnalyticsReport } from '@/types/analytics';
 import { Platform } from '@/types/platform';
 
-
 const props = defineProps<{
     topPosts: WorkspaceAnalyticsReport['top_posts'];
     range: WorkspaceAnalyticsReport['range'];
@@ -107,7 +106,7 @@ const thumbnailFor = (post: TopPost): string | null => {
             <article
                 v-for="post in posts"
                 :key="post.id"
-                class="group relative flex min-w-0 flex-col gap-3 p-4 shadow-[1px_0_0_var(--border),0_1px_0_var(--border)] transition-colors duration-150 has-[button:hover]:bg-muted/60 has-[button:focus-visible]:bg-muted/60 sm:px-5"
+                class="group relative flex min-w-0 flex-col gap-3 p-4 shadow-[1px_0_0_var(--border),0_1px_0_var(--border)] transition-colors duration-150 has-[button:focus-visible]:bg-muted/60 has-[button:hover]:bg-muted/60 sm:px-5"
                 data-testid="analytics-top-post"
             >
                 <div class="mb-1 flex items-stretch justify-between gap-2">
@@ -120,7 +119,9 @@ const thumbnailFor = (post: TopPost): string | null => {
                             $t(`analytics.dashboard.${metric}`)
                         }}</span>
                     </div>
-                    <div class="flex shrink-0 flex-col items-end justify-between gap-1">
+                    <div
+                        class="flex shrink-0 flex-col items-end justify-between gap-1"
+                    >
                         <RankBadge
                             :rank="post.rank"
                             :data-testid="`analytics-top-post-rank-${post.id}`"
@@ -128,7 +129,9 @@ const thumbnailFor = (post: TopPost): string | null => {
                         <span
                             class="text-xs leading-4 whitespace-nowrap text-muted-foreground"
                             :data-testid="`analytics-top-post-date-${post.id}`"
-                            >{{ date.formatDayMonthYear(post.published_at) }}</span
+                            >{{
+                                date.formatDayMonthYear(post.published_at)
+                            }}</span
                         >
                     </div>
                 </div>
@@ -142,7 +145,9 @@ const thumbnailFor = (post: TopPost): string | null => {
                     <p
                         class="line-clamp-3 min-w-0 flex-1 text-sm leading-[18px] text-foreground"
                     >
-                        {{ post.excerpt || $t('analytics.dashboard.no_excerpt') }}
+                        {{
+                            post.excerpt || $t('analytics.dashboard.no_excerpt')
+                        }}
                     </p>
                     <video
                         v-if="post.media && isVideo(post.media)"
@@ -174,7 +179,7 @@ const thumbnailFor = (post: TopPost): string | null => {
                         }}</span>
                         <template v-if="post.origin === 'trypost'">
                             <AppLogo variant="mark" class="text-[13px]" />
-                            <span class="shrink-0">TryPost</span>
+                            <span class="shrink-0">X-board</span>
                         </template>
                         <template v-else>
                             <PlatformBrandIcon

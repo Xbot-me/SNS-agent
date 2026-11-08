@@ -50,4 +50,12 @@ final class BlueskyLexicon
     public const FACET_MENTION = 'app.bsky.richtext.facet#mention';
 
     public const FACET_TAG = 'app.bsky.richtext.facet#tag';
+
+    public const LIST_NOTIFICATIONS = 'app.bsky.notification.listNotifications';
+
+    public const CHAT_LIST_CONVOS = 'chat.bsky.convo.listConvos';
+
+    public const CHAT_GET_MESSAGES = 'chat.bsky.convo.getMessages';
+
+    public const CHAT_SEND_MESSAGE = 'chat.bsky.convo.sendMessage';
 }

@@ -15,6 +15,7 @@ use App\Models\Workspace;
 use App\Rules\ContentFitsPlatformLimits;
 use App\Rules\ContentTypeCompatibleWithMedia;
 use App\Rules\PostContentFitsMaxLength;
+use App\Support\Social\AssistedPosting;
 use App\Support\Social\XPoll;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -216,6 +217,10 @@ class PostCompositionValidator
 
                 if ($composition['status'] === 'draft') {
                     continue;
+                }
+
+                if ($account->isAssisted() && ! AssistedPosting::supports($contentType, $destination['meta'] ?? [])) {
+                    $validator->errors()->add("{$key}.content_type", AssistedPosting::unsupportedMessage());
                 }
 
                 $contentValidator = Validator::make(

@@ -71,7 +71,7 @@ class MastodonController extends SocialController
             $appResponse = Http::post("{$instance}/api/v1/apps", [
                 'client_name' => config('app.name'),
                 'redirect_uris' => route('app.social.mastodon.callback'),
-                'scopes' => self::SCOPES,
+                'scopes' => $this->requestedScopes(),
                 'website' => config('app.url'),
             ]);
 
@@ -105,7 +105,7 @@ class MastodonController extends SocialController
                 'client_id' => $app['client_id'],
                 'response_type' => 'code',
                 'redirect_uri' => route('app.social.mastodon.callback'),
-                'scope' => self::SCOPES,
+                'scope' => $this->requestedScopes(),
                 'state' => $state,
                 'force_login' => PendingConnection::current()?->isSwitchingAccount() ? 'true' : null,
             ]);
@@ -119,6 +119,14 @@ class MastodonController extends SocialController
 
             return back()->withErrors(['instance' => __('accounts.mastodon.connection_error')]);
         }
+    }
+
+    /**
+     * The publish scopes plus the inbox ones, space-separated as Mastodon wants.
+     */
+    private function requestedScopes(): string
+    {
+        return implode(' ', $this->withInboxScopes(explode(' ', self::SCOPES)));
     }
 
     /**
@@ -178,7 +186,7 @@ class MastodonController extends SocialController
 
             $profile = $profileResponse->json();
 
-            $grantedScopes = $this->reportedScopes(data_get($tokenData, 'scope'), explode(' ', self::SCOPES));
+            $grantedScopes = $this->reportedScopes(data_get($tokenData, 'scope'), explode(' ', $this->requestedScopes()));
 
             return $this->refusalForMissingPublishScopes($grantedScopes) ?? $this->offerIdentities($workspace, [
                 PendingConnection::identity(

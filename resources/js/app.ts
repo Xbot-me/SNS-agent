@@ -11,11 +11,15 @@ import { initializeDataLayer } from '@/datalayer';
 import { bootLocale, i18nConfig, syncLocale, textDirection } from '@/language';
 import { syncContentTypeMediaRules } from '@/lib/contentTypeMediaRules';
 import { trackInAppPushes } from '@/lib/inAppHistory';
-import { capturePageview, initializePostHog, syncPostHogContext } from '@/posthog';
+import {
+    capturePageview,
+    initializePostHog,
+    syncPostHogContext,
+} from '@/posthog';
 import { syncPreferences } from '@/preferences';
 import type { Auth } from '@/types';
 
-const appName = import.meta.env.VITE_APP_NAME || 'TryPost.it';
+const appName = import.meta.env.VITE_APP_NAME || 'X-board';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),

@@ -57,8 +57,8 @@ return [
             'edit_in_canva' => ':name bewerken in Canva',
             'errors' => [
                 'import_failed' => 'Het bestand kon niet worden geïmporteerd. Probeer het opnieuw.',
-                'popup_blocked' => 'Je browser heeft het venster geblokkeerd. Sta pop-ups toe voor TryPost en probeer het opnieuw.',
-                'scope_not_granted' => 'TryPost heeft toegang nodig tot het bestand dat je kiest. Probeer het opnieuw en sta het toe.',
+                'popup_blocked' => 'Je browser heeft het venster geblokkeerd. Sta pop-ups toe voor X-board en probeer het opnieuw.',
+                'scope_not_granted' => 'X-board heeft toegang nodig tot het bestand dat je kiest. Probeer het opnieuw en sta het toe.',
                 'session_expired' => 'Je sessie is verlopen. Open de bron opnieuw.',
                 'video_not_ready' => 'Google Photos verwerkt deze video nog. Probeer het over een paar minuten opnieuw.',
                 'google_connect_failed' => 'Kan geen verbinding maken met Google. Probeer het opnieuw.',
@@ -361,7 +361,7 @@ return [
                 'play' => 'Voorbeeld afspelen',
                 'pause' => 'Voorbeeld pauzeren',
                 'remove' => 'Muziek verwijderen',
-                'part_hint' => 'Instagram laat TryPost niet kiezen welk deel van het nummer speelt.',
+                'part_hint' => 'Instagram laat X-board niet kiezen welk deel van het nummer speelt.',
                 'volume' => 'Volume',
                 'video_volume' => 'Video',
                 'audio_volume' => 'Muziek',
@@ -911,6 +911,9 @@ return [
         'publishing_timed_out' => 'Publiceren is timed-out. Probeer het opnieuw.',
         'rejected_in_review' => 'Google heeft dit bericht bij de beoordeling afgewezen. Pas de inhoud of afbeelding aan en probeer het opnieuw.',
         'review_unconfirmed' => 'Google heeft dit bericht nooit bevestigd. Controleer je bedrijfsprofiel en probeer het opnieuw.',
+        'assisted_single_post_only' => 'Dit X-account post via het postvenster, één post tegelijk. Haal de poll of de thread-reacties weg om hem in te plannen.',
+        'assisted_not_posted' => 'Deze post is niet binnen 24 uur op X geplaatst. Probeer opnieuw om het postvenster weer te openen.',
+        'assisted_window_closed' => 'Het X-postvenster is gesloten voordat je op Posten klikte. Probeer opnieuw om het weer te openen.',
         'instagram' => [
             'processing_failed' => 'Instagram kon dit bestand niet verwerken. Probeer een ander bestand.',
         ],
@@ -1069,7 +1072,7 @@ return [
         ],
         'created_by' => 'Gemaakt door :name :when',
         'welcome' => [
-            'title' => 'Welkom bij TryPost 👋',
+            'title' => 'Welkom bij X-board 👋',
             'description' => 'Koppel een kanaal om je posts te plannen en te publiceren.',
             'invite' => 'Nodig je team uit',
             'connect_more' => 'Meer kanalen koppelen',

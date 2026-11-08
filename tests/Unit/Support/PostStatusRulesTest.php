@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Enums\Post\PublishStatus;
 use App\Enums\Post\Status as PostStatus;
 use App\Models\Post;
+use App\Models\SocialAccount;
 use App\Support\PostStatusRules;
 
 test('blocks editing for terminal statuses', function (PostStatus $status) {
@@ -34,6 +36,31 @@ test('blocks deletion for sent and failed statuses', function (PostStatus $statu
     PostStatus::Published,
     PostStatus::Failed,
 ]);
+
+test('allows deleting a publishing post that waits on an assisted channel', function () {
+    $account = SocialAccount::factory()->assisted()->create();
+    $post = Post::factory()->forAccount($account)->create([
+        'status' => PostStatus::Publishing,
+        'publish_status' => PublishStatus::PendingReview,
+    ]);
+
+    expect(PostStatusRules::blocksDeletion($post))->toBeFalse();
+});
+
+test('allows deleting a publishing post whose attempt stopped writing, but not a live one', function () {
+    $post = Post::factory()->make([
+        'status' => PostStatus::Publishing,
+        'publish_status' => PublishStatus::Publishing,
+        'retry_at' => null,
+        'publication_updated_at' => now()->subMinutes(30),
+    ]);
+
+    expect(PostStatusRules::blocksDeletion($post))->toBeFalse();
+
+    $post->publication_updated_at = now()->subMinute();
+
+    expect(PostStatusRules::blocksDeletion($post))->toBeTrue();
+});
 
 test('allows deletion for draft, scheduled and failed statuses', function (PostStatus $status) {
     $post = Post::factory()->make(['status' => $status]);

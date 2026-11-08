@@ -32,6 +32,7 @@ use App\Services\Social\ThreadsPublisher;
 use App\Services\Social\TikTokPublisher;
 use App\Services\Social\XPublisher;
 use App\Services\Social\YouTubePublisher;
+use App\Support\Social\AssistedPosting;
 use App\Support\Social\GoogleBusinessDerivativeCleaner;
 use App\Support\Social\LimitRetryPolicy;
 use App\Support\Social\PublishCheckpoint;
@@ -107,6 +108,12 @@ class PublishToSocialPlatform implements ShouldBeUnique, ShouldQueue
                 'category' => ErrorCategory::TokenExpired->value,
                 'failed_at' => now()->toIso8601String(),
             ]);
+
+            return;
+        }
+
+        if ($this->post->socialAccount->isAssisted()) {
+            $this->handOverToAssistedPosting();
 
             return;
         }
@@ -226,6 +233,24 @@ class PublishToSocialPlatform implements ShouldBeUnique, ShouldQueue
     private function refreshAccountToken(): void
     {
         app(ConnectionVerifier::class)->verify($this->post->socialAccount);
+    }
+
+    /**
+     * An assisted channel has no API token. The post waits in review until the
+     * user publishes it in the window `npm run x:assist` fills in
+     * (CompleteAssistedPost), cancels it there (CancelAssistedPost), or
+     * RecoverStuckPosts gives up at the review ceiling.
+     */
+    private function handOverToAssistedPosting(): void
+    {
+        if (! AssistedPosting::supportsPost($this->post)) {
+            $this->failAndFinalize(AssistedPosting::unsupportedMessage());
+
+            return;
+        }
+
+        $this->post->markPublicationAwaitingAssist();
+        $this->broadcastStatus();
     }
 
     private function failForMissingScopes(): bool

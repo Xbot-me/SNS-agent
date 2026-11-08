@@ -18,6 +18,69 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Unified inbox
+    |--------------------------------------------------------------------------
+    |
+    | Messages, comments, mentions and reviews of the connected channels, read
+    | by polling (no webhook, so it works on a machine without a public URL).
+    | The extra scopes are requested on connect and never required: trim a
+    | list (comma-separated env) when the network's app was not granted them,
+    | or the consent screen refuses the whole login.
+    |
+    */
+    'inbox' => [
+        'enabled' => (bool) env('INBOX_ENABLED', true),
+        // How often each channel is read; YouTube is slower to spare its daily quota.
+        'sync_interval_minutes' => (int) env('INBOX_SYNC_INTERVAL_MINUTES', 5),
+        'youtube_sync_interval_minutes' => (int) env('INBOX_YOUTUBE_SYNC_INTERVAL_MINUTES', 30),
+        // How many recent posts are read for their comments.
+        'recent_posts' => (int) env('INBOX_RECENT_POSTS', 10),
+        'scopes' => [
+            'facebook' => array_values(array_filter(array_map('trim', explode(',', (string) env('INBOX_FACEBOOK_SCOPES', 'pages_messaging,pages_read_user_content,pages_manage_engagement'))))),
+            'instagram' => array_values(array_filter(array_map('trim', explode(',', (string) env('INBOX_INSTAGRAM_SCOPES', 'instagram_business_manage_messages,instagram_business_manage_comments'))))),
+            'instagram-facebook' => array_values(array_filter(array_map('trim', explode(',', (string) env('INBOX_INSTAGRAM_FACEBOOK_SCOPES', 'instagram_manage_messages,instagram_manage_comments,pages_manage_metadata'))))),
+            'threads' => array_values(array_filter(array_map('trim', explode(',', (string) env('INBOX_THREADS_SCOPES', 'threads_read_replies,threads_manage_replies'))))),
+            'mastodon' => array_values(array_filter(array_map('trim', explode(',', (string) env('INBOX_MASTODON_SCOPES', 'read:notifications'))))),
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Trends
+    |--------------------------------------------------------------------------
+    |
+    | Reads what a workspace's niche is talking about (RSS feeds for now) and
+    | ranks the topics worth posting about. Nothing is called out to while it
+    | is off, and a workspace can still switch it off on its own. Each niche
+    | preset fills the setup with starting keywords and a feed category of the
+    | feed directory (`rss_feeds.directory`); its label is `trends.niches.<key>`.
+    |
+    */
+    'trends' => [
+        'enabled' => (bool) env('TRENDS_ENABLED', true),
+        // How far back an item still counts as news, in days.
+        'window_days' => (int) env('TRENDS_WINDOW_DAYS', 7),
+        // How many topics a workspace keeps on its Trends page.
+        'max_topics' => (int) env('TRENDS_MAX_TOPICS', 20),
+        // A topic needs this many different feeds, unless it is one of the workspace's own keywords.
+        'min_outlets' => (int) env('TRENDS_MIN_OUTLETS', 2),
+        // How often a workspace's trends are read again.
+        'analyze_interval_hours' => (int) env('TRENDS_ANALYZE_INTERVAL_HOURS', 6),
+        'max_keywords' => 20,
+        'max_feeds' => 15,
+        'niches' => [
+            'marketing' => ['feed_category' => 'favorites', 'keywords' => ['social media', 'content creation', 'marketing', 'creator economy', 'algorithm']],
+            'technology' => ['feed_category' => 'tech', 'keywords' => ['ai', 'gadgets', 'software', 'apps', 'startups']],
+            'business' => ['feed_category' => 'business', 'keywords' => ['startup', 'entrepreneur', 'finance', 'economy', 'productivity']],
+            'news' => ['feed_category' => 'news', 'keywords' => ['politics', 'world', 'economy', 'climate']],
+            'creative' => ['feed_category' => 'art_media', 'keywords' => ['design', 'photography', 'art', 'film', 'music']],
+            'entertainment' => ['feed_category' => 'entertainment', 'keywords' => ['movies', 'tv', 'celebrity', 'gaming', 'music']],
+            'science' => ['feed_category' => 'science', 'keywords' => ['space', 'health', 'research', 'climate', 'energy']],
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Changelog ("What's New")
     |--------------------------------------------------------------------------
     |
@@ -91,6 +154,20 @@ return [
     */
 
     'mcp_claude_ip_ranges' => explode(',', env('MCP_CLAUDE_IP_RANGES', '160.79.104.0/21')),
+
+    /*
+    |--------------------------------------------------------------------------
+    | API keys on the MCP endpoint
+    |--------------------------------------------------------------------------
+    |
+    | The MCP endpoint takes OAuth grants (an agent signs in through the
+    | browser). When true it also takes a workspace's API keys (Settings →
+    | API keys) as a Bearer token, for agents that cannot sign in or for a
+    | personal setup where one key is simpler. Off by default.
+    |
+    */
+
+    'mcp_accept_api_keys' => (bool) env('MCP_ACCEPT_API_KEYS', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -493,6 +570,9 @@ return [
             'enabled' => env('X_ENABLED', true),
             'api' => env('X_API', 'https://api.x.com/2'),
             'defuse_links' => (bool) env('X_DEFUSE_LINKS', false),
+            // Assisted posting: connect X by handle and publish each post yourself in a
+            // browser window that `npm run x:assist` fills in. No X API, no cost.
+            'assisted' => (bool) env('X_ASSISTED_POSTING', false),
         ],
         'tiktok' => [
             'enabled' => env('TIKTOK_ENABLED', true),
@@ -507,6 +587,8 @@ return [
             'data_api' => env('YOUTUBE_DATA_API', 'https://www.googleapis.com/youtube/v3'),
             'analytics_api' => env('YOUTUBE_ANALYTICS_API', 'https://youtubeanalytics.googleapis.com/v2'),
             'oauth_api' => env('YOUTUBE_OAUTH_API', 'https://oauth2.googleapis.com'),
+            // Watch page the inbox links a comment to.
+            'web_app' => env('YOUTUBE_WEB_APP', 'https://www.youtube.com'),
         ],
         'facebook' => [
             'enabled' => env('FACEBOOK_ENABLED', true),
@@ -520,6 +602,8 @@ return [
             'auth_api' => env('INSTAGRAM_AUTH_API', 'https://graph.instagram.com'),
             'oauth_url' => env('INSTAGRAM_OAUTH_URL', 'https://www.instagram.com'),
             'oauth_api' => env('INSTAGRAM_OAUTH_API', 'https://api.instagram.com'),
+            // Direct message link the inbox opens a conversation with.
+            'dm_link' => env('INSTAGRAM_DM_LINK', 'https://ig.me/m'),
         ],
         'instagram-facebook' => [
             'enabled' => env('INSTAGRAM_FACEBOOK_ENABLED', true),
@@ -547,6 +631,8 @@ return [
             // here, then the resulting blob is embedded in the post record.
             'video_service' => env('BLUESKY_VIDEO_SERVICE', 'https://video.bsky.app'),
             'video_service_did' => env('BLUESKY_VIDEO_SERVICE_DID', 'did:web:video.bsky.app'),
+            // Chat service the PDS proxies direct messages to (atproto-proxy header).
+            'chat_service' => env('BLUESKY_CHAT_SERVICE', 'did:web:api.bsky.chat#bsky_chat'),
             // Seconds between transcode job-status polls.
             'video_poll_seconds' => env('BLUESKY_VIDEO_POLL_SECONDS', 2),
             // Gradually back off status checks to at most this interval.

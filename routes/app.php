@@ -19,6 +19,9 @@ use App\Http\Controllers\App\GooglePhotosSessionController;
 use App\Http\Controllers\App\IdeaController;
 use App\Http\Controllers\App\IdeaGenerateController;
 use App\Http\Controllers\App\IdeaStageController;
+use App\Http\Controllers\App\InboxController;
+use App\Http\Controllers\App\InboxReplyController;
+use App\Http\Controllers\App\InboxSyncController;
 use App\Http\Controllers\App\InsightsController;
 use App\Http\Controllers\App\InstagramAudioController;
 use App\Http\Controllers\App\LibraryTemplateController;
@@ -52,6 +55,10 @@ use App\Http\Controllers\App\Settings\PasswordController;
 use App\Http\Controllers\App\Settings\PreferencesController;
 use App\Http\Controllers\App\Settings\ProfileController;
 use App\Http\Controllers\App\Settings\SessionController;
+use App\Http\Controllers\App\TrendAnalysisController;
+use App\Http\Controllers\App\TrendProfileController;
+use App\Http\Controllers\App\TrendTopicController;
+use App\Http\Controllers\App\TrendTopicIdeaController;
 use App\Http\Controllers\App\UnsplashController;
 use App\Http\Controllers\App\WebhookController;
 use App\Http\Controllers\App\WelcomeController;
@@ -59,6 +66,7 @@ use App\Http\Controllers\App\WorkspaceController;
 use App\Http\Controllers\App\WorkspaceCreationCheckController;
 use App\Http\Controllers\App\WorkspaceInviteController;
 use App\Http\Controllers\App\WorkspaceLabelController;
+use App\Http\Controllers\App\WorkspaceModuleController;
 use App\Http\Controllers\App\WorkspaceSignatureController;
 use App\Http\Controllers\Auth\BlueskyController;
 use App\Http\Controllers\Auth\DiscordController;
@@ -128,6 +136,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('connect/linkedin', [LinkedInController::class, 'connect'])->name('app.social.linkedin.connect');
         Route::post('channels/{account}/posting-schedule/generate', [ChannelPostingScheduleController::class, 'generate'])->name('app.channels.posting-schedule.generate');
         Route::get('connect/x', [XController::class, 'connect'])->name('app.social.x.connect');
+        Route::post('connect/x/assisted', [XController::class, 'storeAssisted'])->name('app.social.x.assisted.store');
         Route::get('connect/tiktok', [TikTokController::class, 'connect'])->name('app.social.tiktok.connect');
         Route::get('connect/youtube', [YouTubeController::class, 'connect'])->name('app.social.youtube.connect');
         Route::get('connect/facebook', [FacebookController::class, 'connect'])->name('app.social.facebook.connect');
@@ -211,6 +220,7 @@ Route::middleware(['auth', EnsureAccountReady::class, EnsureHasWorkspace::class]
 
     Route::get('settings/workspace', [WorkspaceController::class, 'settings'])->name('app.workspace.settings');
     Route::put('settings/workspace', [WorkspaceController::class, 'updateSettings'])->name('app.workspace.settings.update');
+    Route::patch('settings/workspace/modules', [WorkspaceModuleController::class, 'update'])->name('app.workspace.modules.update');
     Route::post('settings/workspace/logo', [WorkspaceController::class, 'uploadLogo'])->name('app.workspace.upload-logo');
     Route::delete('settings/workspace/logo', [WorkspaceController::class, 'deleteLogo'])->name('app.workspace.delete-logo');
 
@@ -230,6 +240,36 @@ Route::middleware(['auth', EnsureAccountReady::class, EnsureHasWorkspace::class]
     Route::post('channels/{account}/posting-schedule/copy', [ChannelPostingScheduleController::class, 'copy'])->name('app.channels.posting-schedule.copy');
     Route::put('channels/{account}/queue/order', [ChannelQueueController::class, 'reorder'])->name('app.channels.queue.order');
     Route::put('channels/{account}/queue/slot', [ChannelQueueController::class, 'moveToSlot'])->name('app.channels.queue.slot');
+
+    Route::middleware('module:inbox')->group(function () {
+        Route::get('inbox', [InboxController::class, 'index'])->name('app.inbox.index');
+        Route::post('inbox/sync', [InboxSyncController::class, 'store'])
+            ->middleware('throttle:6,1')
+            ->name('app.inbox.sync.store');
+        Route::get('inbox/{conversation}', [InboxController::class, 'show'])
+            ->whereUuid('conversation')
+            ->name('app.inbox.show');
+        Route::post('inbox/{conversation}/replies', [InboxReplyController::class, 'store'])
+            ->whereUuid('conversation')
+            ->middleware('throttle:30,1')
+            ->name('app.inbox.replies.store');
+    });
+
+    Route::middleware('module:trends')->group(function () {
+        Route::get('trends', [TrendTopicController::class, 'index'])->name('app.trends.index');
+        Route::patch('trends/topics/{trendTopic}', [TrendTopicController::class, 'update'])
+            ->whereUuid('trendTopic')
+            ->name('app.trends.topics.update');
+        Route::post('trends/topics/{trendTopic}/idea', [TrendTopicIdeaController::class, 'store'])
+            ->whereUuid('trendTopic')
+            ->middleware('throttle:30,1')
+            ->name('app.trends.topics.idea.store');
+        Route::get('trends/setup', [TrendProfileController::class, 'edit'])->name('app.trends.profile.edit');
+        Route::put('trends/setup', [TrendProfileController::class, 'update'])->name('app.trends.profile.update');
+        Route::post('trends/analysis', [TrendAnalysisController::class, 'store'])
+            ->middleware('throttle:6,1')
+            ->name('app.trends.analysis.store');
+    });
 
     Route::get('insights', [InsightsController::class, 'index'])->name('app.insights');
     Route::get('insights/download/{format}', [InsightsController::class, 'download'])

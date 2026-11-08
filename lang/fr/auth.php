@@ -20,8 +20,8 @@ return [
     'throttle' => 'Trop de tentatives de connexion. Veuillez réessayer dans :seconds secondes.',
 
     'flash' => [
-        'welcome' => 'Bienvenue sur TryPost !',
-        'welcome_trial' => 'Bienvenue sur TryPost ! Votre essai a commencé.',
+        'welcome' => 'Bienvenue sur X-board !',
+        'welcome_trial' => 'Bienvenue sur X-board ! Votre essai a commencé.',
     ],
 
     'legal' => 'En continuant, vous acceptez nos <a href=":terms_url" target="_blank">Conditions d\'utilisation</a> et notre <a href=":privacy_url" target="_blank">Politique de confidentialité</a>.',
@@ -60,7 +60,7 @@ return [
     'github_email_unavailable' => 'Impossible de récupérer votre e-mail depuis GitHub. Rendez votre e-mail GitHub public ou accordez l\'autorisation d\'accès à l\'e-mail, puis réessayez.',
 
     'login' => [
-        'title' => 'Connexion à TryPost',
+        'title' => 'Connexion à X-board',
         'page_title' => 'Connexion',
         'email' => 'Adresse e-mail',
         'password' => 'Mot de passe',
@@ -74,7 +74,7 @@ return [
     ],
 
     'register' => [
-        'title' => 'Créer un compte TryPost',
+        'title' => 'Créer un compte X-board',
         'page_title' => 'Inscription',
         'name' => 'Nom',
         'name_placeholder' => 'Nom complet',

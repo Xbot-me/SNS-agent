@@ -1,0 +1,111 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'nav' => 'Tendências',
+    'title' => 'Tendências',
+    'edit_setup' => 'Editar configuração',
+    'analyze_now' => 'Analisar agora',
+    'last_analyzed' => 'Atualizado :time',
+    'never_analyzed' => 'Ainda não analisado',
+    'formats' => [
+        'text' => 'Texto',
+        'image' => 'Imagem',
+        'carousel' => 'Carrossel',
+        'video' => 'Vídeo',
+    ],
+    'goals' => [
+        'grow' => ['label' => 'Aumentar meu público', 'description' => 'Posts que as pessoas compartilham e pelos quais seguem você.'],
+        'traffic' => ['label' => 'Levar visitas ao meu site', 'description' => 'Posts que fazem as pessoas clicarem.'],
+        'sell' => ['label' => 'Vender algo', 'description' => 'Posts que mostram um problema e a sua solução.'],
+        'authority' => ['label' => 'Ser visto como referência', 'description' => 'Posts que ensinam e tomam posição.'],
+    ],
+    'niches' => [
+        'marketing' => 'Marketing',
+        'technology' => 'Tecnologia',
+        'business' => 'Negócios',
+        'news' => 'Notícias',
+        'creative' => 'Criatividade',
+        'entertainment' => 'Entretenimento',
+        'science' => 'Ciência',
+    ],
+    'topic' => [
+        'covered_by' => '{1} Coberto por :count fonte|[0,*] Coberto por :count fontes',
+        'make_post' => 'Criar post',
+        'dismiss' => 'Dispensar',
+        'used' => 'Nas suas ideias',
+        'show_sources' => 'Por que está em alta',
+        'hide_sources' => 'Ocultar fontes',
+        'make_failed' => 'Não foi possível criar a ideia. Tente de novo.',
+    ],
+    'empty' => [
+        'analyzing' => [
+            'title' => 'Lendo suas fontes',
+            'body' => 'Seus primeiros temas aparecem aqui em instantes.',
+        ],
+        'none' => [
+            'title' => 'Nenhum tema ainda',
+            'body' => 'Nada do que suas fontes cobrem combina com o seu nicho por enquanto. Volte depois que seus feeds atualizarem ou adicione mais fontes.',
+        ],
+        'no_feeds' => [
+            'title' => 'Você ainda não escolheu fontes',
+            'body' => 'Para encontrar temas, Tendências precisa de feeds para ler. Escolha alguns para o seu nicho.',
+            'member' => 'Para encontrar temas, um admin do workspace precisa escolher os feeds que Tendências lê.',
+            'action' => 'Escolher fontes',
+        ],
+    ],
+    'setup' => [
+        'title' => 'Configurar Tendências',
+        'step' => 'Passo :current de :total',
+        'steps' => [
+            'niche' => 'Seu nicho',
+            'goal' => 'Seu objetivo',
+            'formats' => 'Como você posta',
+            'sources' => 'Fontes',
+        ],
+        'back' => 'Voltar',
+        'next' => 'Continuar',
+        'finish' => 'Encontrar tendências',
+        'save' => 'Salvar',
+        'save_failed' => 'Não foi possível salvar a configuração. Confira os campos e tente de novo.',
+        'niche' => [
+            'heading' => 'Sobre o que você posta?',
+            'description' => 'Escolha o tema mais próximo ou escreva o seu. É assim que decidimos o que é relevante para você.',
+            'label' => 'Seu nicho',
+            'placeholder' => 'Fitness em casa para pais ocupados',
+            'keywords_label' => 'Palavras para acompanhar',
+            'keywords_placeholder' => 'Digite uma palavra e tecle Enter',
+            'keywords_description' => 'Procuramos essas palavras nas manchetes. Adicione as que o pessoal do seu nicho usa.',
+            'excluded_label' => 'Palavras para ignorar',
+            'excluded_description' => 'Manchetes com essas palavras ficam de fora.',
+        ],
+        'goal' => [
+            'heading' => 'O que seus posts devem fazer?',
+            'description' => 'Isso decide quais formatos sugerimos primeiro.',
+            'audience_label' => 'Para quem são?',
+            'audience_placeholder' => 'Pais que querem treinos rápidos em casa',
+        ],
+        'formats' => [
+            'heading' => 'O que você realmente vai postar?',
+            'description' => 'Só sugerimos formatos que você vai fazer.',
+            'cadence_label' => 'Posts por semana',
+        ],
+        'sources' => [
+            'heading' => 'Onde devemos procurar?',
+            'description' => 'Lemos esses feeds para ver o que o seu nicho está cobrindo.',
+            'yours' => 'Seus feeds',
+            'none' => 'Você ainda não tem feeds. Adicione alguns abaixo.',
+            'limit' => 'Escolha até :count feeds.',
+            'suggested' => 'Sugestões para :niche',
+            'add' => 'Adicionar',
+            'add_failed' => 'Não foi possível adicionar esse feed. Tente de novo.',
+            'more' => 'Encontrar mais feeds',
+        ],
+    ],
+    'idea' => [
+        'summary' => '{1} Em alta: :count fonte está falando disso.|[0,*] Em alta: :count fontes estão falando disso.',
+        'formats' => 'Formatos para testar: :formats.',
+        'sources' => 'Por que está em alta:',
+    ],
+];
