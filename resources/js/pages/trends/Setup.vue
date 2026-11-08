@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Link, router, useForm } from '@inertiajs/vue3';
+import { Head, Link, router, useForm, usePage } from '@inertiajs/vue3';
 import {
     IconAlignLeft,
     IconCarouselHorizontal,
@@ -20,6 +20,10 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
+    NativeSelect,
+    NativeSelectOption,
+} from '@/components/ui/native-select';
+import {
     TagsInput,
     TagsInputInput,
     TagsInputItem,
@@ -37,6 +41,7 @@ import { update as saveProfile } from '@/routes/app/trends/profile';
 import type {
     TrendDirectoryCategory,
     TrendDirectoryEntry,
+    TrendExternalSource,
     TrendFormat,
     TrendGoal,
     TrendNiche,
@@ -53,6 +58,8 @@ const props = defineProps<{
     feeds: TrendSetupFeed[];
     directory: TrendDirectoryCategory[];
     limits: TrendSetupLimits;
+    externalSources: TrendExternalSource[];
+    regions: string[];
 }>();
 
 const steps = ['niche', 'goal', 'formats', 'sources'] as const;
@@ -76,10 +83,23 @@ const form = useForm({
         ...(props.profile?.formats ?? (['text', 'image'] as TrendFormat[])),
     ],
     posts_per_week: props.profile?.posts_per_week ?? 3,
+    region: props.profile?.region ?? 'US',
+    external_sources: props.profile
+        ? [...props.profile.external_sources]
+        : props.externalSources
+              .filter((source) => source.default)
+              .map((source) => source.key),
     rss_feed_ids:
         props.profile?.rss_feed_ids ??
         props.feeds.slice(0, props.limits.feeds).map((feed) => feed.id),
 });
+
+const page = usePage();
+const regionNames = computed(
+    () =>
+        new Intl.DisplayNames([String(page.props.locale)], { type: 'region' }),
+);
+const regionName = (code: string): string => regionNames.value.of(code) ?? code;
 
 const stepIndex = ref(0);
 const selectedNiche = ref<string | null>(null);
@@ -157,6 +177,12 @@ const toggleFormat = (format: TrendFormat): void => {
 
 const pickPostsPerWeek = (count: number): void => {
     form.posts_per_week = count;
+};
+
+const toggleExternal = (key: string, checked: boolean): void => {
+    form.external_sources = checked
+        ? [...form.external_sources, key]
+        : form.external_sources.filter((item) => item !== key);
 };
 
 const toggleFeed = (feedId: string, checked: boolean): void => {
@@ -475,6 +501,84 @@ const goNext = (): void => {
                     <p class="text-sm text-muted-foreground">
                         {{ $t('trends.setup.sources.description') }}
                     </p>
+                </div>
+
+                <div
+                    v-if="externalSources.length > 0"
+                    class="flex flex-col gap-3"
+                    data-testid="trends-external-sources"
+                >
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-sm font-medium">
+                            {{ $t('trends.setup.sources.external_heading') }}
+                        </h3>
+                        <p class="text-sm text-muted-foreground">
+                            {{
+                                $t('trends.setup.sources.external_description')
+                            }}
+                        </p>
+                    </div>
+                    <div
+                        v-for="source in externalSources"
+                        :key="source.key"
+                        class="flex items-start gap-3 rounded-lg border border-border bg-card p-3"
+                    >
+                        <Checkbox
+                            :id="`trends-source-${source.key}`"
+                            :model-value="
+                                form.external_sources.includes(source.key)
+                            "
+                            :data-testid="`trends-source-${source.key}`"
+                            class="mt-0.5"
+                            @update:model-value="
+                                toggleExternal(source.key, Boolean($event))
+                            "
+                        />
+                        <Label
+                            :for="`trends-source-${source.key}`"
+                            class="flex min-w-0 flex-1 flex-col items-start gap-1"
+                        >
+                            <span class="text-sm font-medium">
+                                {{
+                                    $t(
+                                        `trends.setup.sources.external.${source.key}.label`,
+                                    )
+                                }}
+                            </span>
+                            <span
+                                class="text-sm font-normal text-muted-foreground"
+                            >
+                                {{
+                                    $t(
+                                        `trends.setup.sources.external.${source.key}.description`,
+                                    )
+                                }}
+                            </span>
+                        </Label>
+                    </div>
+                    <InputError :message="form.errors.external_sources" />
+                    <div
+                        v-if="form.external_sources.includes('google_trends')"
+                        class="flex flex-col gap-2"
+                    >
+                        <Label for="trends-region">
+                            {{ $t('trends.setup.sources.region_label') }}
+                        </Label>
+                        <NativeSelect
+                            id="trends-region"
+                            v-model="form.region"
+                            data-testid="trends-region"
+                        >
+                            <NativeSelectOption
+                                v-for="code in regions"
+                                :key="code"
+                                :value="code"
+                            >
+                                {{ regionName(code) }}
+                            </NativeSelectOption>
+                        </NativeSelect>
+                        <InputError :message="form.errors.region" />
+                    </div>
                 </div>
 
                 <div class="flex flex-col gap-2">

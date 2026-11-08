@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => 'Wo sollen wir suchen?',
             'description' => 'Wir lesen diese Feeds, um zu sehen, worüber deine Nische berichtet.',
+            'external_heading' => 'Weitere Orte zum Suchen',
+            'external_description' => 'Hier siehst du, wonach gerade gesucht wird und was geteilt wird.',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => 'Wonach Menschen in deinem Land suchen, gefiltert nach deinen Wörtern.'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => 'Beliebte Beiträge und Diskussionen zu deinen Wörtern.'],
+                'youtube' => ['label' => 'YouTube', 'description' => 'Die meistgesehenen aktuellen Videos zu deinen ersten Wörtern.'],
+            ],
+            'region_label' => 'Land für Google Trends',
             'yours' => 'Deine Feeds',
             'none' => 'Du hast noch keine Feeds. Füge unten welche hinzu.',
             'limit' => 'Wähle bis zu :count Feeds.',

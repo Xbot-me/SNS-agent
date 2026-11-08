@@ -17,7 +17,7 @@ import type { TrendProfile, TrendTopic } from '@/types/trend';
 const props = defineProps<{
     profile: TrendProfile;
     topics: TrendTopic[];
-    feedCount: number;
+    hasSources: boolean;
     canManage: boolean;
 }>();
 
@@ -120,7 +120,7 @@ const requestAnalysis = (): void => {
             />
 
             <EmptyState
-                v-else-if="feedCount === 0"
+                v-else-if="!hasSources"
                 :icon="IconRss"
                 :title="$t('trends.empty.no_feeds.title')"
                 :description="

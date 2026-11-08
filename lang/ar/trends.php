@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => 'أين نبحث؟',
             'description' => 'نقرأ هذه الموجزات لنرى ما يتناوله مجالك.',
+            'external_heading' => 'أماكن أخرى للبحث',
+            'external_description' => 'تضيف ما يبحث عنه الناس ويشاركونه الآن.',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => 'ما يبحث عنه الناس في بلدك، مصفّىً بكلماتك.'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => 'قصص ونقاشات رائجة حول كلماتك.'],
+                'youtube' => ['label' => 'YouTube', 'description' => 'أكثر الفيديوهات الحديثة مشاهدة لأولى كلماتك.'],
+            ],
+            'region_label' => 'البلد لخدمة Google Trends',
             'yours' => 'موجزاتك',
             'none' => 'ليس لديك موجزات بعد. أضف بعضها أدناه.',
             'limit' => 'اختر حتى :count موجزات.',

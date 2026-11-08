@@ -32,7 +32,7 @@ class TrendTopicController extends Controller
             'topics' => TrendTopicResource::collection(
                 $workspace->trendTopics()->ranked()->limit((int) config('trypost.trends.max_topics'))->get(),
             )->resolve($request),
-            'feedCount' => $profile->rssFeeds()->count(),
+            'hasSources' => $profile->rssFeeds()->exists() || $profile->externalSourceList() !== [],
             'canManage' => $request->user()->can('update', $workspace),
         ]);
     }

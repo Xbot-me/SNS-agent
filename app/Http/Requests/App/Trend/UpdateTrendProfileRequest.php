@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\App\Trend;
 
+use App\Enums\Trend\ExternalSource;
 use App\Enums\Trend\Goal;
 use App\Enums\Trend\PostFormat;
 use Illuminate\Foundation\Http\FormRequest;
@@ -34,6 +35,13 @@ class UpdateTrendProfileRequest extends FormRequest
             'formats' => ['required', 'array', 'min:1'],
             'formats.*' => [Rule::enum(PostFormat::class), 'distinct'],
             'posts_per_week' => ['required', 'integer', 'between:1,21'],
+            'region' => ['required', 'string', Rule::in((array) config('trypost.trends.regions'))],
+            'external_sources' => ['nullable', 'array'],
+            'external_sources.*' => [
+                'string',
+                'distinct',
+                Rule::in(array_map(fn (ExternalSource $source): string => $source->value, ExternalSource::available())),
+            ],
             'rss_feed_ids' => ['nullable', 'array', 'max:'.(int) config('trypost.trends.max_feeds')],
             'rss_feed_ids.*' => [
                 'uuid',

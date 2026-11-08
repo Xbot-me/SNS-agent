@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Actions\Trend;
 
 use App\Dto\Trend\TrendSignal;
+use App\Enums\Trend\ExternalSource;
 use App\Enums\Trend\PostFormat;
 use App\Enums\Trend\TopicStatus;
 use App\Models\TrendProfile;
@@ -30,8 +31,9 @@ class AnalyzeTrends
         $since = $now->subDays((int) config('trypost.trends.window_days'));
 
         /** @var Collection<int, TrendSignal> $signals */
-        $signals = collect(self::sources())
-            ->flatMap(fn (TrendSource $source): Collection => $source->signals($profile, $since));
+        // A source that fails is reported and skipped, so one outage never costs the others' topics.
+        $signals = collect(self::sources($profile))
+            ->flatMap(fn (TrendSource $source): Collection => rescue(fn (): Collection => $source->signals($profile, $since), collect()));
 
         $ranked = app(TrendScorer::class)->rank($profile, $signals, $now);
         $formats = self::suggestedFormats($profile);
@@ -69,9 +71,15 @@ class AnalyzeTrends
     /**
      * @return list<TrendSource>
      */
-    private static function sources(): array
+    private static function sources(TrendProfile $profile): array
     {
-        return [app(RssTrendSource::class)];
+        return [
+            app(RssTrendSource::class),
+            ...array_map(
+                fn (ExternalSource $source): TrendSource => app($source->sourceClass()),
+                array_filter($profile->externalSourceList(), fn (ExternalSource $source): bool => $source->isAvailable()),
+            ),
+        ];
     }
 
     /**

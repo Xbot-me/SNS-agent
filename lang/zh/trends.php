@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => '去哪里查找？',
             'description' => '我们读取这些订阅源，了解你的领域正在报道什么。',
+            'external_heading' => '更多查找来源',
+            'external_description' => '补充人们此刻正在搜索和分享的内容。',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => '你所在国家的人们正在搜索的内容，按你的词筛选。'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => '与你的词相关的热门文章和讨论。'],
+                'youtube' => ['label' => 'YouTube', 'description' => '你前几个词对应的近期播放量最高的视频。'],
+            ],
+            'region_label' => 'Google Trends 的国家',
             'yours' => '你的订阅源',
             'none' => '你还没有订阅源。请在下方添加。',
             'limit' => '最多选择 :count 个订阅源。',

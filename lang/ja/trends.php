@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => 'どこから探しますか？',
             'description' => 'これらのフィードを読んで、ニッチで話題になっていることを調べます。',
+            'external_heading' => 'ほかの調べ先',
+            'external_description' => '今まさに検索・共有されている内容を追加します。',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => 'あなたの国で検索されている内容を、設定した単語で絞り込みます。'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => '単語に関する人気の記事や議論。'],
+                'youtube' => ['label' => 'YouTube', 'description' => '最初の単語に関する、最近よく再生された動画。'],
+            ],
+            'region_label' => 'Google Trends の対象国',
             'yours' => 'あなたのフィード',
             'none' => 'フィードはまだありません。下から追加してください。',
             'limit' => '最大 :count 件のフィードを選べます。',

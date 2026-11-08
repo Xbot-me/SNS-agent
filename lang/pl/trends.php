@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => 'Gdzie mamy szukać?',
             'description' => 'Czytamy te kanały, żeby zobaczyć, o czym piszą w Twojej niszy.',
+            'external_heading' => 'Więcej miejsc do przeszukania',
+            'external_description' => 'Dodają to, czego ludzie teraz szukają i co udostępniają.',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => 'Czego ludzie szukają w Twoim kraju, przefiltrowane Twoimi słowami.'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => 'Popularne historie i dyskusje o Twoich słowach.'],
+                'youtube' => ['label' => 'YouTube', 'description' => 'Najczęściej oglądane ostatnie filmy dla Twoich pierwszych słów.'],
+            ],
+            'region_label' => 'Kraj dla Google Trends',
             'yours' => 'Twoje kanały',
             'none' => 'Nie masz jeszcze kanałów. Dodaj je poniżej.',
             'limit' => 'Wybierz do :count kanałów.',

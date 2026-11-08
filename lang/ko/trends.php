@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => '어디에서 찾을까요?',
             'description' => '이 피드들을 읽고 내 분야에서 어떤 이야기가 나오는지 확인해요.',
+            'external_heading' => '더 찾아볼 곳',
+            'external_description' => '지금 사람들이 검색하고 공유하는 내용을 더해 줘요.',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => '내 나라에서 사람들이 검색하는 내용을 내 단어로 걸러 보여 줘요.'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => '내 단어와 관련된 인기 글과 토론.'],
+                'youtube' => ['label' => 'YouTube', 'description' => '처음 단어로 찾은 최근 가장 많이 본 동영상.'],
+            ],
+            'region_label' => 'Google Trends 대상 국가',
             'yours' => '내 피드',
             'none' => '아직 피드가 없어요. 아래에서 추가하세요.',
             'limit' => '피드는 최대 :count개까지 고를 수 있어요.',

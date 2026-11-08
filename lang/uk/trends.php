@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => 'Де нам шукати?',
             'description' => 'Ми читаємо ці стрічки, щоб побачити, про що пишуть у вашій ніші.',
+            'external_heading' => 'Де ще шукати',
+            'external_description' => 'Вони додають те, що люди шукають і обговорюють просто зараз.',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => 'Що шукають люди у вашій країні, відфільтровано за вашими словами.'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => 'Популярні історії та обговорення за вашими словами.'],
+                'youtube' => ['label' => 'YouTube', 'description' => 'Найпопулярніші свіжі відео за першими словами.'],
+            ],
+            'region_label' => 'Країна для Google Trends',
             'yours' => 'Ваші стрічки',
             'none' => 'У вас поки немає стрічок. Додайте їх нижче.',
             'limit' => 'Оберіть до :count стрічок.',

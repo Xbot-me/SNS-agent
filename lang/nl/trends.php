@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => 'Waar zoeken we?',
             'description' => 'We lezen deze feeds om te zien waar je niche over schrijft.',
+            'external_heading' => 'Meer plekken om te zoeken',
+            'external_description' => 'Ze voegen toe wat mensen nu zoeken en delen.',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => 'Waar mensen in jouw land naar zoeken, gefilterd op jouw woorden.'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => 'Populaire verhalen en discussies over jouw woorden.'],
+                'youtube' => ['label' => 'YouTube', 'description' => 'De meest bekeken recente video’s voor je eerste woorden.'],
+            ],
+            'region_label' => 'Land voor Google Trends',
             'yours' => 'Je feeds',
             'none' => 'Je hebt nog geen feeds. Voeg er hieronder een paar toe.',
             'limit' => 'Kies maximaal :count feeds.',

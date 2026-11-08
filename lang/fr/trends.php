@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => 'Où devons-nous chercher ?',
             'description' => 'Nous lisons ces flux pour voir ce dont parle votre niche.',
+            'external_heading' => 'Autres endroits où chercher',
+            'external_description' => 'Ils ajoutent ce que les gens recherchent et partagent en ce moment.',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => 'Ce que les gens recherchent dans votre pays, filtré selon vos mots.'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => 'Articles et discussions populaires sur vos mots.'],
+                'youtube' => ['label' => 'YouTube', 'description' => 'Les vidéos récentes les plus vues pour vos premiers mots.'],
+            ],
+            'region_label' => 'Pays pour Google Trends',
             'yours' => 'Vos flux',
             'none' => 'Vous n’avez pas encore de flux. Ajoutez-en ci-dessous.',
             'limit' => 'Choisissez jusqu’à :count flux.',

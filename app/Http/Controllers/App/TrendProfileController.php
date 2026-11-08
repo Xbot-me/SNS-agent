@@ -7,6 +7,7 @@ namespace App\Http\Controllers\App;
 use App\Actions\RssFeed\BuildRssFeedsPageProps;
 use App\Actions\Trend\RequestTrendAnalysis;
 use App\Actions\Trend\SaveTrendProfile;
+use App\Enums\Trend\ExternalSource;
 use App\Enums\Trend\Goal;
 use App\Enums\Trend\PostFormat;
 use App\Http\Requests\App\Trend\UpdateTrendProfileRequest;
@@ -37,6 +38,11 @@ class TrendProfileController extends Controller
                 ])
                 ->values()
                 ->all(),
+            'externalSources' => array_map(
+                fn (ExternalSource $source): array => ['key' => $source->value, 'default' => $source->isDefault()],
+                ExternalSource::available(),
+            ),
+            'regions' => (array) config('trypost.trends.regions'),
             'goals' => Goal::values(),
             'formats' => PostFormat::values(),
             'feeds' => $workspace->rssFeeds()

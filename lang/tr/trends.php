@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => 'Nerede arayalım?',
             'description' => 'Nişinde nelerin işlendiğini görmek için bu akışları okuyoruz.',
+            'external_heading' => 'Aranacak diğer yerler',
+            'external_description' => 'İnsanların şu anda aradığı ve paylaştığı şeyleri ekler.',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => 'Ülkendeki insanların aradıkları, kelimelerinle filtrelenir.'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => 'Kelimelerinle ilgili popüler haberler ve tartışmalar.'],
+                'youtube' => ['label' => 'YouTube', 'description' => 'İlk kelimelerin için en çok izlenen son videolar.'],
+            ],
+            'region_label' => 'Google Trends ülkesi',
             'yours' => 'Akışların',
             'none' => 'Henüz akışın yok. Aşağıdan ekle.',
             'limit' => 'En fazla :count akış seç.',

@@ -32,6 +32,8 @@ export interface TrendProfile {
     excluded_keywords: string[];
     formats: TrendFormat[];
     posts_per_week: number;
+    region: string;
+    external_sources: string[];
     rss_feed_ids: string[];
     analyzed_at: string | null;
     analyzing: boolean;
@@ -65,4 +67,9 @@ export interface TrendDirectoryCategory {
 export interface TrendSetupLimits {
     keywords: number;
     feeds: number;
+}
+
+export interface TrendExternalSource {
+    key: string;
+    default: boolean;
 }

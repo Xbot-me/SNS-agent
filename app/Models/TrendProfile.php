@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\Trend\ExternalSource;
 use App\Enums\Trend\Goal;
 use App\Enums\Trend\PostFormat;
 use Database\Factories\TrendProfileFactory;
@@ -35,6 +36,8 @@ class TrendProfile extends Model
         'excluded_keywords',
         'formats',
         'posts_per_week',
+        'region',
+        'external_sources',
         'onboarded_at',
         'analysis_requested_at',
         'analyzed_at',
@@ -42,6 +45,7 @@ class TrendProfile extends Model
 
     protected $attributes = [
         'goal' => Goal::DEFAULT->value,
+        'region' => 'US',
     ];
 
     protected function casts(): array
@@ -51,6 +55,7 @@ class TrendProfile extends Model
             'keywords' => 'array',
             'excluded_keywords' => 'array',
             'formats' => 'array',
+            'external_sources' => 'array',
             'posts_per_week' => 'integer',
             'onboarded_at' => 'datetime',
             'analysis_requested_at' => 'datetime',
@@ -75,6 +80,35 @@ class TrendProfile extends Model
     {
         return collect($this->formats)
             ->map(fn (string $format): ?PostFormat => PostFormat::tryFrom($format))
+            ->filter()
+            ->values()
+            ->all();
+    }
+
+    /**
+     * The words the workspace watches, trimmed and in the order it gave them.
+     *
+     * @return list<string>
+     */
+    public function watchedWords(): array
+    {
+        return collect($this->keywords)
+            ->map(fn (string $word): string => trim($word))
+            ->filter(fn (string $word): bool => filled($word))
+            ->unique(fn (string $word): string => mb_strtolower($word))
+            ->values()
+            ->all();
+    }
+
+    /**
+     * The external sources the workspace chose (a profile saved before they existed has none).
+     *
+     * @return list<ExternalSource>
+     */
+    public function externalSourceList(): array
+    {
+        return collect($this->external_sources ?? [])
+            ->map(fn (string $source): ?ExternalSource => ExternalSource::tryFrom($source))
             ->filter()
             ->values()
             ->all();

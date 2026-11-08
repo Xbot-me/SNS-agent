@@ -35,6 +35,8 @@ function trendsTestProfileInput(array $overrides = []): array
         'excluded_keywords' => ['giveaway'],
         'formats' => ['video', 'text'],
         'posts_per_week' => 4,
+        'region' => 'GB',
+        'external_sources' => ['hacker_news'],
         ...$overrides,
     ];
 }
@@ -62,7 +64,9 @@ test('the setup page offers the niches, goals, formats and the feeds to read', f
             ->where('formats', ['text', 'image', 'carousel', 'video'])
             ->where('feeds.0.id', $this->feed->id)
             ->has('directory')
-            ->where('limits.keywords', 20));
+            ->where('limits.keywords', 20)
+            ->where('externalSources', [['key' => 'google_trends', 'default' => true], ['key' => 'hacker_news', 'default' => true]])
+            ->has('regions'));
 });
 
 test('finishing the setup saves the profile, marks it done and queues the first analysis', function () {
@@ -77,6 +81,8 @@ test('finishing the setup saves the profile, marks it done and queues the first 
         ->and($profile->keywords)->toBe(['home workout', 'Kettlebell'])
         ->and($profile->formats)->toBe(['video', 'text'])
         ->and($profile->posts_per_week)->toBe(4)
+        ->and($profile->region)->toBe('GB')
+        ->and($profile->external_sources)->toBe(['hacker_news'])
         ->and($profile->onboarded_at)->not->toBeNull()
         ->and($profile->rssFeeds->pluck('id')->all())->toBe([$this->feed->id]);
 
@@ -154,4 +160,41 @@ test('an analysis already running is not queued twice', function () {
 
 test('analysing needs a finished setup', function () {
     $this->actingAs($this->user)->post(route('app.trends.analysis.store'))->assertNotFound();
+});
+
+test('a source the app does not offer cannot be chosen', function () {
+    $this->actingAs($this->user)
+        ->putJson(route('app.trends.profile.update'), trendsTestProfileInput(['external_sources' => ['youtube']]))
+        ->assertJsonValidationErrors('external_sources.0');
+
+    config()->set('trypost.trends.sources.youtube.api_key', 'test-key');
+
+    $this->actingAs($this->user->fresh())
+        ->putJson(route('app.trends.profile.update'), trendsTestProfileInput(['external_sources' => ['youtube']]))
+        ->assertRedirect(route('app.trends.index'));
+
+    expect($this->workspace->fresh()->trendProfile->external_sources)->toBe(['youtube']);
+});
+
+test('YouTube is offered once it has a key, and starts off', function () {
+    config()->set('trypost.trends.sources.youtube.api_key', 'test-key');
+
+    $this->actingAs($this->user)
+        ->get(route('app.trends.profile.edit'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('externalSources.2', ['key' => 'youtube', 'default' => false]));
+});
+
+test('the country must be one Google Trends is read for', function () {
+    $this->actingAs($this->user)
+        ->putJson(route('app.trends.profile.update'), trendsTestProfileInput(['region' => 'ZZ']))
+        ->assertJsonValidationErrors('region');
+});
+
+test('a source that is switched off in the app is not offered', function () {
+    config()->set('trypost.trends.sources.hacker_news.enabled', false);
+
+    $this->actingAs($this->user)
+        ->get(route('app.trends.profile.edit'))
+        ->assertInertia(fn (Assert $page) => $page->where('externalSources', [['key' => 'google_trends', 'default' => true]]));
 });

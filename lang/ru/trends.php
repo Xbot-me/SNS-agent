@@ -94,6 +94,14 @@ return [
         'sources' => [
             'heading' => 'Где нам искать?',
             'description' => 'Мы читаем эти ленты, чтобы увидеть, о чём пишут в вашей нише.',
+            'external_heading' => 'Где ещё искать',
+            'external_description' => 'Они добавляют то, что люди ищут и обсуждают прямо сейчас.',
+            'external' => [
+                'google_trends' => ['label' => 'Google Trends', 'description' => 'Что ищут люди в вашей стране, отфильтровано по вашим словам.'],
+                'hacker_news' => ['label' => 'Hacker News', 'description' => 'Популярные истории и обсуждения по вашим словам.'],
+                'youtube' => ['label' => 'YouTube', 'description' => 'Самые просматриваемые свежие видео по первым словам.'],
+            ],
+            'region_label' => 'Страна для Google Trends',
             'yours' => 'Ваши ленты',
             'none' => 'У вас пока нет лент. Добавьте их ниже.',
             'limit' => 'Выберите не более :count лент.',

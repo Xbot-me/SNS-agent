@@ -68,6 +68,30 @@ return [
         'analyze_interval_hours' => (int) env('TRENDS_ANALYZE_INTERVAL_HOURS', 6),
         'max_keywords' => 20,
         'max_feeds' => 15,
+        // Countries Google Trends can be read for (the setup lists them by name).
+        'regions' => ['US', 'GB', 'CA', 'AU', 'IN', 'BR', 'DE', 'FR', 'ES', 'IT', 'NL', 'PL', 'TR', 'JP', 'KR', 'MX', 'ID', 'ZA', 'NG'],
+        // Places to read besides the workspace's feeds. Each one only adds what its
+        // own API gives for the profile's words; one that fails is skipped.
+        'sources' => [
+            // Unofficial daily feed; no key. Reddit is not here: its API needs Reddit's approval first.
+            'google_trends' => [
+                'enabled' => (bool) env('TRENDS_GOOGLE_TRENDS_ENABLED', true),
+                'host' => env('TRENDS_GOOGLE_TRENDS_HOST', 'https://trends.google.com'),
+            ],
+            // Algolia's open Hacker News search: points and comments, no key.
+            'hacker_news' => [
+                'enabled' => (bool) env('TRENDS_HACKER_NEWS_ENABLED', true),
+                'api' => env('TRENDS_HACKER_NEWS_API', 'https://hn.algolia.com/api/v1'),
+                'max_queries' => 3,
+            ],
+            // Needs an API key from the user's own Google project. A search costs 100 of the 10,000
+            // daily units, so only the first words are searched; the host is platforms.youtube.data_api.
+            'youtube' => [
+                'enabled' => (bool) env('TRENDS_YOUTUBE_ENABLED', true),
+                'api_key' => env('TRENDS_YOUTUBE_API_KEY'),
+                'max_queries' => 2,
+            ],
+        ],
         'niches' => [
             'marketing' => ['feed_category' => 'favorites', 'keywords' => ['social media', 'content creation', 'marketing', 'creator economy', 'algorithm']],
             'technology' => ['feed_category' => 'tech', 'keywords' => ['ai', 'gadgets', 'software', 'apps', 'startups']],

@@ -28,6 +28,8 @@ class SaveTrendProfile
                 'excluded_keywords' => self::words((array) data_get($data, 'excluded_keywords', [])),
                 'formats' => array_values(array_unique((array) data_get($data, 'formats', []))),
                 'posts_per_week' => (int) data_get($data, 'posts_per_week'),
+                'region' => data_get($data, 'region'),
+                'external_sources' => array_values(array_unique((array) data_get($data, 'external_sources', []))),
             ]);
             $profile->onboarded_at ??= now();
             $profile->save();

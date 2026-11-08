@@ -43,19 +43,25 @@ class TrendScorer
 
         $groups = [];
 
-        $signals
+        $kept = $signals
             ->reject(fn (TrendSignal $signal): bool => $this->mentionsAny($signal->title, $excluded))
             ->unique('url')
-            ->each(function (TrendSignal $signal) use (&$groups, $keywords): void {
-                foreach ($this->extractor->terms($signal->title, $keywords) as $term) {
-                    $groups[$term][] = $signal;
-                }
-            });
+            ->values();
+
+        // Engagement only means something next to the same outlet's other items.
+        $peaks = $kept->groupBy('outlet')->map(fn (Collection $items): int => (int) $items->max('engagement'))->all();
+
+        $kept->each(function (TrendSignal $signal) use (&$groups, $keywords): void {
+            foreach ($this->extractor->terms($signal->title, $keywords) as $term) {
+                $groups[$term][] = $signal;
+            }
+        });
 
         return collect($groups)
-            ->map(fn (array $members, string $term): ?array => $this->topic($term, collect($members), $keywords, $labels, $minOutlets, $now))
+            ->map(fn (array $members, string $term): ?array => $this->topic($term, collect($members), $keywords, $labels, $minOutlets, $now, $peaks))
             ->filter()
-            ->sortBy([['score', 'desc'], ['key', 'asc']])
+            // On equal scores the more specific term wins ("zephyr drone" over "zephyr").
+            ->sortBy([['score', 'desc'], fn (array $a, array $b): int => mb_strlen($b['key']) <=> mb_strlen($a['key']), ['key', 'asc']])
             ->pipe(fn (Collection $topics): Collection => $this->withoutRepeats($topics))
             ->take((int) config('trypost.trends.max_topics'))
             ->values()
@@ -66,9 +72,10 @@ class TrendScorer
      * @param  Collection<int, TrendSignal>  $members
      * @param  list<string>  $keywords
      * @param  Collection<string, string>  $labels
+     * @param  array<string, int>  $peaks
      * @return array{key: string, label: string, score: int, signal_count: int, outlet_count: int, evidence: list<array{title: string, url: string, source: string, published_at: string}>, last_seen_at: CarbonImmutable, urls: list<string>}|null
      */
-    private function topic(string $term, Collection $members, array $keywords, Collection $labels, int $minOutlets, CarbonImmutable $now): ?array
+    private function topic(string $term, Collection $members, array $keywords, Collection $labels, int $minOutlets, CarbonImmutable $now, array $peaks): ?array
     {
         $outlets = $members->pluck('outlet')->unique()->count();
         $isKeyword = in_array($term, $keywords, true);
@@ -77,7 +84,7 @@ class TrendScorer
             return null;
         }
 
-        $freshness = $members->sum(fn (TrendSignal $signal): float => 0.5 ** (abs($signal->publishedAt->diffInHours($now)) / self::HALF_LIFE_HOURS));
+        $freshness = $members->sum(fn (TrendSignal $signal): float => 0.5 ** (abs($signal->publishedAt->diffInHours($now)) / self::HALF_LIFE_HOURS) * $this->attention($signal, $peaks));
         $relevance = $isKeyword || $this->touchesKeyword($term, $keywords) ? 1.5 : 1.0;
         $newest = $members->sortByDesc(fn (TrendSignal $signal): int => $signal->publishedAt->getTimestamp())->values();
 
@@ -99,6 +106,23 @@ class TrendScorer
             'last_seen_at' => $newest->first()->publishedAt,
             'urls' => $members->pluck('url')->all(),
         ];
+    }
+
+    /**
+     * One for an item with no engagement figure, up to two for the most engaged item of
+     * its outlet, on a log scale so one viral item does not bury everything else.
+     *
+     * @param  array<string, int>  $peaks  the highest engagement per outlet
+     */
+    private function attention(TrendSignal $signal, array $peaks): float
+    {
+        $peak = data_get($peaks, $signal->outlet, 0);
+
+        if ($signal->engagement === null || $peak <= 0) {
+            return 1.0;
+        }
+
+        return 1.0 + log10(1 + min($signal->engagement, $peak)) / log10(1 + $peak);
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\App;
 
+use App\Enums\Trend\ExternalSource;
 use App\Models\TrendProfile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -27,6 +28,8 @@ class TrendProfileResource extends JsonResource
             'excluded_keywords' => $this->excluded_keywords,
             'formats' => $this->formats,
             'posts_per_week' => $this->posts_per_week,
+            'region' => $this->region,
+            'external_sources' => array_map(fn (ExternalSource $source): string => $source->value, $this->externalSourceList()),
             'rss_feed_ids' => $this->rssFeeds()->pluck('rss_feeds.id')->all(),
             'analyzed_at' => $this->analyzed_at?->toIso8601String(),
             'analyzing' => $this->isAnalyzing(),
