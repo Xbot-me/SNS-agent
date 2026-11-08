@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'Cosa cercano le persone nel tuo paese, filtrato con le tue parole.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Storie e discussioni popolari sulle tue parole.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'I video recenti più visti per le tue prime parole.'],
+                'instagram_hashtags' => ['label' => 'Hashtag di Instagram', 'description' => 'I post Instagram migliori per le tue parole come hashtag, con like e commenti.'],
+                'threads_search' => ['label' => 'Ricerca su Threads', 'description' => 'I post Threads più popolari per le tue parole.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'Di cosa si parla su Bluesky, filtrato con le tue parole.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Hashtag e link in tendenza su Mastodon, filtrati con le tue parole.'],
+                'instagram_competitors' => ['label' => 'Account Instagram da osservare'],
             ],
             'region_label' => 'Paese per Google Trends',
             'competitors_label' => 'Account Instagram da osservare',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'Impossibile aggiungere il feed. Riprova.',
             'more' => 'Trova altri feed',
         ],
+    ],
+    'issues' => [
+        'title' => 'Alcune fonti non si sono potute leggere',
+        'permission' => 'Manca un permesso. Su Meta, approvalo nella tua app e ricollega il canale.',
+        'failed' => 'Non leggibile stavolta. Riproverà al prossimo aggiornamento.',
     ],
     'idea' => [
         'summary' => '{1} In tendenza: :count fonte ne parla.|[0,*] In tendenza: :count fonti ne parlano.',

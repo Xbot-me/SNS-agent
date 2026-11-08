@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'Wonach Menschen in deinem Land suchen, gefiltert nach deinen Wörtern.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Beliebte Beiträge und Diskussionen zu deinen Wörtern.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'Die meistgesehenen aktuellen Videos zu deinen ersten Wörtern.'],
+                'instagram_hashtags' => ['label' => 'Instagram-Hashtags', 'description' => 'Die beliebtesten Instagram-Beiträge zu deinen Wörtern als Hashtags, mit Likes und Kommentaren.'],
+                'threads_search' => ['label' => 'Threads-Suche', 'description' => 'Die beliebtesten Threads-Beiträge zu deinen Wörtern.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'Worüber auf Bluesky gesprochen wird, gefiltert nach deinen Wörtern.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Trendende Hashtags und Links auf Mastodon, gefiltert nach deinen Wörtern.'],
+                'instagram_competitors' => ['label' => 'Instagram-Konten beobachten'],
             ],
             'region_label' => 'Land für Google Trends',
             'competitors_label' => 'Instagram-Konten beobachten',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'Der Feed konnte nicht hinzugefügt werden. Versuche es erneut.',
             'more' => 'Weitere Feeds finden',
         ],
+    ],
+    'issues' => [
+        'title' => 'Einige Quellen konnten nicht gelesen werden',
+        'permission' => 'Es fehlt eine Berechtigung. Bei Meta: in deiner Meta-App freigeben und den Kanal neu verbinden.',
+        'failed' => 'Diesmal nicht lesbar. Beim nächsten Aktualisieren wird es erneut versucht.',
     ],
     'idea' => [
         'summary' => '{1} Im Trend: :count Quelle berichtet darüber.|[0,*] Im Trend: :count Quellen berichten darüber.',

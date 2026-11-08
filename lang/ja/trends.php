@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'あなたの国で検索されている内容を、設定した単語で絞り込みます。'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => '単語に関する人気の記事や議論。'],
                 'youtube' => ['label' => 'YouTube', 'description' => '最初の単語に関する、最近よく再生された動画。'],
+                'instagram_hashtags' => ['label' => 'Instagramハッシュタグ', 'description' => '単語をハッシュタグにして検索した、Instagramの人気投稿といいね・コメント数。'],
+                'threads_search' => ['label' => 'Threads検索', 'description' => '単語に関する、Threadsの人気投稿。'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'Blueskyで今話題になっていること（単語で絞り込み）。'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Mastodonで話題のハッシュタグとリンク（単語で絞り込み）。'],
+                'instagram_competitors' => ['label' => '追跡するInstagramアカウント'],
             ],
             'region_label' => 'Google Trends の対象国',
             'competitors_label' => '追跡するInstagramアカウント',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'フィードを追加できませんでした。もう一度お試しください。',
             'more' => 'フィードをもっと探す',
         ],
+    ],
+    'issues' => [
+        'title' => '読み込めなかったソースがあります',
+        'permission' => '権限が足りません。Metaの場合は、Metaアプリで承認してからチャンネルを再接続してください。',
+        'failed' => '今回は読み込めませんでした。次回の更新で再試行します。',
     ],
     'idea' => [
         'summary' => '{1} トレンド: :count 件のソースが取り上げています。|[0,*] トレンド: :count 件のソースが取り上げています。',

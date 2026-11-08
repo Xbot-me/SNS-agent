@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'Τι ψάχνουν οι άνθρωποι στη χώρα σου, φιλτραρισμένο με τις λέξεις σου.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Δημοφιλείς ιστορίες και συζητήσεις για τις λέξεις σου.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'Τα πιο δημοφιλή πρόσφατα βίντεο για τις πρώτες σου λέξεις.'],
+                'instagram_hashtags' => ['label' => 'Hashtags Instagram', 'description' => 'Οι κορυφαίες αναρτήσεις Instagram για τις λέξεις σου ως hashtags, με likes και σχόλια.'],
+                'threads_search' => ['label' => 'Αναζήτηση Threads', 'description' => 'Οι πιο δημοφιλείς αναρτήσεις Threads για τις λέξεις σου.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'Για τι μιλούν οι άνθρωποι στο Bluesky, φιλτραρισμένο με τις λέξεις σου.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Δημοφιλή hashtags και σύνδεσμοι στο Mastodon, φιλτραρισμένα με τις λέξεις σου.'],
+                'instagram_competitors' => ['label' => 'Λογαριασμοί Instagram προς παρακολούθηση'],
             ],
             'region_label' => 'Χώρα για το Google Trends',
             'competitors_label' => 'Λογαριασμοί Instagram προς παρακολούθηση',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'Δεν προστέθηκε η ροή. Δοκίμασε ξανά.',
             'more' => 'Βρες περισσότερες ροές',
         ],
+    ],
+    'issues' => [
+        'title' => 'Ορισμένες πηγές δεν διαβάστηκαν',
+        'permission' => 'Λείπει μια άδεια. Στη Meta, έγκρινέ την στην εφαρμογή σου και ξανασύνδεσε το κανάλι.',
+        'failed' => 'Δεν διαβάστηκε αυτή τη φορά. Θα ξαναδοκιμάσει στην επόμενη ανανέωση.',
     ],
     'idea' => [
         'summary' => '{1} Τάση: το καλύπτει :count πηγή.|[0,*] Τάση: το καλύπτουν :count πηγές.',

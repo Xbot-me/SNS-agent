@@ -36,6 +36,7 @@ export interface TrendProfile {
     posts_per_week: number;
     region: string;
     competitors: string[];
+    source_issues: Record<string, 'permission' | 'failed'>;
     external_sources: string[];
     rss_feed_ids: string[];
     analyzed_at: string | null;

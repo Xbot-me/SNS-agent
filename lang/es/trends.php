@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'Lo que busca la gente en tu país, filtrado por tus palabras.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Historias y debates populares sobre tus palabras.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'Los vídeos recientes más vistos para tus primeras palabras.'],
+                'instagram_hashtags' => ['label' => 'Hashtags de Instagram', 'description' => 'Las publicaciones más destacadas de Instagram para tus palabras como hashtags, con sus me gusta y comentarios.'],
+                'threads_search' => ['label' => 'Búsqueda en Threads', 'description' => 'Las publicaciones más populares de Threads para tus palabras.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'De qué habla la gente en Bluesky, filtrado por tus palabras.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Hashtags y enlaces en tendencia en Mastodon, filtrados por tus palabras.'],
+                'instagram_competitors' => ['label' => 'Cuentas de Instagram a seguir'],
             ],
             'region_label' => 'País para Google Trends',
             'competitors_label' => 'Cuentas de Instagram a seguir',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'No se pudo añadir ese feed. Inténtalo de nuevo.',
             'more' => 'Buscar más feeds',
         ],
+    ],
+    'issues' => [
+        'title' => 'No se pudieron leer algunas fuentes',
+        'permission' => 'Falta un permiso. En Meta, apruébalo en tu app y vuelve a conectar el canal.',
+        'failed' => 'No se pudo leer esta vez. Se reintentará en la próxima actualización.',
     ],
     'idea' => [
         'summary' => '{1} Tendencia: :count fuente habla de esto.|[0,*] Tendencia: :count fuentes hablan de esto.',

@@ -7,9 +7,9 @@ namespace App\Actions\Trend;
 use App\Actions\Analytics\ReadWorkspacePostPerformance;
 use App\Dto\Trend\PostPerformance;
 use App\Dto\Trend\TrendSignal;
-use App\Enums\Trend\ExternalSource;
 use App\Enums\Trend\PostFormat;
 use App\Enums\Trend\TopicStatus;
+use App\Exceptions\Trend\SourceUnavailableException;
 use App\Models\TrendProfile;
 use App\Models\TrendTopic;
 use App\Services\Trend\Sources\InstagramCompetitorSource;
@@ -19,6 +19,7 @@ use App\Services\Trend\TrendScorer;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class AnalyzeTrends
 {
@@ -33,17 +34,29 @@ class AnalyzeTrends
         $now = CarbonImmutable::now();
         $since = $now->subDays((int) config('trypost.trends.window_days'));
 
+        // A source that fails is skipped and noted for the user, so one outage never costs the others' topics.
+        $issues = [];
+
         /** @var Collection<int, TrendSignal> $signals */
-        // A source that fails is reported and skipped, so one outage never costs the others' topics.
-        $signals = collect(self::sources($profile))
-            ->flatMap(fn (TrendSource $source): Collection => rescue(fn (): Collection => $source->signals($profile, $since), collect()));
+        $signals = collect(self::sources($profile))->flatMap(function (TrendSource $source, string $key) use ($profile, $since, &$issues): Collection {
+            try {
+                return $source->signals($profile, $since);
+            } catch (SourceUnavailableException $exception) {
+                $issues[$key] = $exception->reason;
+            } catch (Throwable $exception) {
+                report($exception);
+                $issues[$key] = SourceUnavailableException::FAILED;
+            }
+
+            return collect();
+        });
 
         // What already worked for this audience nudges both the topics and the formats.
         $performance = ReadWorkspacePostPerformance::execute($profile->workspace_id, $now);
         $ranked = app(TrendScorer::class)->rank($profile, $signals, $now, $performance);
         $formats = self::suggestedFormats($profile, $performance);
 
-        DB::transaction(function () use ($profile, $ranked, $formats, $now): void {
+        DB::transaction(function () use ($profile, $ranked, $formats, $now, $issues): void {
             foreach ($ranked as $ranking) {
                 $topic = TrendTopic::query()->firstOrNew([
                     'workspace_id' => $profile->workspace_id,
@@ -71,23 +84,30 @@ class AnalyzeTrends
                 ->whereNotIn('key', array_column($ranked, 'key'))
                 ->delete();
 
-            $profile->update(['analyzed_at' => $now]);
+            $profile->update(['analyzed_at' => $now, 'source_issues' => $issues === [] ? null : $issues]);
         });
     }
 
     /**
-     * @return list<TrendSource>
+     * The sources to read, by the key a problem with them is recorded under.
+     *
+     * @return array<string, TrendSource>
      */
     private static function sources(TrendProfile $profile): array
     {
-        return [
-            app(RssTrendSource::class),
-            ...($profile->competitorHandles() !== [] && config('trypost.trends.sources.instagram_competitors.enabled') ? [app(InstagramCompetitorSource::class)] : []),
-            ...array_map(
-                fn (ExternalSource $source): TrendSource => app($source->sourceClass()),
-                array_filter($profile->externalSourceList(), fn (ExternalSource $source): bool => $source->isAvailable()),
-            ),
-        ];
+        $sources = ['rss' => app(RssTrendSource::class)];
+
+        if ($profile->competitorHandles() !== [] && config('trypost.trends.sources.instagram_competitors.enabled')) {
+            $sources['instagram_competitors'] = app(InstagramCompetitorSource::class);
+        }
+
+        foreach ($profile->externalSourceList() as $source) {
+            if ($source->isAvailableFor($profile->workspace)) {
+                $sources[$source->value] = app($source->sourceClass());
+            }
+        }
+
+        return $sources;
     }
 
     /**

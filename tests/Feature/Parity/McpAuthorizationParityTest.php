@@ -81,6 +81,11 @@ use App\Mcp\Tools\SocialAccount\MovePostToSlotTool;
 use App\Mcp\Tools\SocialAccount\ReorderQueueTool;
 use App\Mcp\Tools\SocialAccount\SearchInstagramAudioTool;
 use App\Mcp\Tools\SocialAccount\UpdatePostingScheduleTool;
+use App\Mcp\Tools\Trend\CreateIdeaFromTrendTool;
+use App\Mcp\Tools\Trend\GetTrendBriefTool;
+use App\Mcp\Tools\Trend\ListTrendsTool;
+use App\Mcp\Tools\Trend\RunTrendAnalysisTool;
+use App\Mcp\Tools\Trend\UpdateTrendTopicTool;
 use App\Mcp\Tools\Webhook\CreateWebhookTool;
 use App\Mcp\Tools\Webhook\DeleteWebhookTool;
 use App\Mcp\Tools\Webhook\GetWebhookTool;
@@ -99,6 +104,8 @@ use App\Models\Post;
 use App\Models\PostNote;
 use App\Models\Repurpose;
 use App\Models\SocialAccount;
+use App\Models\TrendProfile;
+use App\Models\TrendTopic;
 use App\Models\User;
 use App\Models\Webhook;
 use App\Models\WebhookLog;
@@ -205,6 +212,9 @@ function mcpAuthParityFixture(Workspace $workspace, User $owner, ?User $actor = 
         'ideaStageIds' => $workspace->ideaStages()->pluck('id')->all(),
         'label' => WorkspaceLabel::factory()->create(['workspace_id' => $workspace->id]),
         'signature' => WorkspaceSignature::factory()->create(['workspace_id' => $workspace->id]),
+        // The fixture is built twice per test (web, then MCP); a workspace has one Trends profile.
+        'trendProfile' => TrendProfile::query()->where('workspace_id', $workspace->id)->first() ?? TrendProfile::factory()->create(['workspace_id' => $workspace->id]),
+        'trendTopic' => TrendTopic::factory()->create(['workspace_id' => $workspace->id]),
         'discord' => SocialAccount::factory()->discord()->create(['workspace_id' => $workspace->id, 'platform_user_id' => (string) Str::uuid()]),
         'pinterest' => SocialAccount::factory()->pinterest()->create(['workspace_id' => $workspace->id, 'platform_user_id' => (string) Str::uuid()]),
         'instagramFacebook' => SocialAccount::factory()->instagram()->create(['workspace_id' => $workspace->id, 'platform' => Platform::InstagramFacebook, 'platform_user_id' => (string) Str::uuid()]),
@@ -320,6 +330,11 @@ function mcpAuthParityTools(): array
         'rotate-webhook-secret-tool' => [RotateWebhookSecretTool::class, $admins, fn (TestCase $t, array $f) => $t->post(route('app.webhooks.rotate-secret', $f['webhook'])), fn (array $f) => ['webhook_id' => $f['webhook']->id]],
         'send-webhook-test-tool' => [SendWebhookTestTool::class, $admins, fn (TestCase $t, array $f) => $t->post(route('app.webhooks.send-test', $f['webhook'])), fn (array $f) => ['webhook_id' => $f['webhook']->id]],
         'update-webhook-tool' => [UpdateWebhookTool::class, $admins, fn (TestCase $t, array $f) => $t->put(route('app.webhooks.update', $f['webhook']), $webhook), fn (array $f) => ['webhook_id' => $f['webhook']->id, ...$webhook]],
+        'get-trend-brief-tool' => [GetTrendBriefTool::class, $everyMember, fn (TestCase $t, array $f) => $t->get(route('app.trends.index')), fn (array $f) => []],
+        'list-trends-tool' => [ListTrendsTool::class, $everyMember, fn (TestCase $t, array $f) => $t->get(route('app.trends.index')), fn (array $f) => []],
+        'run-trend-analysis-tool' => [RunTrendAnalysisTool::class, $admins, fn (TestCase $t, array $f) => $t->post(route('app.trends.analysis.store')), fn (array $f) => []],
+        'update-trend-topic-tool' => [UpdateTrendTopicTool::class, $everyMember, fn (TestCase $t, array $f) => $t->patch(route('app.trends.topics.update', $f['trendTopic']), ['status' => 'dismissed']), fn (array $f) => ['topic_id' => $f['trendTopic']->id, 'status' => 'dismissed']],
+        'create-idea-from-trend-tool' => [CreateIdeaFromTrendTool::class, $everyMember, fn (TestCase $t, array $f) => $t->post(route('app.trends.topics.idea.store', $f['trendTopic'])), fn (array $f) => ['topic_id' => $f['trendTopic']->id]],
         'get-workspace-tool' => [GetWorkspaceTool::class, $everyMember, fn (TestCase $t, array $f) => $t->get(route('app.calendar')), fn (array $f) => []],
     ];
 }

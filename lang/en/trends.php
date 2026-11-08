@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'What people in your country are searching for, filtered to your words.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Popular stories and discussions about your words.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'The most-watched recent videos for your first words.'],
+                'instagram_hashtags' => ['label' => 'Instagram hashtags', 'description' => 'The top Instagram posts for your words as hashtags, with their likes and comments.'],
+                'threads_search' => ['label' => 'Threads search', 'description' => 'The most popular Threads posts for your words.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'What people are talking about on Bluesky, filtered to your words.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Trending hashtags and links on Mastodon, filtered to your words.'],
+                'instagram_competitors' => ['label' => 'Instagram accounts to watch'],
             ],
             'region_label' => 'Country for Google Trends',
             'competitors_label' => 'Instagram accounts to watch',
@@ -116,6 +121,11 @@ return [
             'add_failed' => "Couldn't add that feed. Try again.",
             'more' => 'Find more feeds',
         ],
+    ],
+    'issues' => [
+        'title' => 'Some sources couldn\'t be read',
+        'permission' => 'Missing a permission. For Meta, approve it in your Meta app and reconnect the channel.',
+        'failed' => 'Couldn\'t be read this time. It will try again at the next refresh.',
     ],
     'idea' => [
         'summary' => '{1} Trending: :count source is covering this.|[0,*] Trending: :count sources are covering this.',

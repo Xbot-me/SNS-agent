@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => '내 나라에서 사람들이 검색하는 내용을 내 단어로 걸러 보여 줘요.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => '내 단어와 관련된 인기 글과 토론.'],
                 'youtube' => ['label' => 'YouTube', 'description' => '처음 단어로 찾은 최근 가장 많이 본 동영상.'],
+                'instagram_hashtags' => ['label' => 'Instagram 해시태그', 'description' => '내 단어를 해시태그로 검색한 Instagram 인기 게시물과 좋아요·댓글 수.'],
+                'threads_search' => ['label' => 'Threads 검색', 'description' => '내 단어와 관련된 인기 Threads 게시물.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'Bluesky에서 지금 화제인 내용 (내 단어로 걸러서).'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Mastodon에서 뜨는 해시태그와 링크 (내 단어로 걸러서).'],
+                'instagram_competitors' => ['label' => '지켜볼 Instagram 계정'],
             ],
             'region_label' => 'Google Trends 대상 국가',
             'competitors_label' => '지켜볼 Instagram 계정',
@@ -116,6 +121,11 @@ return [
             'add_failed' => '피드를 추가하지 못했어요. 다시 시도해 주세요.',
             'more' => '피드 더 찾기',
         ],
+    ],
+    'issues' => [
+        'title' => '읽지 못한 소스가 있어요',
+        'permission' => '권한이 없어요. Meta라면 Meta 앱에서 승인한 뒤 채널을 다시 연결하세요.',
+        'failed' => '이번에는 읽지 못했어요. 다음 새로고침 때 다시 시도해요.',
     ],
     'idea' => [
         'summary' => '{1} 트렌드: 출처 :count곳에서 다루고 있어요.|[0,*] 트렌드: 출처 :count곳에서 다루고 있어요.',

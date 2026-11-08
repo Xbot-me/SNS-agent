@@ -22,6 +22,7 @@ use App\Models\Workspace;
 use App\Services\PostHogService;
 use App\Support\Inbox\InboxScopes;
 use App\Support\Social\PendingConnection;
+use App\Support\Trend\TrendScopes;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -244,7 +245,7 @@ class SocialController extends Controller
      */
     protected function withInboxScopes(array $scopes): array
     {
-        return array_values(array_unique([...$scopes, ...InboxScopes::for($this->platform)]));
+        return array_values(array_unique([...$scopes, ...InboxScopes::for($this->platform), ...TrendScopes::for($this->platform)]));
     }
 
     /**

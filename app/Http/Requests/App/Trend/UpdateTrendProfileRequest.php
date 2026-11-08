@@ -42,7 +42,7 @@ class UpdateTrendProfileRequest extends FormRequest
             'external_sources.*' => [
                 'string',
                 'distinct',
-                Rule::in(array_map(fn (ExternalSource $source): string => $source->value, ExternalSource::available())),
+                Rule::in(array_map(fn (ExternalSource $source): string => $source->value, ExternalSource::availableFor($this->user()->currentWorkspace))),
             ],
             'rss_feed_ids' => ['nullable', 'array', 'max:'.(int) config('trypost.trends.max_feeds')],
             'rss_feed_ids.*' => [

@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'Что ищут люди в вашей стране, отфильтровано по вашим словам.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Популярные истории и обсуждения по вашим словам.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'Самые просматриваемые свежие видео по первым словам.'],
+                'instagram_hashtags' => ['label' => 'Хештеги Instagram', 'description' => 'Самые популярные посты Instagram по вашим словам как хештегам, с лайками и комментариями.'],
+                'threads_search' => ['label' => 'Поиск в Threads', 'description' => 'Самые популярные посты Threads по вашим словам.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'О чём говорят в Bluesky, отфильтровано по вашим словам.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Популярные хештеги и ссылки в Mastodon, отфильтровано по вашим словам.'],
+                'instagram_competitors' => ['label' => 'Аккаунты Instagram для наблюдения'],
             ],
             'region_label' => 'Страна для Google Trends',
             'competitors_label' => 'Аккаунты Instagram для наблюдения',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'Не удалось добавить ленту. Попробуйте ещё раз.',
             'more' => 'Найти другие ленты',
         ],
+    ],
+    'issues' => [
+        'title' => 'Некоторые источники не удалось прочитать',
+        'permission' => 'Не хватает разрешения. Для Meta одобрите его в своём приложении и заново подключите канал.',
+        'failed' => 'В этот раз прочитать не удалось. Повторная попытка при следующем обновлении.',
     ],
     'idea' => [
         'summary' => 'В тренде: об этом пишет :count источник.|В тренде: об этом пишут :count источника.|В тренде: об этом пишут :count источников.',

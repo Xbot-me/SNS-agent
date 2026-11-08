@@ -65,7 +65,7 @@ test('the setup page offers the niches, goals, formats and the feeds to read', f
             ->where('feeds.0.id', $this->feed->id)
             ->has('directory')
             ->where('limits.keywords', 20)
-            ->where('externalSources', [['key' => 'google_trends', 'default' => true], ['key' => 'hacker_news', 'default' => true]])
+            ->where('externalSources', [['key' => 'google_trends', 'default' => true], ['key' => 'hacker_news', 'default' => true], ['key' => 'bluesky', 'default' => false], ['key' => 'mastodon', 'default' => false]])
             ->has('regions'));
 });
 
@@ -196,5 +196,5 @@ test('a source that is switched off in the app is not offered', function () {
 
     $this->actingAs($this->user)
         ->get(route('app.trends.profile.edit'))
-        ->assertInertia(fn (Assert $page) => $page->where('externalSources', [['key' => 'google_trends', 'default' => true]]));
+        ->assertInertia(fn (Assert $page) => $page->where('externalSources', [['key' => 'google_trends', 'default' => true], ['key' => 'bluesky', 'default' => false], ['key' => 'mastodon', 'default' => false]]));
 });

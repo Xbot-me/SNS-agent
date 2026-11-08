@@ -23,6 +23,9 @@ const props = defineProps<{
 
 const isRequesting = ref(false);
 
+// The sources the last analysis could not read, with why.
+const issues = computed(() => Object.entries(props.profile.source_issues));
+
 const maxScore = computed(() =>
     Math.max(1, ...props.topics.map((topic) => topic.score)),
 );
@@ -97,6 +100,28 @@ const requestAnalysis = (): void => {
                             : $t('trends.never_analyzed')
                     }}
                 </p>
+            </div>
+
+            <div
+                v-if="issues.length > 0"
+                class="flex flex-col gap-2 rounded-xl border border-border bg-card p-4"
+                data-testid="trends-issues"
+            >
+                <p class="text-sm font-medium text-foreground">
+                    {{ $t('trends.issues.title') }}
+                </p>
+                <ul class="flex flex-col gap-1 text-sm text-muted-foreground">
+                    <li v-for="[source, reason] in issues" :key="source">
+                        <span class="font-medium text-foreground">
+                            {{
+                                $t(
+                                    `trends.setup.sources.external.${source}.label`,
+                                )
+                            }}
+                        </span>
+                        · {{ $t(`trends.issues.${reason}`) }}
+                    </li>
+                </ul>
             </div>
 
             <div

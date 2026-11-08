@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => '你所在国家的人们正在搜索的内容，按你的词筛选。'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => '与你的词相关的热门文章和讨论。'],
                 'youtube' => ['label' => 'YouTube', 'description' => '你前几个词对应的近期播放量最高的视频。'],
+                'instagram_hashtags' => ['label' => 'Instagram 话题标签', 'description' => '把你的词当作话题标签搜索到的 Instagram 热门帖子，含点赞和评论数。'],
+                'threads_search' => ['label' => 'Threads 搜索', 'description' => '与你的词相关的 Threads 热门帖子。'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => '人们此刻在 Bluesky 上谈论的内容（按你的词筛选）。'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Mastodon 上的热门话题标签和链接（按你的词筛选）。'],
+                'instagram_competitors' => ['label' => '要关注的 Instagram 账号'],
             ],
             'region_label' => 'Google Trends 的国家',
             'competitors_label' => '要关注的 Instagram 账号',
@@ -116,6 +121,11 @@ return [
             'add_failed' => '无法添加该订阅源。请重试。',
             'more' => '查找更多订阅源',
         ],
+    ],
+    'issues' => [
+        'title' => '部分来源无法读取',
+        'permission' => '缺少权限。对 Meta 来说，请在你的 Meta 应用中批准后重新连接频道。',
+        'failed' => '这次无法读取，下次刷新时会重试。',
     ],
     'idea' => [
         'summary' => '{1} 热门：有 :count 个来源在报道这个话题。|[0,*] 热门：有 :count 个来源在报道这个话题。',

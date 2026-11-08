@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'Ülkendeki insanların aradıkları, kelimelerinle filtrelenir.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Kelimelerinle ilgili popüler haberler ve tartışmalar.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'İlk kelimelerin için en çok izlenen son videolar.'],
+                'instagram_hashtags' => ['label' => 'Instagram etiketleri', 'description' => 'Kelimelerinin etiket olarak aratıldığı en popüler Instagram gönderileri, beğeni ve yorumlarıyla.'],
+                'threads_search' => ['label' => 'Threads araması', 'description' => 'Kelimelerin için en popüler Threads gönderileri.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'Bluesky’da insanların neyi konuştuğu, kelimelerinle filtrelenmiş.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Mastodon’da öne çıkan etiketler ve bağlantılar, kelimelerinle filtrelenmiş.'],
+                'instagram_competitors' => ['label' => 'Takip edilecek Instagram hesapları'],
             ],
             'region_label' => 'Google Trends ülkesi',
             'competitors_label' => 'Takip edilecek Instagram hesapları',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'Bu akış eklenemedi. Tekrar dene.',
             'more' => 'Daha fazla akış bul',
         ],
+    ],
+    'issues' => [
+        'title' => 'Bazı kaynaklar okunamadı',
+        'permission' => 'Bir izin eksik. Meta için uygulamanda onayla ve kanalı yeniden bağla.',
+        'failed' => 'Bu sefer okunamadı. Bir sonraki yenilemede tekrar denenecek.',
     ],
     'idea' => [
         'summary' => '{1} Trend: :count kaynak bunu işliyor.|[0,*] Trend: :count kaynak bunu işliyor.',

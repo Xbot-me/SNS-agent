@@ -79,6 +79,11 @@ use App\Mcp\Tools\SocialAccount\MovePostToSlotTool;
 use App\Mcp\Tools\SocialAccount\ReorderQueueTool;
 use App\Mcp\Tools\SocialAccount\SearchInstagramAudioTool;
 use App\Mcp\Tools\SocialAccount\UpdatePostingScheduleTool;
+use App\Mcp\Tools\Trend\CreateIdeaFromTrendTool;
+use App\Mcp\Tools\Trend\GetTrendBriefTool;
+use App\Mcp\Tools\Trend\ListTrendsTool;
+use App\Mcp\Tools\Trend\RunTrendAnalysisTool;
+use App\Mcp\Tools\Trend\UpdateTrendTopicTool;
 use App\Mcp\Tools\Webhook\CreateWebhookTool;
 use App\Mcp\Tools\Webhook\DeleteWebhookTool;
 use App\Mcp\Tools\Webhook\GetWebhookTool;
@@ -98,7 +103,7 @@ use Laravel\Mcp\Server\Attributes\Version;
 #[Name('TryPost')]
 #[Version('1.0.0')]
 #[Icon('images/trypost/icon.png', mimeType: 'image/png')]
-#[Instructions('TryPost is a social media scheduling platform. Use this server to manage posts (drafts, custom times, the channel queue and its free slots, recurrence, a thread (X, Bluesky, Mastodon) or one comment (LinkedIn) through meta.thread_replies, previews, notes and approvals), ideas, analytics, signatures, labels, social accounts and their posting times, workspaces, outgoing webhooks, repurposes (auto-replicating videos posted outside TryPost), and API keys. Call list-content-types-tool before choosing a content_type or attaching media: it lists the media rules, text and hashtag limits, thread support and the meta each network requires. Media is attached to a post by upload or URL; an upload is temporary, kept for 24 hours and single-use, and every post keeps its own copy of its files. Times are UTC. Members who need approval in a workspace can create and edit posts, but scheduling, queueing or publishing stores their post with status pending_approval until a member who publishes directly calls approve-post-tool or reject-post-tool; get-workspace-tool tells the caller which applies.')]
+#[Instructions('TryPost is a social media scheduling platform. Use this server to manage posts (drafts, custom times, the channel queue and its free slots, recurrence, a thread (X, Bluesky, Mastodon) or one comment (LinkedIn) through meta.thread_replies, previews, notes and approvals), ideas, analytics, signatures, labels, social accounts and their posting times, workspaces, outgoing webhooks, trending topics for the niche of the workspace (call get-trend-brief-tool before writing posts for the niche: it needs no model, you write the posts), repurposes (auto-replicating videos posted outside TryPost), and API keys. Call list-content-types-tool before choosing a content_type or attaching media: it lists the media rules, text and hashtag limits, thread support and the meta each network requires. Media is attached to a post by upload or URL; an upload is temporary, kept for 24 hours and single-use, and every post keeps its own copy of its files. Times are UTC. Members who need approval in a workspace can create and edit posts, but scheduling, queueing or publishing stores their post with status pending_approval until a member who publishes directly calls approve-post-tool or reject-post-tool; get-workspace-tool tells the caller which applies.')]
 class TryPostServer extends Server
 {
     public int $defaultPaginationLength = 200;
@@ -150,6 +155,12 @@ class TryPostServer extends Server
         UpdateIdeaStageTool::class,
         DeleteIdeaStageTool::class,
         ReorderIdeaStagesTool::class,
+
+        GetTrendBriefTool::class,
+        ListTrendsTool::class,
+        RunTrendAnalysisTool::class,
+        UpdateTrendTopicTool::class,
+        CreateIdeaFromTrendTool::class,
 
         ListLabelsTool::class,
         CreateLabelTool::class,

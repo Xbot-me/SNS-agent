@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'Waar mensen in jouw land naar zoeken, gefilterd op jouw woorden.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Populaire verhalen en discussies over jouw woorden.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'De meest bekeken recente video’s voor je eerste woorden.'],
+                'instagram_hashtags' => ['label' => 'Instagram-hashtags', 'description' => 'De beste Instagram-berichten voor je woorden als hashtags, met likes en reacties.'],
+                'threads_search' => ['label' => 'Threads-zoekopdracht', 'description' => 'De populairste Threads-berichten voor je woorden.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'Waar mensen over praten op Bluesky, gefilterd op je woorden.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Trending hashtags en links op Mastodon, gefilterd op je woorden.'],
+                'instagram_competitors' => ['label' => 'Instagram-accounts om te volgen'],
             ],
             'region_label' => 'Land voor Google Trends',
             'competitors_label' => 'Instagram-accounts om te volgen',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'Die feed kon niet worden toegevoegd. Probeer het opnieuw.',
             'more' => 'Meer feeds zoeken',
         ],
+    ],
+    'issues' => [
+        'title' => 'Sommige bronnen konden niet worden gelezen',
+        'permission' => 'Er mist een toestemming. Bij Meta: keur die goed in je app en koppel het kanaal opnieuw.',
+        'failed' => 'Deze keer niet te lezen. Bij de volgende vernieuwing wordt het opnieuw geprobeerd.',
     ],
     'idea' => [
         'summary' => '{1} Trending: :count bron schrijft hierover.|[0,*] Trending: :count bronnen schrijven hierover.',

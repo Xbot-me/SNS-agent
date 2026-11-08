@@ -41,7 +41,7 @@ class TrendProfileController extends Controller
                 ->all(),
             'externalSources' => array_map(
                 fn (ExternalSource $source): array => ['key' => $source->value, 'default' => $source->isDefault()],
-                ExternalSource::available(),
+                ExternalSource::availableFor($workspace),
             ),
             'regions' => (array) config('trypost.trends.regions'),
             'canWatchCompetitors' => config('trypost.trends.sources.instagram_competitors.enabled') && InstagramCompetitorSource::usableAccount($workspace->id) !== null,

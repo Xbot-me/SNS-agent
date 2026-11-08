@@ -85,6 +85,12 @@ class TrendScorer
             return null;
         }
 
+        // A general feed covers every subject, so a subject only counts when the workspace's own
+        // words come up in at least one headline about it ("nyt cooking" is not a 3D studio topic).
+        if ($keywords !== [] && ! $isKeyword && ! $members->contains(fn (TrendSignal $signal): bool => $this->mentionsAny($signal->title, $keywords))) {
+            return null;
+        }
+
         $freshness = $members->sum(fn (TrendSignal $signal): float => 0.5 ** (abs($signal->publishedAt->diffInHours($now)) / self::HALF_LIFE_HOURS) * $this->attention($signal, $peaks));
         $relevance = $isKeyword || $this->touchesKeyword($term, $keywords) ? 1.5 : 1.0;
         $newest = $members->sortByDesc(fn (TrendSignal $signal): int => $signal->publishedAt->getTimestamp())->values();

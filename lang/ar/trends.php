@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'ما يبحث عنه الناس في بلدك، مصفّىً بكلماتك.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'قصص ونقاشات رائجة حول كلماتك.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'أكثر الفيديوهات الحديثة مشاهدة لأولى كلماتك.'],
+                'instagram_hashtags' => ['label' => 'وسوم إنستغرام', 'description' => 'أبرز منشورات إنستغرام لكلماتك كوسوم، مع الإعجابات والتعليقات.'],
+                'threads_search' => ['label' => 'بحث ثريدز', 'description' => 'أشهر منشورات ثريدز لكلماتك.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'ما يتحدث عنه الناس على Bluesky، مصفّىً بكلماتك.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'الوسوم والروابط الرائجة على Mastodon، مصفّاة بكلماتك.'],
+                'instagram_competitors' => ['label' => 'حسابات إنستغرام للمتابعة'],
             ],
             'region_label' => 'البلد لخدمة Google Trends',
             'competitors_label' => 'حسابات إنستغرام للمتابعة',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'تعذّرت إضافة هذا الموجز. حاول مرة أخرى.',
             'more' => 'ابحث عن موجزات أخرى',
         ],
+    ],
+    'issues' => [
+        'title' => 'تعذّرت قراءة بعض المصادر',
+        'permission' => 'تنقصه صلاحية. في ميتا، وافق عليها في تطبيقك ثم أعد ربط القناة.',
+        'failed' => 'تعذّرت قراءته هذه المرة. ستتم المحاولة عند التحديث التالي.',
     ],
     'idea' => [
         'summary' => '{1} رائج: يتناوله مصدر واحد.|{2} رائج: يتناوله مصدران.|[0,*] رائج: يتناوله :count مصادر.',

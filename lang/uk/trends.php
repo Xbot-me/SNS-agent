@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'Що шукають люди у вашій країні, відфільтровано за вашими словами.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Популярні історії та обговорення за вашими словами.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'Найпопулярніші свіжі відео за першими словами.'],
+                'instagram_hashtags' => ['label' => 'Хештеги Instagram', 'description' => 'Найпопулярніші дописи Instagram за вашими словами як хештегами, з вподобайками та коментарями.'],
+                'threads_search' => ['label' => 'Пошук у Threads', 'description' => 'Найпопулярніші дописи Threads за вашими словами.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'Про що говорять у Bluesky, відфільтровано за вашими словами.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Популярні хештеги й посилання в Mastodon, відфільтровано за вашими словами.'],
+                'instagram_competitors' => ['label' => 'Акаунти Instagram для спостереження'],
             ],
             'region_label' => 'Країна для Google Trends',
             'competitors_label' => 'Акаунти Instagram для спостереження',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'Не вдалося додати стрічку. Спробуйте ще раз.',
             'more' => 'Знайти інші стрічки',
         ],
+    ],
+    'issues' => [
+        'title' => 'Деякі джерела не вдалося прочитати',
+        'permission' => 'Бракує дозволу. Для Meta схваліть його у своєму застосунку й заново підключіть канал.',
+        'failed' => 'Цього разу прочитати не вдалося. Повторна спроба під час наступного оновлення.',
     ],
     'idea' => [
         'summary' => 'У тренді: про це пише :count джерело.|У тренді: про це пишуть :count джерела.|У тренді: про це пишуть :count джерел.',

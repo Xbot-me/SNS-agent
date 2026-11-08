@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'Ce que les gens recherchent dans votre pays, filtré selon vos mots.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Articles et discussions populaires sur vos mots.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'Les vidéos récentes les plus vues pour vos premiers mots.'],
+                'instagram_hashtags' => ['label' => 'Hashtags Instagram', 'description' => 'Les meilleurs posts Instagram pour vos mots sous forme de hashtags, avec leurs likes et commentaires.'],
+                'threads_search' => ['label' => 'Recherche Threads', 'description' => 'Les posts Threads les plus populaires pour vos mots.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'Ce dont on parle sur Bluesky, filtré selon vos mots.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Hashtags et liens tendance sur Mastodon, filtrés selon vos mots.'],
+                'instagram_competitors' => ['label' => 'Comptes Instagram à suivre'],
             ],
             'region_label' => 'Pays pour Google Trends',
             'competitors_label' => 'Comptes Instagram à suivre',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'Impossible d’ajouter ce flux. Réessayez.',
             'more' => 'Trouver d’autres flux',
         ],
+    ],
+    'issues' => [
+        'title' => 'Certaines sources n’ont pas pu être lues',
+        'permission' => 'Une autorisation manque. Chez Meta, validez-la dans votre app puis reconnectez le canal.',
+        'failed' => 'Illisible cette fois. Nouvel essai à la prochaine actualisation.',
     ],
     'idea' => [
         'summary' => '{1} Tendance : :count source en parle.|[0,*] Tendance : :count sources en parlent.',

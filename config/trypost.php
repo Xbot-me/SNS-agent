@@ -91,6 +91,33 @@ return [
                 'enabled' => (bool) env('TRENDS_INSTAGRAM_COMPETITORS_ENABLED', true),
                 'max_accounts' => 10,
             ],
+            // Top Instagram posts of the profile's words as hashtags (engagement included), read with the
+            // workspace's Instagram channel linked through Facebook. Needs Meta's "Instagram Public Content
+            // Access" feature on the app and allows 30 different hashtags per 7 days, so few words are used.
+            'instagram_hashtags' => [
+                'enabled' => (bool) env('TRENDS_INSTAGRAM_HASHTAGS_ENABLED', true),
+                'max_queries' => 5,
+            ],
+            // Public Threads posts for the profile's words (the most popular first). Needs the
+            // `threads_keyword_search` permission approved for the Meta app, which is asked for at connect
+            // only when listed in TRENDS_THREADS_SEARCH_SCOPES (comma-separated): a permission the app was
+            // not granted makes the whole Threads login fail, so it stays off until you add it.
+            'threads_search' => [
+                'enabled' => (bool) env('TRENDS_THREADS_SEARCH_ENABLED', true),
+                'max_queries' => 3,
+                'scopes' => array_values(array_filter(array_map('trim', explode(',', (string) env('TRENDS_THREADS_SEARCH_SCOPES', ''))))),
+            ],
+            // Bluesky's trending topics. The endpoint is public but "unspecced" (not a stable contract).
+            'bluesky' => [
+                'enabled' => (bool) env('TRENDS_BLUESKY_ENABLED', true),
+                'api' => env('TRENDS_BLUESKY_API', 'https://public.api.bsky.app'),
+                'web' => env('TRENDS_BLUESKY_WEB', 'https://bsky.app'),
+            ],
+            // Mastodon's public trends (hashtags and links) of one server.
+            'mastodon' => [
+                'enabled' => (bool) env('TRENDS_MASTODON_ENABLED', true),
+                'host' => env('TRENDS_MASTODON_HOST', 'https://mastodon.social'),
+            ],
             // Needs an API key from the user's own Google project. A search costs 100 of the 10,000
             // daily units, so only the first words are searched; the host is platforms.youtube.data_api.
             'youtube' => [

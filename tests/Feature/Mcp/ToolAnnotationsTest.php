@@ -116,6 +116,13 @@ function mcpExpectedToolAnnotations(): array
         'list-webhook-logs-tool' => [true, false, false],
         'replay-webhook-log-tool' => [false, true, true],
 
+        // Trends
+        'get-trend-brief-tool' => [true, false, false],
+        'list-trends-tool' => [true, false, false],
+        'run-trend-analysis-tool' => [false, false, true],
+        'update-trend-topic-tool' => [false, true, false],
+        'create-idea-from-trend-tool' => [false, false, false],
+
         // Workspace and API keys
         'get-workspace-tool' => [true, false, false],
         'list-api-keys-tool' => [true, false, false],

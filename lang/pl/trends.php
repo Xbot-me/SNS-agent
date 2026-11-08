@@ -102,6 +102,11 @@ return [
                 'google_trends' => ['label' => 'Google Trends', 'description' => 'Czego ludzie szukają w Twoim kraju, przefiltrowane Twoimi słowami.'],
                 'hacker_news' => ['label' => 'Hacker News', 'description' => 'Popularne historie i dyskusje o Twoich słowach.'],
                 'youtube' => ['label' => 'YouTube', 'description' => 'Najczęściej oglądane ostatnie filmy dla Twoich pierwszych słów.'],
+                'instagram_hashtags' => ['label' => 'Hashtagi Instagrama', 'description' => 'Najpopularniejsze posty na Instagramie dla Twoich słów jako hashtagów, z polubieniami i komentarzami.'],
+                'threads_search' => ['label' => 'Wyszukiwanie w Threads', 'description' => 'Najpopularniejsze posty w Threads dla Twoich słów.'],
+                'bluesky' => ['label' => 'Bluesky', 'description' => 'O czym rozmawiają ludzie na Bluesky, przefiltrowane Twoimi słowami.'],
+                'mastodon' => ['label' => 'Mastodon', 'description' => 'Popularne hashtagi i linki na Mastodonie, przefiltrowane Twoimi słowami.'],
+                'instagram_competitors' => ['label' => 'Konta Instagrama do obserwowania'],
             ],
             'region_label' => 'Kraj dla Google Trends',
             'competitors_label' => 'Konta Instagrama do obserwowania',
@@ -116,6 +121,11 @@ return [
             'add_failed' => 'Nie udało się dodać tego kanału. Spróbuj ponownie.',
             'more' => 'Znajdź więcej kanałów',
         ],
+    ],
+    'issues' => [
+        'title' => 'Nie udało się odczytać części źródeł',
+        'permission' => 'Brakuje uprawnienia. W Meta zatwierdź je w swojej aplikacji i połącz kanał ponownie.',
+        'failed' => 'Tym razem nie udało się odczytać. Kolejna próba przy następnym odświeżeniu.',
     ],
     'idea' => [
         'summary' => 'Trend: pisze o tym :count źródło.|Trend: piszą o tym :count źródła.|Trend: pisze o tym :count źródeł.',

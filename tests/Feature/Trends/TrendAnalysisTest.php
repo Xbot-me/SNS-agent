@@ -180,3 +180,25 @@ test('a workspace only reads its own feeds', function () {
 
     expect(trendsTestKeys())->toBe([]);
 });
+
+test('a subject only counts when a headline about it also mentions one of the workspace words', function () {
+    $this->profile->update(['keywords' => ['animation']]);
+    trendsTestItem($this->feedA, 'Nyt cooking guide for weeknights');
+    trendsTestItem($this->feedB, 'Nyt cooking tips from the test kitchen');
+    trendsTestItem($this->feedA, 'Zephyr rig explained for animation');
+    trendsTestItem($this->feedB, 'Why the zephyr rig changes everything');
+
+    AnalyzeTrends::execute($this->profile);
+
+    expect(trendsTestKeys())->toContain('zephyr rig')->not->toContain('nyt cooking');
+});
+
+test('a workspace with no words keeps every well covered subject', function () {
+    $this->profile->update(['keywords' => []]);
+    trendsTestItem($this->feedA, 'Nyt cooking guide for weeknights');
+    trendsTestItem($this->feedB, 'Nyt cooking tips from the test kitchen');
+
+    AnalyzeTrends::execute($this->profile);
+
+    expect(trendsTestKeys())->toContain('nyt cooking');
+});
