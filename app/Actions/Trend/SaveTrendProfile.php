@@ -29,6 +29,7 @@ class SaveTrendProfile
                 'formats' => array_values(array_unique((array) data_get($data, 'formats', []))),
                 'posts_per_week' => (int) data_get($data, 'posts_per_week'),
                 'region' => data_get($data, 'region'),
+                'competitors' => self::handles((array) data_get($data, 'competitors', [])),
                 'external_sources' => array_values(array_unique((array) data_get($data, 'external_sources', []))),
             ]);
             $profile->onboarded_at ??= now();
@@ -40,6 +41,22 @@ class SaveTrendProfile
 
             return $profile;
         });
+    }
+
+    /**
+     * Instagram usernames as stored: no @, lowercase, each once.
+     *
+     * @param  array<int, mixed>  $handles
+     * @return list<string>
+     */
+    private static function handles(array $handles): array
+    {
+        return collect($handles)
+            ->map(fn (mixed $handle): string => mb_strtolower(ltrim(trim((string) $handle), '@')))
+            ->filter(fn (string $handle): bool => filled($handle))
+            ->unique()
+            ->values()
+            ->all();
     }
 
     /**

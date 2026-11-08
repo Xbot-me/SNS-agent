@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Actions\Trend;
 
+use App\Actions\Analytics\ReadWorkspacePostPerformance;
+use App\Dto\Trend\PostPerformance;
 use App\Dto\Trend\TrendSignal;
 use App\Enums\Trend\ExternalSource;
 use App\Enums\Trend\PostFormat;
 use App\Enums\Trend\TopicStatus;
 use App\Models\TrendProfile;
 use App\Models\TrendTopic;
+use App\Services\Trend\Sources\InstagramCompetitorSource;
 use App\Services\Trend\Sources\RssTrendSource;
 use App\Services\Trend\Sources\TrendSource;
 use App\Services\Trend\TrendScorer;
@@ -35,8 +38,10 @@ class AnalyzeTrends
         $signals = collect(self::sources($profile))
             ->flatMap(fn (TrendSource $source): Collection => rescue(fn (): Collection => $source->signals($profile, $since), collect()));
 
-        $ranked = app(TrendScorer::class)->rank($profile, $signals, $now);
-        $formats = self::suggestedFormats($profile);
+        // What already worked for this audience nudges both the topics and the formats.
+        $performance = ReadWorkspacePostPerformance::execute($profile->workspace_id, $now);
+        $ranked = app(TrendScorer::class)->rank($profile, $signals, $now, $performance);
+        $formats = self::suggestedFormats($profile, $performance);
 
         DB::transaction(function () use ($profile, $ranked, $formats, $now): void {
             foreach ($ranked as $ranking) {
@@ -53,6 +58,8 @@ class AnalyzeTrends
                     'evidence' => $ranking['evidence'],
                     'formats' => $formats,
                     'last_seen_at' => $ranking['last_seen_at'],
+                    'own_posts' => $ranking['own_posts'],
+                    'own_ratio' => $ranking['own_ratio'],
                 ]);
                 $topic->first_seen_at ??= $now;
                 $topic->save();
@@ -75,6 +82,7 @@ class AnalyzeTrends
     {
         return [
             app(RssTrendSource::class),
+            ...($profile->competitorHandles() !== [] && config('trypost.trends.sources.instagram_competitors.enabled') ? [app(InstagramCompetitorSource::class)] : []),
             ...array_map(
                 fn (ExternalSource $source): TrendSource => app($source->sourceClass()),
                 array_filter($profile->externalSourceList(), fn (ExternalSource $source): bool => $source->isAvailable()),
@@ -83,15 +91,20 @@ class AnalyzeTrends
     }
 
     /**
-     * The formats the workspace said it makes, in the order its goal prefers them.
+     * The formats the workspace said it makes, in the order its goal prefers them, with the
+     * ones its own posts did clearly better (or worse) on moved up (or down).
      *
      * @return list<string>
      */
-    private static function suggestedFormats(TrendProfile $profile): array
+    private static function suggestedFormats(TrendProfile $profile, PostPerformance $performance): array
     {
         $preferred = $profile->goal->preferredFormats();
         $made = $profile->postFormats();
         $ordered = array_values(array_filter($preferred, fn (PostFormat $format): bool => in_array($format, $made, true)));
+        $lifts = $performance->formatLifts();
+        $position = array_flip(array_map(fn (PostFormat $format): string => $format->value, $ordered));
+
+        usort($ordered, fn (PostFormat $a, PostFormat $b): int => [data_get($lifts, $b->value, 1.0), $position[$a->value]] <=> [data_get($lifts, $a->value, 1.0), $position[$b->value]]);
 
         return array_map(
             fn (PostFormat $format): string => $format->value,

@@ -38,6 +38,7 @@ class TrendProfile extends Model
         'posts_per_week',
         'region',
         'external_sources',
+        'competitors',
         'onboarded_at',
         'analysis_requested_at',
         'analyzed_at',
@@ -56,6 +57,7 @@ class TrendProfile extends Model
             'excluded_keywords' => 'array',
             'formats' => 'array',
             'external_sources' => 'array',
+            'competitors' => 'array',
             'posts_per_week' => 'integer',
             'onboarded_at' => 'datetime',
             'analysis_requested_at' => 'datetime',
@@ -96,6 +98,21 @@ class TrendProfile extends Model
             ->map(fn (string $word): string => trim($word))
             ->filter(fn (string $word): bool => filled($word))
             ->unique(fn (string $word): string => mb_strtolower($word))
+            ->values()
+            ->all();
+    }
+
+    /**
+     * The Instagram usernames the workspace watches.
+     *
+     * @return list<string>
+     */
+    public function competitorHandles(): array
+    {
+        return collect($this->competitors ?? [])
+            ->map(fn (string $handle): string => mb_strtolower(ltrim(trim($handle), '@')))
+            ->filter(fn (string $handle): bool => filled($handle))
+            ->unique()
             ->values()
             ->all();
     }

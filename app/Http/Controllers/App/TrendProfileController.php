@@ -13,6 +13,7 @@ use App\Enums\Trend\PostFormat;
 use App\Http\Requests\App\Trend\UpdateTrendProfileRequest;
 use App\Http\Resources\App\TrendProfileResource;
 use App\Models\RssFeed;
+use App\Services\Trend\Sources\InstagramCompetitorSource;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -43,6 +44,8 @@ class TrendProfileController extends Controller
                 ExternalSource::available(),
             ),
             'regions' => (array) config('trypost.trends.regions'),
+            'canWatchCompetitors' => config('trypost.trends.sources.instagram_competitors.enabled') && InstagramCompetitorSource::usableAccount($workspace->id) !== null,
+            'maxCompetitors' => (int) config('trypost.trends.sources.instagram_competitors.max_accounts'),
             'goals' => Goal::values(),
             'formats' => PostFormat::values(),
             'feeds' => $workspace->rssFeeds()

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Trend;
 
+use App\Dto\Trend\PostPerformance;
 use App\Dto\Trend\TrendSignal;
 use App\Models\TrendProfile;
 use Carbon\CarbonImmutable;
@@ -32,9 +33,9 @@ class TrendScorer
 
     /**
      * @param  Collection<int, TrendSignal>  $signals
-     * @return list<array{key: string, label: string, score: int, signal_count: int, outlet_count: int, evidence: list<array{title: string, url: string, source: string, published_at: string}>, last_seen_at: CarbonImmutable}>
+     * @return list<array{key: string, label: string, score: int, signal_count: int, outlet_count: int, evidence: list<array{title: string, url: string, source: string, published_at: string}>, last_seen_at: CarbonImmutable, own_posts: int, own_ratio: int|null}>
      */
-    public function rank(TrendProfile $profile, Collection $signals, CarbonImmutable $now): array
+    public function rank(TrendProfile $profile, Collection $signals, CarbonImmutable $now, ?PostPerformance $performance = null): array
     {
         $keywords = $this->normalize($profile->keywords);
         $labels = collect($profile->keywords)->mapWithKeys(fn (string $keyword): array => [mb_strtolower(trim($keyword)) => trim($keyword)]);
@@ -58,7 +59,7 @@ class TrendScorer
         });
 
         return collect($groups)
-            ->map(fn (array $members, string $term): ?array => $this->topic($term, collect($members), $keywords, $labels, $minOutlets, $now, $peaks))
+            ->map(fn (array $members, string $term): ?array => $this->topic($term, collect($members), $keywords, $labels, $minOutlets, $now, $peaks, $performance))
             ->filter()
             // On equal scores the more specific term wins ("zephyr drone" over "zephyr").
             ->sortBy([['score', 'desc'], fn (array $a, array $b): int => mb_strlen($b['key']) <=> mb_strlen($a['key']), ['key', 'asc']])
@@ -73,9 +74,9 @@ class TrendScorer
      * @param  list<string>  $keywords
      * @param  Collection<string, string>  $labels
      * @param  array<string, int>  $peaks
-     * @return array{key: string, label: string, score: int, signal_count: int, outlet_count: int, evidence: list<array{title: string, url: string, source: string, published_at: string}>, last_seen_at: CarbonImmutable, urls: list<string>}|null
+     * @return array{key: string, label: string, score: int, signal_count: int, outlet_count: int, evidence: list<array{title: string, url: string, source: string, published_at: string}>, last_seen_at: CarbonImmutable, own_posts: int, own_ratio: int|null, urls: list<string>}|null
      */
-    private function topic(string $term, Collection $members, array $keywords, Collection $labels, int $minOutlets, CarbonImmutable $now, array $peaks): ?array
+    private function topic(string $term, Collection $members, array $keywords, Collection $labels, int $minOutlets, CarbonImmutable $now, array $peaks, ?PostPerformance $performance): ?array
     {
         $outlets = $members->pluck('outlet')->unique()->count();
         $isKeyword = in_array($term, $keywords, true);
@@ -87,11 +88,12 @@ class TrendScorer
         $freshness = $members->sum(fn (TrendSignal $signal): float => 0.5 ** (abs($signal->publishedAt->diffInHours($now)) / self::HALF_LIFE_HOURS) * $this->attention($signal, $peaks));
         $relevance = $isKeyword || $this->touchesKeyword($term, $keywords) ? 1.5 : 1.0;
         $newest = $members->sortByDesc(fn (TrendSignal $signal): int => $signal->publishedAt->getTimestamp())->values();
+        $own = $performance?->forTerm($term, $this->extractor);
 
         return [
             'key' => $term,
             'label' => $labels->get($term) ?? Str::title($term),
-            'score' => (int) round(10 * $relevance * ($outlets * 2 + $freshness)),
+            'score' => (int) round(10 * $relevance * ($outlets * 2 + $freshness) * $this->ownFactor($own)),
             'signal_count' => $members->count(),
             'outlet_count' => $outlets,
             'evidence' => $newest
@@ -104,8 +106,25 @@ class TrendScorer
                 ])
                 ->all(),
             'last_seen_at' => $newest->first()->publishedAt,
+            'own_posts' => $own['posts'] ?? 0,
+            'own_ratio' => $own['ratio'] ?? null,
             'urls' => $members->pluck('url')->all(),
         ];
+    }
+
+    /**
+     * A subject the workspace's own posts did better than average on ranks higher, one they
+     * did worse on a little lower; a gentle push (0.8 to 1.5), since a few posts prove little.
+     *
+     * @param  array{posts: int, ratio: int}|null  $own
+     */
+    private function ownFactor(?array $own): float
+    {
+        if ($own === null) {
+            return 1.0;
+        }
+
+        return max(0.8, min(1.5, 1.0 + 0.25 * ($own['ratio'] / 100 - 1.0)));
     }
 
     /**

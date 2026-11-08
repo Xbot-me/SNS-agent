@@ -17,6 +17,8 @@ export interface TrendTopic {
     score: number;
     signal_count: number;
     outlet_count: number;
+    own_posts: number;
+    own_ratio: number | null;
     evidence: TrendEvidence[];
     formats: TrendFormat[];
     status: TrendTopicStatus;
@@ -33,6 +35,7 @@ export interface TrendProfile {
     formats: TrendFormat[];
     posts_per_week: number;
     region: string;
+    competitors: string[];
     external_sources: string[];
     rss_feed_ids: string[];
     analyzed_at: string | null;

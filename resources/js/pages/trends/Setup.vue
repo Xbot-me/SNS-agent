@@ -38,6 +38,7 @@ import {
 } from '@/routes/app/create/feeds';
 import { index as trendsIndex } from '@/routes/app/trends';
 import { update as saveProfile } from '@/routes/app/trends/profile';
+import { channels } from '@/routes/app/workspace';
 import type {
     TrendDirectoryCategory,
     TrendDirectoryEntry,
@@ -60,6 +61,8 @@ const props = defineProps<{
     limits: TrendSetupLimits;
     externalSources: TrendExternalSource[];
     regions: string[];
+    canWatchCompetitors: boolean;
+    maxCompetitors: number;
 }>();
 
 const steps = ['niche', 'goal', 'formats', 'sources'] as const;
@@ -84,6 +87,7 @@ const form = useForm({
     ],
     posts_per_week: props.profile?.posts_per_week ?? 3,
     region: props.profile?.region ?? 'US',
+    competitors: [...(props.profile?.competitors ?? [])],
     external_sources: props.profile
         ? [...props.profile.external_sources]
         : props.externalSources
@@ -136,6 +140,15 @@ const suggestedEntries = computed<TrendDirectoryEntry[]>(() => {
             .slice(0, SUGGESTED_FEEDS) ?? []
     );
 });
+
+// Each username is validated on its own, so the first message of any of them is shown.
+const competitorsError = computed(
+    () =>
+        form.errors.competitors ??
+        Object.entries(form.errors).find(([key]) =>
+            key.startsWith('competitors.'),
+        )?.[1],
+);
 
 const feedLimitReached = computed(
     () => form.rss_feed_ids.length >= props.limits.feeds,
@@ -579,6 +592,54 @@ const goNext = (): void => {
                         </NativeSelect>
                         <InputError :message="form.errors.region" />
                     </div>
+                </div>
+
+                <div
+                    class="flex flex-col gap-2"
+                    data-testid="trends-competitors"
+                >
+                    <Label for="trends-competitors">
+                        {{ $t('trends.setup.sources.competitors_label') }}
+                    </Label>
+                    <template v-if="canWatchCompetitors">
+                        <TagsInput
+                            v-model="form.competitors"
+                            :max="maxCompetitors"
+                            data-testid="trends-competitors-input"
+                        >
+                            <TagsInputItem
+                                v-for="handle in form.competitors"
+                                :key="handle"
+                                :value="handle"
+                            >
+                                <TagsInputItemText />
+                                <TagsInputItemDelete />
+                            </TagsInputItem>
+                            <TagsInputInput
+                                id="trends-competitors"
+                                :placeholder="
+                                    $t(
+                                        'trends.setup.sources.competitors_placeholder',
+                                    )
+                                "
+                            />
+                        </TagsInput>
+                        <p class="text-sm text-muted-foreground">
+                            {{
+                                $t(
+                                    'trends.setup.sources.competitors_description',
+                                )
+                            }}
+                        </p>
+                        <InputError :message="competitorsError" />
+                    </template>
+                    <Link
+                        v-else
+                        :href="channels.url()"
+                        class="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+                    >
+                        {{ $t('trends.setup.sources.competitors_connect') }}
+                    </Link>
                 </div>
 
                 <div class="flex flex-col gap-2">

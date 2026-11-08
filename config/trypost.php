@@ -84,6 +84,13 @@ return [
                 'api' => env('TRENDS_HACKER_NEWS_API', 'https://hn.algolia.com/api/v1'),
                 'max_queries' => 3,
             ],
+            // The Instagram accounts a profile watches, read through business discovery with the
+            // workspace's own Instagram channel (connected through Facebook). The host is
+            // platforms.instagram-facebook.graph_api; Meta rate-limits it per app, so the list stays short.
+            'instagram_competitors' => [
+                'enabled' => (bool) env('TRENDS_INSTAGRAM_COMPETITORS_ENABLED', true),
+                'max_accounts' => 10,
+            ],
             // Needs an API key from the user's own Google project. A search costs 100 of the 10,000
             // daily units, so only the first words are searched; the host is platforms.youtube.data_api.
             'youtube' => [

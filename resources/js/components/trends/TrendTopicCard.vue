@@ -86,9 +86,24 @@ const dismiss = (): void => {
                     {{ date.diffForHumans(topic.last_seen_at) }}
                 </p>
             </div>
-            <Badge v-if="topic.status === 'used'" variant="success">
-                {{ $t('trends.topic.used') }}
-            </Badge>
+            <div class="flex shrink-0 flex-wrap justify-end gap-2">
+                <Badge
+                    v-if="topic.own_posts > 0"
+                    :variant="
+                        (topic.own_ratio ?? 0) >= 120 ? 'success' : 'outline'
+                    "
+                    :data-testid="`trend-topic-own-${topic.id}`"
+                >
+                    {{
+                        (topic.own_ratio ?? 0) >= 120
+                            ? $t('trends.topic.did_well')
+                            : $t('trends.topic.posted_before')
+                    }}
+                </Badge>
+                <Badge v-if="topic.status === 'used'" variant="success">
+                    {{ $t('trends.topic.used') }}
+                </Badge>
+            </div>
         </div>
 
         <div

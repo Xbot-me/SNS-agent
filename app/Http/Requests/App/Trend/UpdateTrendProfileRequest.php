@@ -35,6 +35,8 @@ class UpdateTrendProfileRequest extends FormRequest
             'formats' => ['required', 'array', 'min:1'],
             'formats.*' => [Rule::enum(PostFormat::class), 'distinct'],
             'posts_per_week' => ['required', 'integer', 'between:1,21'],
+            'competitors' => ['nullable', 'array', 'max:'.(int) config('trypost.trends.sources.instagram_competitors.max_accounts')],
+            'competitors.*' => ['string', 'regex:/^@?[A-Za-z0-9._]{1,30}$/', 'distinct:ignore_case'],
             'region' => ['required', 'string', Rule::in((array) config('trypost.trends.regions'))],
             'external_sources' => ['nullable', 'array'],
             'external_sources.*' => [

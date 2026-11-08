@@ -24,6 +24,8 @@ class TrendTopicResource extends JsonResource
             'score' => $this->score,
             'signal_count' => $this->signal_count,
             'outlet_count' => $this->outlet_count,
+            'own_posts' => $this->own_posts,
+            'own_ratio' => $this->own_ratio,
             'evidence' => $this->evidence,
             'formats' => $this->formats,
             'status' => $this->status->value,
