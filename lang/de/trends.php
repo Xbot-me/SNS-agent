@@ -40,6 +40,7 @@ return [
         'show_sources' => 'Warum es im Trend ist',
         'hide_sources' => 'Quellen ausblenden',
         'make_failed' => 'Die Idee konnte nicht erstellt werden. Versuche es erneut.',
+        'top_format' => 'Häufigstes Format: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'Wir lesen ihre neuesten Beiträge, um zu sehen, was in deiner Nische funktioniert. Nur öffentliche Business- und Creator-Konten.',
             'competitors_placeholder' => 'Nutzernamen eingeben und Enter drücken',
             'competitors_connect' => 'Um Instagram-Konten zu beobachten, verbinde ein Instagram-Konto über Facebook.',
+            'threads_topics_label' => 'Threads-Themen zum Folgen',
+            'threads_topics_description' => 'Das Thema einer Community, etwa 3D-Druck. Wir lesen ihre beliebtesten Beiträge.',
+            'threads_topics_placeholder' => 'Thema eingeben und Enter drücken',
+            'threads_creators_label' => 'Threads-Konten beobachten',
+            'threads_creators_description' => 'Wir lesen ihre beliebtesten Beiträge zu deinem ersten Wort.',
             'yours' => 'Deine Feeds',
             'none' => 'Du hast noch keine Feeds. Füge unten welche hinzu.',
             'limit' => 'Wähle bis zu :count Feeds.',

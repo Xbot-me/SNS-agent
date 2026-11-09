@@ -40,6 +40,7 @@ return [
         'show_sources' => 'Neden trend',
         'hide_sources' => 'Kaynakları gizle',
         'make_failed' => 'Fikir oluşturulamadı. Tekrar dene.',
+        'top_format' => 'En çok kullanılan biçim: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'Nişinde neyin işe yaradığını görmek için son gönderilerini okuruz. Yalnızca herkese açık Business ve Creator hesapları.',
             'competitors_placeholder' => 'Bir kullanıcı adı yaz ve Enter’a bas',
             'competitors_connect' => 'Instagram hesaplarını takip etmek için Facebook üzerinden bir Instagram hesabı bağla.',
+            'threads_topics_label' => 'Takip edilecek Threads konuları',
+            'threads_topics_description' => 'Bir topluluğun konusu, örneğin 3D Baskı. En popüler gönderilerini okuruz.',
+            'threads_topics_placeholder' => 'Bir konu yaz ve Enter\'a bas',
+            'threads_creators_label' => 'Takip edilecek Threads hesapları',
+            'threads_creators_description' => 'İlk kelimen hakkındaki en popüler gönderilerini okuruz.',
             'yours' => 'Akışların',
             'none' => 'Henüz akışın yok. Aşağıdan ekle.',
             'limit' => 'En fazla :count akış seç.',

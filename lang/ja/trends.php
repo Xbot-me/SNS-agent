@@ -40,6 +40,7 @@ return [
         'show_sources' => '話題の理由',
         'hide_sources' => 'ソースを隠す',
         'make_failed' => 'アイデアを作成できませんでした。もう一度お試しください。',
+        'top_format' => '人気投稿の主な形式：:format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => '最近の投稿を読み、ニッチで効果のある内容を調べます。公開のビジネス/クリエイターアカウントのみ。',
             'competitors_placeholder' => 'ユーザー名を入力して Enter',
             'competitors_connect' => 'Instagramアカウントを追跡するには、Facebook経由でInstagramアカウントを接続してください。',
+            'threads_topics_label' => 'フォローするThreadsトピック',
+            'threads_topics_description' => 'コミュニティのトピック（例：3Dプリント）。人気の投稿を読み取ります。',
+            'threads_topics_placeholder' => 'トピックを入力してEnter',
+            'threads_creators_label' => '追跡するThreadsアカウント',
+            'threads_creators_description' => '最初の単語に関する人気投稿を読み取ります。',
             'yours' => 'あなたのフィード',
             'none' => 'フィードはまだありません。下から追加してください。',
             'limit' => '最大 :count 件のフィードを選べます。',

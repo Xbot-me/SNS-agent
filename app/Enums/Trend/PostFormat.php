@@ -32,6 +32,21 @@ enum PostFormat: string
     }
 
     /**
+     * The format of a Threads or Instagram post by its `media_type`; null for one that says
+     * nothing about format (a repost, audio).
+     */
+    public static function fromMetaMediaType(?string $mediaType): ?self
+    {
+        return match ($mediaType) {
+            'TEXT_POST' => self::Text,
+            'IMAGE' => self::Image,
+            'CAROUSEL_ALBUM' => self::Carousel,
+            'VIDEO', 'REELS' => self::Video,
+            default => null,
+        };
+    }
+
+    /**
      * @return list<string>
      */
     public static function values(): array

@@ -40,6 +40,7 @@ return [
         'show_sources' => 'لماذا هو رائج',
         'hide_sources' => 'إخفاء المصادر',
         'make_failed' => 'تعذّر إنشاء الفكرة. حاول مرة أخرى.',
+        'top_format' => 'معظم المنشورات الأعلى: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'نقرأ منشوراتها الأخيرة لنعرف ما ينجح في مجالك. الحسابات العامة التجارية وحسابات المبدعين فقط.',
             'competitors_placeholder' => 'اكتب اسم مستخدم واضغط Enter',
             'competitors_connect' => 'لمتابعة حسابات إنستغرام، اربط حساب إنستغرام عبر فيسبوك.',
+            'threads_topics_label' => 'مواضيع ثريدز للمتابعة',
+            'threads_topics_description' => 'موضوع مجتمع، مثل الطباعة ثلاثية الأبعاد. نقرأ أشهر منشوراته.',
+            'threads_topics_placeholder' => 'اكتب موضوعًا واضغط Enter',
+            'threads_creators_label' => 'حسابات ثريدز للمتابعة',
+            'threads_creators_description' => 'نقرأ أشهر منشوراتهم عن كلمتك الأولى.',
             'yours' => 'موجزاتك',
             'none' => 'ليس لديك موجزات بعد. أضف بعضها أدناه.',
             'limit' => 'اختر حتى :count موجزات.',

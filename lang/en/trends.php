@@ -40,6 +40,7 @@ return [
         'show_sources' => 'Why it is trending',
         'hide_sources' => 'Hide sources',
         'make_failed' => "Couldn't create the idea. Try again.",
+        'top_format' => 'Most top posts: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'We read their recent posts to see what works in your niche. Public Business and Creator accounts only.',
             'competitors_placeholder' => 'Type a username and press Enter',
             'competitors_connect' => 'To watch Instagram accounts, connect an Instagram account through Facebook.',
+            'threads_topics_label' => 'Threads topics to follow',
+            'threads_topics_description' => 'A community\'s topic, like 3D Printing. We read its most popular posts.',
+            'threads_topics_placeholder' => 'Type a topic and press Enter',
+            'threads_creators_label' => 'Threads accounts to watch',
+            'threads_creators_description' => 'We read their most popular posts about your first word.',
             'yours' => 'Your feeds',
             'none' => 'You have no feeds yet. Add some below.',
             'limit' => 'Pick up to :count feeds.',

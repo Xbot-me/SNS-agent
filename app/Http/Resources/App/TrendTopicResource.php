@@ -28,6 +28,7 @@ class TrendTopicResource extends JsonResource
             'own_ratio' => $this->own_ratio,
             'evidence' => $this->evidence,
             'formats' => $this->formats,
+            'top_formats' => (object) ($this->top_formats ?? []),
             'status' => $this->status->value,
             'last_seen_at' => $this->last_seen_at->toIso8601String(),
         ];

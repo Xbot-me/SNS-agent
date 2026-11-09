@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dto\Trend;
 
+use App\Enums\Trend\PostFormat;
 use Carbon\CarbonImmutable;
 
 /**
@@ -12,6 +13,8 @@ use Carbon\CarbonImmutable;
  * outlets can be told from one outlet repeating itself. `engagement` is how
  * much attention the source says it got (points, views, searches), in that
  * source's own unit, so it only ever compares with the same outlet's items.
+ * `format` is the kind of post it was, when the source says (a Threads or
+ * Instagram post), so a topic can tell which format its top posts use.
  */
 final readonly class TrendSignal
 {
@@ -22,5 +25,6 @@ final readonly class TrendSignal
         public string $url,
         public CarbonImmutable $publishedAt,
         public ?int $engagement = null,
+        public ?PostFormat $format = null,
     ) {}
 }

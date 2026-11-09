@@ -30,6 +30,8 @@ class SaveTrendProfile
                 'posts_per_week' => (int) data_get($data, 'posts_per_week'),
                 'region' => data_get($data, 'region'),
                 'competitors' => self::handles((array) data_get($data, 'competitors', [])),
+                'threads_topics' => self::words(array_map(fn (mixed $tag): string => ltrim(trim((string) $tag), '#'), (array) data_get($data, 'threads_topics', []))),
+                'threads_creators' => self::handles((array) data_get($data, 'threads_creators', [])),
                 'external_sources' => array_values(array_unique((array) data_get($data, 'external_sources', []))),
             ]);
             $profile->onboarded_at ??= now();
@@ -44,7 +46,7 @@ class SaveTrendProfile
     }
 
     /**
-     * Instagram usernames as stored: no @, lowercase, each once.
+     * Instagram and Threads usernames as stored: no @, lowercase, each once.
      *
      * @param  array<int, mixed>  $handles
      * @return list<string>

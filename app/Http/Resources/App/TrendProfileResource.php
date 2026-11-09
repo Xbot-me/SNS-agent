@@ -30,6 +30,8 @@ class TrendProfileResource extends JsonResource
             'posts_per_week' => $this->posts_per_week,
             'region' => $this->region,
             'competitors' => $this->competitorHandles(),
+            'threads_topics' => $this->threadsTopicTags(),
+            'threads_creators' => $this->threadsCreatorHandles(),
             'source_issues' => (object) ($this->source_issues ?? []),
             'external_sources' => array_map(fn (ExternalSource $source): string => $source->value, $this->externalSourceList()),
             'rss_feed_ids' => $this->rssFeeds()->pluck('rss_feeds.id')->all(),

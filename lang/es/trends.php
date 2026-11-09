@@ -40,6 +40,7 @@ return [
         'show_sources' => 'Por qué es tendencia',
         'hide_sources' => 'Ocultar fuentes',
         'make_failed' => 'No se pudo crear la idea. Inténtalo de nuevo.',
+        'top_format' => 'Formato más usado: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'Leemos sus publicaciones recientes para ver qué funciona en tu nicho. Solo cuentas públicas Business y Creator.',
             'competitors_placeholder' => 'Escribe un usuario y pulsa Intro',
             'competitors_connect' => 'Para seguir cuentas de Instagram, conecta una cuenta de Instagram a través de Facebook.',
+            'threads_topics_label' => 'Temas de Threads a seguir',
+            'threads_topics_description' => 'El tema de una comunidad, como Impresión 3D. Leemos sus publicaciones más populares.',
+            'threads_topics_placeholder' => 'Escribe un tema y pulsa Enter',
+            'threads_creators_label' => 'Cuentas de Threads a seguir',
+            'threads_creators_description' => 'Leemos sus publicaciones más populares sobre tu primera palabra.',
             'yours' => 'Tus feeds',
             'none' => 'Aún no tienes feeds. Añade algunos abajo.',
             'limit' => 'Elige hasta :count feeds.',

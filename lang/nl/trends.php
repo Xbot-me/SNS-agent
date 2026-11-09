@@ -40,6 +40,7 @@ return [
         'show_sources' => 'Waarom het trendt',
         'hide_sources' => 'Bronnen verbergen',
         'make_failed' => 'Het idee kon niet worden gemaakt. Probeer het opnieuw.',
+        'top_format' => 'Meest gebruikte vorm: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'We lezen hun recente berichten om te zien wat werkt in je niche. Alleen openbare Business- en Creator-accounts.',
             'competitors_placeholder' => 'Typ een gebruikersnaam en druk op Enter',
             'competitors_connect' => 'Om Instagram-accounts te volgen, koppel je een Instagram-account via Facebook.',
+            'threads_topics_label' => 'Threads-onderwerpen om te volgen',
+            'threads_topics_description' => 'Het onderwerp van een community, zoals 3D-printen. We lezen de populairste berichten.',
+            'threads_topics_placeholder' => 'Typ een onderwerp en druk op Enter',
+            'threads_creators_label' => 'Threads-accounts om te volgen',
+            'threads_creators_description' => 'We lezen hun populairste berichten over je eerste woord.',
             'yours' => 'Je feeds',
             'none' => 'Je hebt nog geen feeds. Voeg er hieronder een paar toe.',
             'limit' => 'Kies maximaal :count feeds.',

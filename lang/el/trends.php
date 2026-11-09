@@ -40,6 +40,7 @@ return [
         'show_sources' => 'Γιατί είναι τάση',
         'hide_sources' => 'Απόκρυψη πηγών',
         'make_failed' => 'Δεν δημιουργήθηκε η ιδέα. Δοκίμασε ξανά.',
+        'top_format' => 'Συχνότερη μορφή: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'Διαβάζουμε τις πρόσφατες αναρτήσεις τους για να δούμε τι δουλεύει στη θεματική σου. Μόνο δημόσιοι λογαριασμοί Business και Creator.',
             'competitors_placeholder' => 'Γράψε ένα όνομα χρήστη και πάτα Enter',
             'competitors_connect' => 'Για να παρακολουθείς λογαριασμούς Instagram, σύνδεσε έναν λογαριασμό Instagram μέσω Facebook.',
+            'threads_topics_label' => 'Θέματα Threads για παρακολούθηση',
+            'threads_topics_description' => 'Το θέμα μιας κοινότητας, π.χ. 3D εκτύπωση. Διαβάζουμε τις πιο δημοφιλείς αναρτήσεις της.',
+            'threads_topics_placeholder' => 'Γράψε ένα θέμα και πάτα Enter',
+            'threads_creators_label' => 'Λογαριασμοί Threads για παρακολούθηση',
+            'threads_creators_description' => 'Διαβάζουμε τις πιο δημοφιλείς αναρτήσεις τους για την πρώτη σου λέξη.',
             'yours' => 'Οι ροές σου',
             'none' => 'Δεν έχεις ροές ακόμη. Πρόσθεσε μερικές παρακάτω.',
             'limit' => 'Διάλεξε έως :count ροές.',

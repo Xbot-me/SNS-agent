@@ -105,6 +105,10 @@ return [
             'threads_search' => [
                 'enabled' => (bool) env('TRENDS_THREADS_SEARCH_ENABLED', true),
                 'max_queries' => 3,
+                // Topic tags (a community's tag) searched with `search_mode=TAG`, and usernames whose
+                // top posts on the profile's first word are read (`author_username`). Each is one query.
+                'max_topics' => 5,
+                'max_creators' => 5,
                 'scopes' => array_values(array_filter(array_map('trim', explode(',', (string) env('TRENDS_THREADS_SEARCH_SCOPES', ''))))),
             ],
             // Bluesky's trending topics. The endpoint is public but "unspecced" (not a stable contract).

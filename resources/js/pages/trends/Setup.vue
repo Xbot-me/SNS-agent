@@ -63,6 +63,8 @@ const props = defineProps<{
     regions: string[];
     canWatchCompetitors: boolean;
     maxCompetitors: number;
+    maxThreadsTopics: number;
+    maxThreadsCreators: number;
 }>();
 
 const steps = ['niche', 'goal', 'formats', 'sources'] as const;
@@ -88,6 +90,8 @@ const form = useForm({
     posts_per_week: props.profile?.posts_per_week ?? 3,
     region: props.profile?.region ?? 'US',
     competitors: [...(props.profile?.competitors ?? [])],
+    threads_topics: [...(props.profile?.threads_topics ?? [])],
+    threads_creators: [...(props.profile?.threads_creators ?? [])],
     external_sources: props.profile
         ? [...props.profile.external_sources]
         : props.externalSources
@@ -141,14 +145,16 @@ const suggestedEntries = computed<TrendDirectoryEntry[]>(() => {
     );
 });
 
-// Each username is validated on its own, so the first message of any of them is shown.
-const competitorsError = computed(
-    () =>
-        form.errors.competitors ??
-        Object.entries(form.errors).find(([key]) =>
-            key.startsWith('competitors.'),
-        )?.[1],
-);
+// Each entry of a list is validated on its own, so the first message of any of them is shown.
+const listError = (field: string): string | undefined =>
+    (form.errors as Record<string, string | undefined>)[field] ??
+    Object.entries(form.errors).find(([key]) =>
+        key.startsWith(`${field}.`),
+    )?.[1];
+
+const competitorsError = computed(() => listError('competitors'));
+const threadsTopicsError = computed(() => listError('threads_topics'));
+const threadsCreatorsError = computed(() => listError('threads_creators'));
 
 const feedLimitReached = computed(
     () => form.rss_feed_ids.length >= props.limits.feeds,
@@ -570,6 +576,90 @@ const goNext = (): void => {
                         </Label>
                     </div>
                     <InputError :message="form.errors.external_sources" />
+                    <div
+                        v-if="form.external_sources.includes('threads_search')"
+                        class="flex flex-col gap-4"
+                        data-testid="trends-threads-tracking"
+                    >
+                        <div class="flex flex-col gap-2">
+                            <Label for="trends-threads-topics">
+                                {{
+                                    $t(
+                                        'trends.setup.sources.threads_topics_label',
+                                    )
+                                }}
+                            </Label>
+                            <TagsInput
+                                v-model="form.threads_topics"
+                                :max="maxThreadsTopics"
+                                data-testid="trends-threads-topics-input"
+                            >
+                                <TagsInputItem
+                                    v-for="tag in form.threads_topics"
+                                    :key="tag"
+                                    :value="tag"
+                                >
+                                    <TagsInputItemText />
+                                    <TagsInputItemDelete />
+                                </TagsInputItem>
+                                <TagsInputInput
+                                    id="trends-threads-topics"
+                                    :placeholder="
+                                        $t(
+                                            'trends.setup.sources.threads_topics_placeholder',
+                                        )
+                                    "
+                                />
+                            </TagsInput>
+                            <p class="text-sm text-muted-foreground">
+                                {{
+                                    $t(
+                                        'trends.setup.sources.threads_topics_description',
+                                    )
+                                }}
+                            </p>
+                            <InputError :message="threadsTopicsError" />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <Label for="trends-threads-creators">
+                                {{
+                                    $t(
+                                        'trends.setup.sources.threads_creators_label',
+                                    )
+                                }}
+                            </Label>
+                            <TagsInput
+                                v-model="form.threads_creators"
+                                :max="maxThreadsCreators"
+                                data-testid="trends-threads-creators-input"
+                            >
+                                <TagsInputItem
+                                    v-for="handle in form.threads_creators"
+                                    :key="handle"
+                                    :value="handle"
+                                >
+                                    <TagsInputItemText />
+                                    <TagsInputItemDelete />
+                                </TagsInputItem>
+                                <TagsInputInput
+                                    id="trends-threads-creators"
+                                    :placeholder="
+                                        $t(
+                                            'trends.setup.sources.competitors_placeholder',
+                                        )
+                                    "
+                                />
+                            </TagsInput>
+                            <p class="text-sm text-muted-foreground">
+                                {{
+                                    $t(
+                                        'trends.setup.sources.threads_creators_description',
+                                    )
+                                }}
+                            </p>
+                            <InputError :message="threadsCreatorsError" />
+                        </div>
+                    </div>
                     <div
                         v-if="form.external_sources.includes('google_trends')"
                         class="flex flex-col gap-2"

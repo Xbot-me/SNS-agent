@@ -40,6 +40,7 @@ return [
         'show_sources' => 'Почему это тренд',
         'hide_sources' => 'Скрыть источники',
         'make_failed' => 'Не удалось создать идею. Попробуйте ещё раз.',
+        'top_format' => 'Самый частый формат: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'Мы читаем их свежие посты, чтобы увидеть, что работает в вашей нише. Только публичные аккаунты Business и Creator.',
             'competitors_placeholder' => 'Введите имя пользователя и нажмите Enter',
             'competitors_connect' => 'Чтобы следить за аккаунтами Instagram, подключите аккаунт Instagram через Facebook.',
+            'threads_topics_label' => 'Темы Threads для отслеживания',
+            'threads_topics_description' => 'Тема сообщества, например 3D-печать. Мы читаем её самые популярные посты.',
+            'threads_topics_placeholder' => 'Введите тему и нажмите Enter',
+            'threads_creators_label' => 'Аккаунты Threads для отслеживания',
+            'threads_creators_description' => 'Мы читаем их самые популярные посты о вашем первом слове.',
             'yours' => 'Ваши ленты',
             'none' => 'У вас пока нет лент. Добавьте их ниже.',
             'limit' => 'Выберите не более :count лент.',

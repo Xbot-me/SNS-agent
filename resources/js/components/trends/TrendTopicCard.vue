@@ -9,7 +9,7 @@ import {
 } from '@tabler/icons-vue';
 import { trans } from 'laravel-vue-i18n';
 import type { Component } from 'vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { toast } from 'vue-sonner';
 
 import { Badge } from '@/components/ui/badge';
@@ -30,6 +30,23 @@ const formatIcons: Record<TrendFormat, Component> = {
     carousel: IconCarouselHorizontal,
     video: IconVideo,
 };
+
+// A format leads once at least two of the topic's top posts used it.
+const MIN_POSTS_FOR_TOP_FORMAT = 2;
+
+const topFormat = computed((): TrendFormat | null => {
+    const [format, count] =
+        (
+            Object.entries(props.topic.top_formats ?? {}) as [
+                TrendFormat,
+                number,
+            ][]
+        ).sort(([, a], [, b]) => b - a)[0] ?? [];
+
+    return format !== undefined && count >= MIN_POSTS_FOR_TOP_FORMAT
+        ? format
+        : null;
+});
 
 const isMakingPost = ref(false);
 const isSourcesOpen = ref(false);
@@ -117,6 +134,19 @@ const dismiss = (): void => {
                 }"
             />
         </div>
+
+        <p
+            v-if="topFormat"
+            class="flex items-center gap-1.5 text-sm text-muted-foreground"
+            :data-testid="`trend-topic-top-format-${topic.id}`"
+        >
+            <component :is="formatIcons[topFormat]" class="size-4" />
+            {{
+                $t('trends.topic.top_format', {
+                    format: $t(`trends.formats.${topFormat}`),
+                })
+            }}
+        </p>
 
         <div v-if="topic.formats.length > 0" class="flex flex-wrap gap-2">
             <Badge

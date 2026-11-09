@@ -33,7 +33,7 @@ class TrendScorer
 
     /**
      * @param  Collection<int, TrendSignal>  $signals
-     * @return list<array{key: string, label: string, score: int, signal_count: int, outlet_count: int, evidence: list<array{title: string, url: string, source: string, published_at: string}>, last_seen_at: CarbonImmutable, own_posts: int, own_ratio: int|null}>
+     * @return list<array{key: string, label: string, score: int, signal_count: int, outlet_count: int, evidence: list<array{title: string, url: string, source: string, published_at: string}>, last_seen_at: CarbonImmutable, own_posts: int, own_ratio: int|null, top_formats: array<string, int>}>
      */
     public function rank(TrendProfile $profile, Collection $signals, CarbonImmutable $now, ?PostPerformance $performance = null): array
     {
@@ -74,7 +74,7 @@ class TrendScorer
      * @param  list<string>  $keywords
      * @param  Collection<string, string>  $labels
      * @param  array<string, int>  $peaks
-     * @return array{key: string, label: string, score: int, signal_count: int, outlet_count: int, evidence: list<array{title: string, url: string, source: string, published_at: string}>, last_seen_at: CarbonImmutable, own_posts: int, own_ratio: int|null, urls: list<string>}|null
+     * @return array{key: string, label: string, score: int, signal_count: int, outlet_count: int, evidence: list<array{title: string, url: string, source: string, published_at: string}>, last_seen_at: CarbonImmutable, own_posts: int, own_ratio: int|null, top_formats: array<string, int>, urls: list<string>}|null
      */
     private function topic(string $term, Collection $members, array $keywords, Collection $labels, int $minOutlets, CarbonImmutable $now, array $peaks, ?PostPerformance $performance): ?array
     {
@@ -114,6 +114,12 @@ class TrendScorer
             'last_seen_at' => $newest->first()->publishedAt,
             'own_posts' => $own['posts'] ?? 0,
             'own_ratio' => $own['ratio'] ?? null,
+            // Which formats the topic's posts used, most used first, from the sources that say.
+            'top_formats' => $members
+                ->filter(fn (TrendSignal $signal): bool => $signal->format !== null)
+                ->countBy(fn (TrendSignal $signal): string => $signal->format->value)
+                ->sortDesc()
+                ->all(),
             'urls' => $members->pluck('url')->all(),
         ];
     }

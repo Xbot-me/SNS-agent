@@ -40,6 +40,7 @@ return [
         'show_sources' => 'Pourquoi c’est une tendance',
         'hide_sources' => 'Masquer les sources',
         'make_failed' => 'Impossible de créer l’idée. Réessayez.',
+        'top_format' => 'Format le plus utilisé : :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'Nous lisons leurs posts récents pour voir ce qui marche dans votre niche. Comptes Business et Créateur publics uniquement.',
             'competitors_placeholder' => 'Saisissez un nom d’utilisateur et appuyez sur Entrée',
             'competitors_connect' => 'Pour suivre des comptes Instagram, connectez un compte Instagram via Facebook.',
+            'threads_topics_label' => 'Sujets Threads à suivre',
+            'threads_topics_description' => 'Le sujet d’une communauté, comme Impression 3D. Nous lisons ses posts les plus populaires.',
+            'threads_topics_placeholder' => 'Tapez un sujet puis Entrée',
+            'threads_creators_label' => 'Comptes Threads à suivre',
+            'threads_creators_description' => 'Nous lisons leurs posts les plus populaires sur votre premier mot.',
             'yours' => 'Vos flux',
             'none' => 'Vous n’avez pas encore de flux. Ajoutez-en ci-dessous.',
             'limit' => 'Choisissez jusqu’à :count flux.',

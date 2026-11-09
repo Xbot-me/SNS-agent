@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Trend\Sources;
 
 use App\Dto\Trend\TrendSignal;
+use App\Enums\Trend\PostFormat;
 use App\Exceptions\Trend\SourceUnavailableException;
 use App\Models\SocialAccount;
 use App\Models\TrendProfile;
@@ -134,6 +135,7 @@ class InstagramHashtagSource implements TrendSource
             publishedAt: $publishedAt,
             // Meta leaves like_count out when the owner hides likes; comments still count.
             engagement: (int) data_get($post, 'like_count', 0) + (int) data_get($post, 'comments_count', 0),
+            format: PostFormat::fromMetaMediaType(data_get($post, 'media_type')),
         );
     }
 }

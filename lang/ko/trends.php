@@ -40,6 +40,7 @@ return [
         'show_sources' => '왜 뜨고 있나요',
         'hide_sources' => '출처 숨기기',
         'make_failed' => '아이디어를 만들지 못했어요. 다시 시도해 주세요.',
+        'top_format' => '인기 게시물의 주요 형식: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => '최근 게시물을 읽고 내 분야에서 무엇이 통하는지 확인해요. 공개 비즈니스·크리에이터 계정만 가능해요.',
             'competitors_placeholder' => '사용자 이름을 입력하고 Enter를 누르세요',
             'competitors_connect' => 'Instagram 계정을 지켜보려면 Facebook으로 Instagram 계정을 연결하세요.',
+            'threads_topics_label' => '팔로우할 Threads 주제',
+            'threads_topics_description' => '커뮤니티 주제(예: 3D 프린팅). 인기 게시물을 읽어요.',
+            'threads_topics_placeholder' => '주제를 입력하고 Enter',
+            'threads_creators_label' => '지켜볼 Threads 계정',
+            'threads_creators_description' => '첫 번째 단어에 대한 인기 게시물을 읽어요.',
             'yours' => '내 피드',
             'none' => '아직 피드가 없어요. 아래에서 추가하세요.',
             'limit' => '피드는 최대 :count개까지 고를 수 있어요.',

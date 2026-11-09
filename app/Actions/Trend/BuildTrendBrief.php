@@ -59,7 +59,7 @@ class BuildTrendBrief
                     'created_at' => $post->created_at->toIso8601String(),
                 ])
                 ->all(),
-            'how_to_use' => 'Write posts about the highest-scoring topics. A topic covered by several sources (outlet_count) is more reliable than one source repeating itself. Use the formats listed on the topic, in that order. Where own_ratio is above 100 the audience liked this subject before; where status is used an idea already exists. Do not repeat anything in recent_posts. For a Reel, call search-instagram-audio-tool without q to see the sounds trending on Instagram. Save a topic you will use with create-idea-from-trend-tool, or dismiss one that does not fit with update-trend-topic-tool.',
+            'how_to_use' => 'Write posts about the highest-scoring topics. A topic covered by several sources (outlet_count) is more reliable than one source repeating itself. Use the formats listed on the topic, in that order; top_formats counts the formats its top Threads and Instagram posts used. Where own_ratio is above 100 the audience liked this subject before; where status is used an idea already exists. Do not repeat anything in recent_posts. For a Reel, call search-instagram-audio-tool without q to see the sounds trending on Instagram. Save a topic you will use with create-idea-from-trend-tool, or dismiss one that does not fit with update-trend-topic-tool.',
         ];
     }
 }

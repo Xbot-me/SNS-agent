@@ -25,6 +25,9 @@ class AnalyzeTrends
 {
     private const int SUGGESTED_FORMATS = 2;
 
+    /** A format leads a topic's suggestions once this many of its top posts used it. */
+    private const int MIN_POSTS_FOR_TOP_FORMAT = 2;
+
     /**
      * Reads the sources, ranks the topics and stores them for the workspace.
      * A topic the user already used or dismissed keeps that answer when it comes back.
@@ -69,7 +72,8 @@ class AnalyzeTrends
                     'signal_count' => $ranking['signal_count'],
                     'outlet_count' => $ranking['outlet_count'],
                     'evidence' => $ranking['evidence'],
-                    'formats' => $formats,
+                    'formats' => self::topicFormats($profile, $formats, $ranking['top_formats']),
+                    'top_formats' => $ranking['top_formats'] === [] ? null : $ranking['top_formats'],
                     'last_seen_at' => $ranking['last_seen_at'],
                     'own_posts' => $ranking['own_posts'],
                     'own_ratio' => $ranking['own_ratio'],
@@ -126,9 +130,26 @@ class AnalyzeTrends
 
         usort($ordered, fn (PostFormat $a, PostFormat $b): int => [data_get($lifts, $b->value, 1.0), $position[$a->value]] <=> [data_get($lifts, $a->value, 1.0), $position[$b->value]]);
 
-        return array_map(
-            fn (PostFormat $format): string => $format->value,
-            array_slice($ordered === [] ? $preferred : $ordered, 0, self::SUGGESTED_FORMATS),
-        );
+        return array_map(fn (PostFormat $format): string => $format->value, $ordered === [] ? $preferred : $ordered);
+    }
+
+    /**
+     * The formats suggested for one topic: the one most of its top posts used goes first when the
+     * workspace makes it and enough posts used it, then the workspace's own order.
+     *
+     * @param  list<string>  $formats  the workspace's formats, best first
+     * @param  array<string, int>  $topFormats  format => posts, most used first
+     * @return list<string>
+     */
+    private static function topicFormats(TrendProfile $profile, array $formats, array $topFormats): array
+    {
+        $made = array_map(fn (PostFormat $format): string => $format->value, $profile->postFormats());
+        $lead = array_key_first($topFormats);
+
+        if ($lead !== null && $topFormats[$lead] >= self::MIN_POSTS_FOR_TOP_FORMAT && in_array($lead, $made, true)) {
+            $formats = [$lead, ...array_values(array_diff($formats, [$lead]))];
+        }
+
+        return array_slice($formats, 0, self::SUGGESTED_FORMATS);
     }
 }

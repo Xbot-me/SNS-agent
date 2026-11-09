@@ -39,6 +39,8 @@ class TrendProfile extends Model
         'region',
         'external_sources',
         'competitors',
+        'threads_topics',
+        'threads_creators',
         'source_issues',
         'onboarded_at',
         'analysis_requested_at',
@@ -59,6 +61,8 @@ class TrendProfile extends Model
             'formats' => 'array',
             'external_sources' => 'array',
             'competitors' => 'array',
+            'threads_topics' => 'array',
+            'threads_creators' => 'array',
             'source_issues' => 'array',
             'posts_per_week' => 'integer',
             'onboarded_at' => 'datetime',
@@ -112,6 +116,36 @@ class TrendProfile extends Model
     public function competitorHandles(): array
     {
         return collect($this->competitors ?? [])
+            ->map(fn (string $handle): string => mb_strtolower(ltrim(trim($handle), '@')))
+            ->filter(fn (string $handle): bool => filled($handle))
+            ->unique()
+            ->values()
+            ->all();
+    }
+
+    /**
+     * The Threads topic tags the workspace follows (a community's tag), without the #.
+     *
+     * @return list<string>
+     */
+    public function threadsTopicTags(): array
+    {
+        return collect($this->threads_topics ?? [])
+            ->map(fn (string $tag): string => trim(ltrim(trim($tag), '#')))
+            ->filter(fn (string $tag): bool => filled($tag))
+            ->unique(fn (string $tag): string => mb_strtolower($tag))
+            ->values()
+            ->all();
+    }
+
+    /**
+     * The Threads usernames the workspace watches.
+     *
+     * @return list<string>
+     */
+    public function threadsCreatorHandles(): array
+    {
+        return collect($this->threads_creators ?? [])
             ->map(fn (string $handle): string => mb_strtolower(ltrim(trim($handle), '@')))
             ->filter(fn (string $handle): bool => filled($handle))
             ->unique()

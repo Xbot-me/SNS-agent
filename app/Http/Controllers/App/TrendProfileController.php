@@ -46,6 +46,8 @@ class TrendProfileController extends Controller
             'regions' => (array) config('trypost.trends.regions'),
             'canWatchCompetitors' => config('trypost.trends.sources.instagram_competitors.enabled') && InstagramCompetitorSource::usableAccount($workspace->id) !== null,
             'maxCompetitors' => (int) config('trypost.trends.sources.instagram_competitors.max_accounts'),
+            'maxThreadsTopics' => (int) config('trypost.trends.sources.threads_search.max_topics'),
+            'maxThreadsCreators' => (int) config('trypost.trends.sources.threads_search.max_creators'),
             'goals' => Goal::values(),
             'formats' => PostFormat::values(),
             'feeds' => $workspace->rssFeeds()

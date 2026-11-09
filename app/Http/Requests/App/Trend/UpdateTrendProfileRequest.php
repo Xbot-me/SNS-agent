@@ -37,6 +37,11 @@ class UpdateTrendProfileRequest extends FormRequest
             'posts_per_week' => ['required', 'integer', 'between:1,21'],
             'competitors' => ['nullable', 'array', 'max:'.(int) config('trypost.trends.sources.instagram_competitors.max_accounts')],
             'competitors.*' => ['string', 'regex:/^@?[A-Za-z0-9._]{1,30}$/', 'distinct:ignore_case'],
+            // A Threads topic tag: 1-50 characters without . or &, an optional leading #.
+            'threads_topics' => ['nullable', 'array', 'max:'.(int) config('trypost.trends.sources.threads_search.max_topics')],
+            'threads_topics.*' => ['string', 'regex:/^#?[^.&#]{1,50}$/u', 'distinct:ignore_case'],
+            'threads_creators' => ['nullable', 'array', 'max:'.(int) config('trypost.trends.sources.threads_search.max_creators')],
+            'threads_creators.*' => ['string', 'regex:/^@?[A-Za-z0-9._]{1,30}$/', 'distinct:ignore_case'],
             'region' => ['required', 'string', Rule::in((array) config('trypost.trends.regions'))],
             'external_sources' => ['nullable', 'array'],
             'external_sources.*' => [

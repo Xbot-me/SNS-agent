@@ -40,6 +40,7 @@ return [
         'show_sources' => 'Dlaczego to trend',
         'hide_sources' => 'Ukryj źródła',
         'make_failed' => 'Nie udało się utworzyć pomysłu. Spróbuj ponownie.',
+        'top_format' => 'Najczęstszy format: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'Czytamy ich najnowsze posty, żeby zobaczyć, co działa w Twojej niszy. Tylko publiczne konta Business i Creator.',
             'competitors_placeholder' => 'Wpisz nazwę użytkownika i naciśnij Enter',
             'competitors_connect' => 'Aby obserwować konta na Instagramie, połącz konto Instagram przez Facebooka.',
+            'threads_topics_label' => 'Tematy Threads do obserwowania',
+            'threads_topics_description' => 'Temat społeczności, np. Druk 3D. Czytamy jej najpopularniejsze posty.',
+            'threads_topics_placeholder' => 'Wpisz temat i naciśnij Enter',
+            'threads_creators_label' => 'Konta Threads do obserwowania',
+            'threads_creators_description' => 'Czytamy ich najpopularniejsze posty o Twoim pierwszym słowie.',
             'yours' => 'Twoje kanały',
             'none' => 'Nie masz jeszcze kanałów. Dodaj je poniżej.',
             'limit' => 'Wybierz do :count kanałów.',

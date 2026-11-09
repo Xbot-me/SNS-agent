@@ -40,6 +40,7 @@ return [
         'show_sources' => '为什么热门',
         'hide_sources' => '隐藏来源',
         'make_failed' => '无法创建创意。请重试。',
+        'top_format' => '热门帖子最常用的形式：:format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => '我们读取他们最近的帖子，了解你的领域里什么有效。仅限公开的商业和创作者账号。',
             'competitors_placeholder' => '输入用户名后按 Enter',
             'competitors_connect' => '要关注 Instagram 账号，请先通过 Facebook 连接一个 Instagram 账号。',
+            'threads_topics_label' => '要关注的 Threads 话题',
+            'threads_topics_description' => '社区的话题，例如 3D 打印。我们会读取其中最热门的帖子。',
+            'threads_topics_placeholder' => '输入话题后按 Enter',
+            'threads_creators_label' => '要关注的 Threads 账号',
+            'threads_creators_description' => '我们会读取他们关于你第一个词的热门帖子。',
             'yours' => '你的订阅源',
             'none' => '你还没有订阅源。请在下方添加。',
             'limit' => '最多选择 :count 个订阅源。',

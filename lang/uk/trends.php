@@ -40,6 +40,7 @@ return [
         'show_sources' => 'Чому це тренд',
         'hide_sources' => 'Сховати джерела',
         'make_failed' => 'Не вдалося створити ідею. Спробуйте ще раз.',
+        'top_format' => 'Найчастіший формат: :format',
     ],
     'empty' => [
         'analyzing' => [
@@ -113,6 +114,11 @@ return [
             'competitors_description' => 'Ми читаємо їхні свіжі дописи, щоб побачити, що працює у вашій ніші. Лише публічні акаунти Business і Creator.',
             'competitors_placeholder' => 'Введіть ім’я користувача й натисніть Enter',
             'competitors_connect' => 'Щоб стежити за акаунтами Instagram, підключіть акаунт Instagram через Facebook.',
+            'threads_topics_label' => 'Теми Threads для відстеження',
+            'threads_topics_description' => 'Тема спільноти, наприклад 3D-друк. Ми читаємо її найпопулярніші дописи.',
+            'threads_topics_placeholder' => 'Введіть тему й натисніть Enter',
+            'threads_creators_label' => 'Акаунти Threads для відстеження',
+            'threads_creators_description' => 'Ми читаємо їхні найпопулярніші дописи про ваше перше слово.',
             'yours' => 'Ваші стрічки',
             'none' => 'У вас поки немає стрічок. Додайте їх нижче.',
             'limit' => 'Оберіть до :count стрічок.',

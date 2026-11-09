@@ -21,6 +21,7 @@ export interface TrendTopic {
     own_ratio: number | null;
     evidence: TrendEvidence[];
     formats: TrendFormat[];
+    top_formats: Partial<Record<TrendFormat, number>>;
     status: TrendTopicStatus;
     last_seen_at: string;
 }
@@ -36,6 +37,8 @@ export interface TrendProfile {
     posts_per_week: number;
     region: string;
     competitors: string[];
+    threads_topics: string[];
+    threads_creators: string[];
     source_issues: Record<string, 'permission' | 'failed'>;
     external_sources: string[];
     rss_feed_ids: string[];
