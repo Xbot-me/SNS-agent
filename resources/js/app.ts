@@ -61,6 +61,21 @@ createInertiaApp({
             syncPreferences(event.detail.page.props);
         });
 
+        // A 401 that is not an Inertia response did not come from the app: it is
+        // Cloudflare Access refusing a visit because its session ran out while the
+        // tab sat idle. Inertia would show that page in a dialog; reloading sends the
+        // browser through the Access sign-in and back to this page instead.
+        router.on('httpException', (event) => {
+            const { response } = event.detail;
+
+            if (response.status !== 401 || 'x-inertia' in response.headers) {
+                return;
+            }
+
+            event.preventDefault();
+            window.location.reload();
+        });
+
         trackInAppPushes();
 
         router.on('navigate', (event) => {
